@@ -1,3 +1,82 @@
 body {
   background-color: #0f85d4;
 }
+
+/* The container */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+    /* Hide the default checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+/* The slider track */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+    /* The sliding circle (the knob) */
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+/* When checked: change background to blue */
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+/* When checked: move the circle to the right */
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.logo-container {
+    position: relative;
+    width: 500px; /* Adjust to your logo size */
+    height: 500px;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.4s ease-in-out; /* This creates the fade */
+}
+
+/* Initially, hide the white/inverted logo */
+.logo-light {
+    opacity: 0;
+}
+
+/* When the 'dark-mode' class is added to the body... */
+body.dark-mode .logo-dark {
+    opacity: 0;
+}
+
+body.dark-mode .logo-light {
+    opacity: 1;
+}
