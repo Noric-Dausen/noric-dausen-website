@@ -115,12 +115,14 @@ body.dark-mode .logo-light {
     margin: 2rem;
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s;
-}
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+        margin: 0.5rem;
+        align-self: center;
+    }
 
 .nav-links a:hover {
     background-color: #1a1a1a;
