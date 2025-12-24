@@ -1,5 +1,5 @@
 body {
-  background-color: #0f85d4;
+    background-color: #fff;
 }
 
 /* The container */
@@ -45,7 +45,7 @@ body {
 
 /* When checked: change background to blue */
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #122055;
 }
 
 /* When checked: move the circle to the right */
@@ -65,6 +65,7 @@ input:checked + .slider:before {
     left: 0;
     width: 100%;
     transition: opacity 0.4s ease-in-out; /* This creates the fade */
+    margin: -0.375rem 0 0 0;
 }
 
 /* Initially, hide the white/inverted logo */
@@ -79,4 +80,54 @@ body.dark-mode .logo-dark {
 
 body.dark-mode .logo-light {
     opacity: 1;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 5%;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.4s;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .navbar {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .nav-links a {
+    color: white;
+}
+
+.logo-navbar-container {
+    position: relative;
+    width: 100px; /* Adjust to your logo size */
+    height: 100px;
 }
