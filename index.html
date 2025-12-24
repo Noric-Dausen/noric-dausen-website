@@ -20,13 +20,18 @@
     <!--the navigation bar code-->
     <nav class="navbar">
 
-        <div class="logo">
+        <!--In the navbar, there are 3 segments: the logo, the links, and the toggle-->
+        <!--logo-->
+    
+        <div class="logo"> 
             <div class="logo-navbar-container">
-                <img src="Assets\Images\NoricDausenLogosTranslucent.png" class="logo logo-dark" alt="Noric Dausen Logo (Dark)">
-                <img src="Assets\Images\NoricDausenLogosTranslucentLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)">
+                <a href="index.html" class="logo-link">
+                    <img src="Assets\Images\NoricDausenLogosTranslucent.png" class="logo logo-dark" alt="Noric Dausen Logo (Dark)">
+                    <img src="Assets\Images\NoricDausenLogosTranslucentLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)">
+                </a>
             </div>
         </div>
-
+        <!--links-->
         <ul class="nav-links">
             <!--List of links in the navbar-->
             <li>
@@ -35,16 +40,17 @@
                 <a href="services.html">Services</a>
                 <a href="contact.html">Contact</a>
             </li>
-
-            <li>
-                <!--the light-dark mode switch-->
-                <label class="switch">
-                    <input type="checkbox" id="toggleInput">
-                    <span class="slider"></span>
-                </label>
-            </li>
-
         </ul>
+
+        <!--toggle-->
+        <div class="toggle-container">
+            <!--the light-dark mode switch-->
+            <label class="switch">
+                <input type="checkbox" id="toggleInput">
+                <span class="slider"></span>
+            </label>
+        </div>
+
     </nav>
 
     <main>
@@ -68,6 +74,7 @@
         </div>
 
     </main>
+
     <footer>
         <p>&copy; 2025 Noric Dausen LLC. All rights reserved.</p>
     </footer>

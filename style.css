@@ -53,6 +53,14 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
+.toggle-container {
+    display: flex;
+    align-items: center;
+    width: 60px;
+    position: fixed;
+    right: 2rem;
+}
+
 .logo-container {
     position: relative;
     width: 500px; /* Adjust to your logo size */
@@ -91,7 +99,7 @@ body.dark-mode .logo-light {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 90%;
     height: 5rem;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -130,4 +138,14 @@ body.dark-mode .nav-links a {
     position: relative;
     width: 100px; /* Adjust to your logo size */
     height: 100px;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.logo-link {
+    text-decoration: none;
+    cursor: pointer;
 }
