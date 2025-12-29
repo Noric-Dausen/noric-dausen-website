@@ -3,24 +3,6 @@ body {
     font-family: Arial, Helvetica, sans-serif
 }
 
-/*#region Dark Mode Settings */
-
-/* Initially, hide the white/inverted logo */
-.logo-light {
-    opacity: 0;
-}
-
-/* When the 'dark-mode' class is added to the body... */
-body.dark-mode .logo-dark {
-    opacity: 0;
-}
-
-body.dark-mode .logo-light {
-    opacity: 1;
-}
-
-/*#endregion */
-
 /*#region Dark Mode Toggle Switch */
 
 /* The container for dark mode switch */
@@ -110,6 +92,20 @@ input:checked + .slider {
     margin: -0.375rem 0 0 0;
 }
 
+/* Initially, hide the white/inverted logo */
+.logo-light {
+    opacity: 0;
+}
+
+/* When the 'dark-mode' class is added to the body... */
+body.dark-mode .logo-dark {
+    opacity: 0;
+}
+
+body.dark-mode .logo-light {
+    opacity: 1;
+}
+
 /*#endregion */
 
 /* #region Navbar */
@@ -177,6 +173,7 @@ body.dark-mode .navbar {
 
 body.dark-mode .nav-links a {
     color: white;
+    transition: color 0.3s;
 }
 
 .logo-navbar-container {
