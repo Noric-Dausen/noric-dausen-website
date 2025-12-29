@@ -8,6 +8,7 @@ body {
     display: inline-block;
     width: 60px;
     height: 34px;
+    margin: auto;
 }
 
     /* Hide the default checkbox */
@@ -20,6 +21,7 @@ body {
 /* The slider track */
 .slider {
     position: absolute;
+    width: 60px;
     cursor: pointer;
     top: 0;
     left: 0;
@@ -53,14 +55,6 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-.toggle-container {
-    display: flex;
-    align-items: center;
-    width: 60px;
-    position: fixed;
-    right: 2rem;
-}
-
 .logo-container {
     position: relative;
     width: 500px; /* Adjust to your logo size */
@@ -90,20 +84,39 @@ body.dark-mode .logo-light {
     opacity: 1;
 }
 
+/* #region navbar*/
+
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 0rem 5%;
+    padding: 0 5% 0 5%;
     background-color: white;
     position: fixed;
     top: 0;
     left: 0;
-    width: 90%;
-    height: 5rem;
+    width: 90%; /*width is 90% instead of 100% because 10% is used by the padding*/
+    height: 4rem;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: background-color 0.4s;
+}
+
+.nav-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 60%;
+    height: 4rem;
+    padding: 0 5% 0 5%;
+}
+
+.nav-secondary-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    width: 40%;
+    height: 4rem;
 }
 
 .nav-links {
@@ -138,8 +151,10 @@ body.dark-mode .nav-links a {
 
 .logo-navbar-container {
     position: relative;
-    width: 100px; /* Adjust to your logo size */
-    height: 100px;
+    width: 80px; /* Adjust to your logo size */
+    height: 80px;
+    margin-right: -3rem;
+    margin-left: 8%;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
@@ -151,3 +166,5 @@ body.dark-mode .nav-links a {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* #endregion*/
