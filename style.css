@@ -2,7 +2,7 @@ body {
     background-color: #fff;
 }
 
-/* The container */
+/* The container for dark mode switch */
 .switch {
     position: relative;
     display: inline-block;
@@ -55,10 +55,27 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
+/* display logos in a flex container */
+.logos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    /* debug border */
+    /* border: dotted 2px red; */
+}
+
+
 .logo-container {
     position: relative;
-    width: 500px; /* Adjust to your logo size */
+    width: 500px;
     height: 500px;
+
+    /* debug border */
+    /* border: dotted 2px red; */
 }
 
 .logo {
