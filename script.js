@@ -13,3 +13,11 @@ toggle.addEventListener('change', () => {
         document.body.style.color = "#000";
     }
 });
+
+const hamburger = document.getElementById('hamburger2');
+const navLinks = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+    // This adds 'active' if it's not there, and removes it if it is
+    navLinks.classList.toggle('active');
+});
