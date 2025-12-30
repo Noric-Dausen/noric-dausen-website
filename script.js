@@ -14,7 +14,7 @@ toggle.addEventListener('change', () => {
     }
 });
 
-const hamburger = document.getElementById('hamburger2');
+const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
 
 hamburger.addEventListener('click', () => {
