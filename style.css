@@ -115,7 +115,7 @@ body.dark-mode .logo-light {
     justify-content: space-around;
     align-items: center;
 
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
 
@@ -178,9 +178,10 @@ body.dark-mode .nav-links a {
 
 .logo-navbar-container {
     position: relative;
-    width: 80px; /* Adjust to your logo size */
+    width: 80px; /* Adjust to your logo size ---550w 70l for banner variant*/
     height: 80px;
     margin-right: -3rem;
+    margin-top: 0rem; /*1rem top margin for banner variant*/
     margin-left: 8%;
     -moz-user-select: none;
     -ms-user-select: none;
