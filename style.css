@@ -244,6 +244,7 @@ body.dark-mode .nav-links a {
     gap: 5px;
     width: 60px;
     height: 40px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* 2. Mobile Styles (Screens smaller than 768px) */
