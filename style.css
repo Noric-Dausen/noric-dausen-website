@@ -276,22 +276,35 @@ body.dark-mode .nav-links a {
     }
 
     .nav-links {
-        display: none; /* Hide links by default on mobile */
+        display: flex;
         flex-direction: column;
         position: absolute;
-        top: 45px;
+        top: -12rem; /* Hide links above screen by default on mobile */
         right: 0;
         background: white;
         width: 100%;
         text-align: center;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 0 0 rgba(0,0,0,0);
         padding: 1rem 0;
+        height: 10rem;
+        transition: 0.4s ease-in-out;
+        z-index: -1;
     }
+
+        .nav-links li {
+            opacity: 0;
+            transition: 0.4s ease-in-out;
+        }
 
         /* This class will be added via JavaScript */
         .nav-links.active {
-            display: flex;
+            top: 45px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
+
+            .nav-links.active li {
+                opacity: 1;
+            }
 
     .hline-short.active {
         top: 0rem;
