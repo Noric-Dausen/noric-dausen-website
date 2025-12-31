@@ -14,10 +14,14 @@ toggle.addEventListener('change', () => {
     }
 });
 
-const hamburger = document.getElementById('hamburger2');
+const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
+const hamline1 = document.getElementById('hline-short');
+const hamline2 = document.getElementById('hline-long');
 
 hamburger.addEventListener('click', () => {
     // This adds 'active' if it's not there, and removes it if it is
     navLinks.classList.toggle('active');
+    hamline1.classList.toggle('active');
+    hamline2.classList.toggle('active');
 });

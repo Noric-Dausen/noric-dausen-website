@@ -1,3 +1,15 @@
+/*Prevents rescaling causing elements to break*/
+* {
+    -moz-box-sizing: inherit;
+    -webkit-box-sizing: inherit;
+    box-sizing: border-box;
+}
+
+html, body { 
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     background-color: #fff;
     font-family: Arial, Helvetica, sans-serif
@@ -7,7 +19,7 @@ body {
 
 /* The container for dark mode switch */
 .switch {
-    position: relative;
+    position: absolute;
     display: inline-block;
     width: 60px;
     height: 34px;
@@ -115,13 +127,13 @@ body.dark-mode .logo-light {
     justify-content: space-around;
     align-items: center;
 
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
 
-    padding: 0 5% 0 5%;
-    width: 90%; /*width is 90% instead of 100% because 10% is used by the padding*/
-    height: 4rem;
+    padding: 0 0% 0 0%;
+    width: 100%; 
+    height: 5rem;
     z-index: 1000;
 
     background-color: white;
@@ -133,17 +145,18 @@ body.dark-mode .logo-light {
 .nav-main-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    width: 71%;
+    justify-content: flex-end;
+    width: 60%;
     height: 4rem;
-    padding: 0 5% 0 5%;
+    padding: 0 0% 0 0%;
 }
 
 .nav-secondary-container {
     display: flex;
     align-items: center;
-    justify-items: center;
-    width: 29%;
+    justify-items: flex-start;
+    padding: 0 0rem 0 2rem;
+    width: 40%;
     height: 4rem;
 }
 
@@ -178,9 +191,10 @@ body.dark-mode .nav-links a {
 
 .logo-navbar-container {
     position: relative;
-    width: 80px; /* Adjust to your logo size */
+    width: 80px; /* Adjust to your logo size ---550w 70l for banner variant*/
     height: 80px;
     margin-right: -3rem;
+    margin-top: 0rem; /*1rem top margin for banner variant*/
     margin-left: 8%;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -196,8 +210,25 @@ body.dark-mode .nav-links a {
 
 /* #endregion*/
 
+.hamburger-line {
+    position: relative;
+    top: 0.5rem;
+    left: 0.15rem;
+    width: 2.5rem;
+    height: 0.25rem;
+    cursor: pointer;
+    background-color: #393939;
+    transition: .4s;
+    border-radius: 4rem;
+}
 
-.hamburger2 {
+.hline-short {
+    width: 1.5rem;
+    top: 0.75rem;
+    left: 0.7rem;
+}
+
+.hamburger {
     display: none; /* Hidden by default, shown on smaller screens */
     flex-direction: column;
     cursor: pointer;
@@ -211,36 +242,75 @@ body.dark-mode .nav-links a {
     background: none;
     border: none;
     gap: 5px;
-}
-
-.hameburger2 span {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
+    width: 60px;
+    height: 40px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* 2. Mobile Styles (Screens smaller than 768px) */
 @media screen and (max-width: 768px) {
-    .hamburger2 {
+
+    .navbar {
+        width: 100%;
+        position: center;
+        height: 4rem;
+    }
+
+    .nav-main-container {
+        justify-content: flex-start;
+    }
+
+    .nav-secondary-container {
+        justify-content: flex-end;
+        padding: 0 3% 0 0;
+    }
+
+    .switch {
+        position: relative;
+        margin-right: 1rem;
+    }
+    
+    .hamburger {
         display: flex; /* Show hamburger on mobile */
-        border: dotted 2px red;
+        /*border: dotted 2px red;*/
     }
 
     .nav-links {
-        display: none; /* Hide links by default on mobile */
+        display: flex;
         flex-direction: column;
         position: absolute;
-        top: 60px;
+        top: -12rem; /* Hide links above screen by default on mobile */
         right: 0;
         background: white;
         width: 100%;
         text-align: center;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 0 0 rgba(0,0,0,0);
         padding: 1rem 0;
+        height: 10rem;
+        transition: 0.4s ease-in-out;
+        z-index: -1;
     }
+
+        .nav-links li {
+            opacity: 0;
+            transition: 0.4s ease-in-out;
+        }
 
         /* This class will be added via JavaScript */
         .nav-links.active {
-            display: flex;
+            top: 45px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
+
+            .nav-links.active li {
+                opacity: 1;
+            }
+
+    .hline-short.active {
+        top: 0rem;
+    }
+
+    .hline-long.active {
+        top: 1.375rem; 
+    }
 }
