@@ -342,3 +342,39 @@ body.dark-mode .nav-links a {
         top: 1.375rem; 
     }
 }
+
+/* #region Logo Animation */
+
+.logo-svg {
+    width: 300px;
+    fill: none;
+    stroke: #000;
+    stroke-width: 16;
+    stroke-linecap: square;
+    stroke-linejoin: round;
+    border: dotted 1px black;
+}
+
+.letter {
+    /* 1. define a dash length longer than the path itself */
+    stroke-dasharray: 300;
+    /* 2. push the dash completely off the screen */
+    stroke-dashoffset: 300;
+}
+
+/* The Animation Trigger */
+.logo-svg:hover .letter {
+    animation: drawIn 2s forwards ease-in-out;
+}
+
+@keyframes drawIn {
+    0% {
+        stroke-dashoffset: 300; /* Fully hidden */
+    }
+
+    100% {
+        stroke-dashoffset: 0; /* Fully drawn */
+    }
+}
+
+/* #endregion */
