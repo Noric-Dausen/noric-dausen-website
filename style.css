@@ -13,8 +13,14 @@ html, body {
 body {
     background-color: #fff;
     margin: 0;
+    transition: color 10.4s;
     font-family: Arial, Helvetica, sans-serif
 }
+
+    body.dark-mode {
+        background-color: #121212;
+        color: #eee;
+    }
 
 /*#region Dark Mode Toggle Switch */
 
