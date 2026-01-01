@@ -69,7 +69,6 @@ input:checked + .slider {
     input:checked + .slider:before {
         transform: translateX(26px);
     }
-
 /*#endregion */
 
 /*#region Logos */
@@ -180,6 +179,31 @@ body.dark-mode .logo-light {
             color: #3dafe9;
         }
 
+.nav-links-mobile {
+    display: none;
+    margin-left: 2rem;
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+
+    .nav-links-mobile a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+        margin: 0.5rem;
+        align-self: center;
+    }
+
+    .nav-links-mobile.dark-mode a {
+        color: #eee;
+    }
+
+        .nav-links-mobile a:hover {
+            color: #3dafe9;
+        }
+
 body.dark-mode .navbar {
     background-color: #1a1a1a;
 }
@@ -275,8 +299,8 @@ body.dark-mode .nav-links a {
         /*border: dotted 2px red;*/
     }
 
-    .nav-links {
-        display: flex;
+    .nav-links-mobile {
+        display: flex; /* enable the mobile nav-link segment */
         flex-direction: column;
         position: absolute;
         top: -12rem; /* Hide links above screen by default on mobile */
@@ -288,21 +312,25 @@ body.dark-mode .nav-links a {
         padding: 1rem 0;
         height: 10rem;
         transition: 0.4s ease-in-out;
-        z-index: -1;
+        z-index: 1;
     }
 
-        .nav-links li {
+    .nav-links {
+        display: none;
+    }
+
+        .nav-links-mobile li {
             opacity: 0;
             transition: 0.4s ease-in-out;
         }
 
         /* This class will be added via JavaScript */
-        .nav-links.active {
+        .nav-links-mobile.active {
             top: 45px;
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
 
-            .nav-links.active li {
+            .nav-links-mobile.active li {
                 opacity: 1;
             }
 
