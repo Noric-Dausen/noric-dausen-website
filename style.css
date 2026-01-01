@@ -12,6 +12,7 @@ html, body {
 
 body {
     background-color: #fff;
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif
 }
 
@@ -348,6 +349,63 @@ body.dark-mode .nav-links a {
 }
 
 /* #endregion*/
+
+/*#region Footer*/
+
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: #f4f4f4;
+    color: #333;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.4s, color 0.4s;
+    align-content: center;
+    align-items: center;
+}
+
+body.dark-mode .footer {
+    background-color: #1a1a1a;
+    color: #eee;
+}
+
+.footer a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+    margin: 0rem 1rem 0 1rem;
+}
+
+body.dark-mode .footer a {
+    color: #eee;
+}
+
+
+.footer a:hover {
+    border-bottom: 3px solid #333;
+    padding-bottom: 0.2rem;
+    display: inline-block;
+}
+
+body.dark-mode .footer a:hover {
+    border-bottom: 3px solid #eee;
+}
+
+.logo-footer-container {
+    position: absolute;
+    width: 60px; /* Adjust to your logo size */
+    height: 60px;
+    margin-top: -1rem;
+    margin-left: -4.5rem;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+/*#endregion*/
 
 /* #region Logo Animation */
 
