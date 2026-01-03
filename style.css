@@ -322,7 +322,7 @@ body.dark-mode .nav-links a {
         box-shadow: 0 0 0 rgba(0,0,0,0);
         padding: 1rem 0;
         height: 10rem;
-        transition: 0.4s ease-in-out;
+        transition: 0.25s ease-in-out; /*hamburger menu fall transition*/
         z-index: 1;
     }
 
@@ -330,10 +330,10 @@ body.dark-mode .nav-links a {
         display: none;
     }
 
-        .nav-links-mobile li {
-            opacity: 0;
-            transition: 0.4s ease-in-out;
-        }
+    .nav-links-mobile li {
+        opacity: 0;
+        transition: 0.25s ease-in-out; /*hamburger menu text transition*/
+    }
 
         /* This class will be added via JavaScript */
         .nav-links-mobile.active {
