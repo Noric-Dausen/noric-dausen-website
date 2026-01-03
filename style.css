@@ -152,7 +152,7 @@ body.dark-mode .logo-light {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 60%;
+    width: 68%; /*To center the items in the navbar, manually adjust the widths of the two navbar containers*/
     height: 4rem;
     padding: 0 0% 0 0%;
 }
@@ -162,7 +162,7 @@ body.dark-mode .logo-light {
     align-items: center;
     justify-items: flex-start;
     padding: 0 0rem 0 2rem;
-    width: 40%;
+    width: 32%;
     height: 4rem;
 }
 
@@ -226,10 +226,10 @@ body.dark-mode .nav-links a {
 
 .logo-navbar-container {
     position: relative;
-    width: 80px; /* Adjust to your logo size ---550w 70l for banner variant*/
-    height: 80px;
+    width: 412px; /* Adjust to your logo size ---550w 70l for banner variant*/
+    height: 53px;
     margin-right: -3rem;
-    margin-top: 0rem; /*1rem top margin for banner variant*/
+    margin-top: 0.75rem; /*1rem top margin for banner variant*/
     margin-left: 8%;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -280,6 +280,7 @@ body.dark-mode .nav-links a {
     width: 60px;
     height: 40px;
     -webkit-tap-highlight-color: transparent;
+    margin-left: 2.5rem;
 }
 
 /* 2. Mobile Styles (Screens smaller than 768px) */
@@ -352,6 +353,13 @@ body.dark-mode .nav-links a {
     .hline-long.active {
         top: 1.375rem; 
     }
+
+    .logo-navbar-container {
+        width: 80px; /* Adjust to your logo size */
+        height: 80px;
+        margin-top: 0.5rem;
+    }
+
 }
 
 /* #endregion*/

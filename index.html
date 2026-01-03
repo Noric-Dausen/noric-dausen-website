@@ -27,8 +27,15 @@
         <div class="nav-main-container">
             <div class="logo-navbar-container">
                 <a href="index.html" class="logo-link">
-                    <img src="Assets\Images\NoricDausenLogosTranslucent.png" class="logo logo-dark" alt="Noric Dausen Logo (Dark)">
-                    <img src="Assets\Images\NoricDausenLogosTranslucentLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)">
+                    <!--Use <picture> tags to create image with small and banner variants for screen sizes-->
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="Assets\Images\NoricDausenLogosTranslucent.png" />
+                        <img src="Assets\Images\NoricDausenBannerLogoTranslucent.png" class="logo logo-dark" alt="Noric Dausen Logo (Dark)" />
+                    </picture>
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="Assets\Images\NoricDausenLogosTranslucentLight.png" />
+                        <img src="Assets\Images\NoricDausenBannerLogoTranslucentLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)" />
+                    </picture>
                 </a>
             </div>
 
