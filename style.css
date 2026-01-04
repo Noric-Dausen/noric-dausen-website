@@ -462,7 +462,7 @@ body.dark-mode .footer a:hover {
 
 /* #endregion */
 
-.clipped {
+.clipped-poly {
     /* logo animation variables */
     --n-start: 16.5%;
     --n1-end: 26.5%;
@@ -471,10 +471,10 @@ body.dark-mode .footer a:hover {
 
     background-color: #3dafe9;
 
-    animation: clipReveal 0.4s ease-out forwards;
+    animation: clippedPoly 0.4s ease-out forwards;
 }
 
-@keyframes clipReveal {
+@keyframes clippedPoly {
     0% {
         background-color: #FF0000;
         clip-path: polygon(
@@ -512,4 +512,28 @@ body.dark-mode .footer a:hover {
         );
     }
 
+}
+
+.clipped-circle {
+    /* logo animation variables */
+    --n-start: 16.5%;
+    --n1-end: 26.5%;
+    --n1-current-height: 69.2%;
+    --n1-start-height: 69.2%;
+    /*background-color: #3dafe9;*/
+
+    animation: clippedCircle 2s ease-out forwards;
+}
+
+@keyframes clippedCircle {
+    0% {
+        /* background-color: #FF0000; */
+        clip-path: circle(0% at 50% 50%);
+    }
+
+    100% {
+        /* background-color: #B700FF; */
+
+        clip-path: circle(100% at 50% 50%);
+    }
 }
