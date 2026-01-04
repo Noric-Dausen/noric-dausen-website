@@ -471,12 +471,12 @@ body.dark-mode .footer a:hover {
 
     background-color: #3dafe9;
 
-    animation: clipReveal 0.8s ease-out forwards;
+    animation: clipReveal 0.4s ease-out forwards;
 }
 
 @keyframes clipReveal {
     0% {
-        background-color: #3dafe9;
+        background-color: #FF0000;
         clip-path: polygon(
             var(--n-start) var(--n1-current-height), 
             var(--n1-end) var(--n1-current-height), 
@@ -484,8 +484,25 @@ body.dark-mode .footer a:hover {
             var(--n-start) var(--n1-start-height)
         );
     }
+    33% {
+        clip-path: polygon(
+            var(--n-start) 31%, 
+            var(--n1-end) 31%, 
+            var(--n1-end) var(--n1-start-height), 
+            var(--n-start) var(--n1-start-height)
+        );
+    }
+    /* 67 HAHAHAHAHAHAHA */
+    67% {
+        clip-path: polygon(
+            var(--n-start) 31%, 
+            var(--n1-end) 31%, 
+            var(--n1-end) var(--n1-start-height), 
+            var(--n-start) var(--n1-start-height)
+        );
+    }
     100% {
-        background-color: #fc038c;
+        background-color: #B700FF;
 
         clip-path: polygon(
             var(--n-start) 31%, 
