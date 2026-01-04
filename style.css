@@ -1,4 +1,5 @@
 /*Prevents rescaling causing elements to break*/
+
 * {
     -moz-box-sizing: inherit;
     -webkit-box-sizing: inherit;
@@ -460,3 +461,38 @@ body.dark-mode .footer a:hover {
 }
 
 /* #endregion */
+
+.clipped {
+    /* logo animation variables */
+    --n-start: 16.5%;
+    --n1-end: 26.5%;
+    --n1-current-height: 69.2%;
+    --n1-start-height: 69.2%;
+
+    background-color: #3dafe9;
+
+    animation: clipReveal 0.8s ease-out forwards;
+}
+
+@keyframes clipReveal {
+    0% {
+        background-color: #3dafe9;
+        clip-path: polygon(
+            var(--n-start) var(--n1-current-height), 
+            var(--n1-end) var(--n1-current-height), 
+            var(--n1-end) var(--n1-start-height), 
+            var(--n-start) var(--n1-start-height)
+        );
+    }
+    100% {
+        background-color: #fc038c;
+
+        clip-path: polygon(
+            var(--n-start) 31%, 
+            var(--n1-end) 31%, 
+            var(--n1-end) var(--n1-start-height), 
+            var(--n-start) var(--n1-start-height)
+        );
+    }
+
+}
