@@ -275,6 +275,19 @@ body.dark-mode .nav-links a {
     margin-left: 2.5rem;
 }
 
+/* 1. Medium Style/Smaller Banner Logo (Screens smaller than 1000px) 
+    Note that this is to prevent the logo from being shrunk by the screen for being too big on medium screens.
+*/
+
+@media screen and (max-width: 1000px) {
+    .logo-navbar-container {
+        width: 255px; /* Adjust to your logo size */
+        height: 34px;
+        margin-top: 0rem;
+        margin-right: -1rem;
+    }
+}
+
 /* 2. Mobile Styles (Screens smaller than 768px) */
 @media screen and (max-width: 768px) {
 
