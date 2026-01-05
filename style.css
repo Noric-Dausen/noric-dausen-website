@@ -1,5 +1,24 @@
 /*Prevents rescaling causing elements to break*/
 
+:root {
+    /* logo animation variables */
+    --n-start: 15%;
+    --n1-end: 27%;
+    --n1-start-height: 70%;
+    --n1-end-height: 30%;
+    --n2-start: calc(var(--n1-end) - 4%);
+    --n2-end: 44%;
+    --n2-start-height-top: calc(var(--n1-end-height) - 20%);
+    --n2-start-height-bottom: calc(var(--n2-start-height-top) + 50%);
+    --n2-end-height-top: calc(var(--n1-start-height) - 20%);
+    --n2-end-height-bottom: calc(var(--n2-end-height-top) + 50%);
+    --n3-start: calc(var(--n2-end));
+    --n3-end: 55%;
+    --n3-start-height: var(--n1-end-height);
+    --n3-end-height: var(--n1-start-height);
+    --logo-anim-speed: 0.6s;
+}
+
 * {
     -moz-box-sizing: inherit;
     -webkit-box-sizing: inherit;
@@ -90,8 +109,6 @@ input:checked + .slider {
     align-items: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    /* debug border */
-    /* border: dotted 2px red; */
 }
 
 
@@ -99,8 +116,6 @@ input:checked + .slider {
     position: relative;
     width: 500px;
     height: 500px;
-    /* debug border */
-    /* border: dotted 2px red; */
 }
 
 .logo {
@@ -476,58 +491,112 @@ body.dark-mode .footer a:hover {
     }
 }
 
-/* #endregion */
-
-.clipped-poly {
-    /* logo animation variables */
-    --n-start: 16.5%;
-    --n1-end: 26.5%;
-    --n1-current-height: 69.2%;
-    --n1-start-height: 69.2%;
-
-    background-color: #3dafe9;
-
-    animation: clippedPoly 0.4s ease-out forwards;
+.clipped-poly-N1 {
+    /* animation shorthand: Name | Duration | Timing | Delay | Fill-Mode */
+    animation: clippedPolyN1 var(--logo-anim-speed) ease-out 0s forwards;
 }
 
-@keyframes clippedPoly {
+.clipped-poly-N2 {
+    opacity: 0;
+    animation: clippedPolyN2 var(--logo-anim-speed) ease-out var(--logo-anim-speed) forwards;
+}
+
+.clipped-poly-N3 {
+    opacity: 0;
+    animation: clippedPolyN3 var(--logo-anim-speed) ease-out 0s forwards;
+}
+
+.clipped-circle-D1 {
+    opacity: 0;
+    animation: clippedCircleD calc(var(--logo-anim-speed) * 3) ease-out forwards;
+}
+
+.clipped-circle-D2 {
+    --x1: 55%;
+    --y1: 30%;
+    --x2: 90%;
+    --y2: 70%;
+    clip-path: polygon(
+        var(--x1) var(--y1), 
+        var(--x1) var(--y2), 
+        var(--x2) var(--y2), 
+        var(--x2) var(--y1)
+    );
+
+    opacity: 0;
+}
+
+@keyframes clippedPolyN1 {
     0% {
-        background-color: #FF0000;
         clip-path: polygon(
-            var(--n-start) var(--n1-current-height), 
-            var(--n1-end) var(--n1-current-height), 
+            var(--n-start) var(--n1-start-height), 
             var(--n1-end) var(--n1-start-height), 
-            var(--n-start) var(--n1-start-height)
-        );
-    }
-    33% {
-        clip-path: polygon(
-            var(--n-start) 31%, 
-            var(--n1-end) 31%, 
             var(--n1-end) var(--n1-start-height), 
             var(--n-start) var(--n1-start-height)
         );
     }
     /* 67 HAHAHAHAHAHAHA */
-    67% {
+    100% {
         clip-path: polygon(
-            var(--n-start) 31%, 
-            var(--n1-end) 31%, 
+            var(--n-start) var(--n1-end-height), 
+            calc(var(--n1-end) - 0.75%) var(--n1-end-height), 
             var(--n1-end) var(--n1-start-height), 
             var(--n-start) var(--n1-start-height)
+        );
+    }
+}
+
+@keyframes clippedPolyN2 {
+    0% {
+        opacity: 1;
+        clip-path: polygon(
+            var(--n2-start) var(--n2-start-height-top),
+            var(--n2-start) var(--n2-start-height-bottom),
+            var(--n2-start) var(--n2-start-height-bottom),
+            var(--n2-start) var(--n2-start-height-top)
         );
     }
     100% {
-        background-color: #B700FF;
-
+        opacity: 1;
         clip-path: polygon(
-            var(--n-start) 31%, 
-            var(--n1-end) 31%, 
-            var(--n1-end) var(--n1-start-height), 
-            var(--n-start) var(--n1-start-height)
+            var(--n2-start) var(--n2-start-height-top),
+            var(--n2-start) var(--n2-start-height-bottom),
+            var(--n2-end) var(--n2-end-height-bottom),
+            var(--n2-end) var(--n2-end-height-top)
         );
     }
+}
 
+@keyframes clippedPolyN3 {
+    0% {
+        opacity: 1;
+        clip-path: polygon(
+            var(--n3-start) var(--n3-start-height),
+            var(--n3-start) var(--n3-start-height),
+            var(--n3-end) var(--n3-start-height),
+            var(--n3-end) var(--n3-start-height)
+        );
+    }
+    100% {
+        opacity: 1;
+        clip-path: polygon(
+            var(--n3-start) var(--n3-start-height),
+            var(--n3-start) var(--n3-end-height),
+            var(--n3-end) var(--n3-end-height),
+            var(--n3-end) var(--n3-start-height)
+        );
+    }
+}
+
+@keyframes clippedCircleD {
+    0% {
+        clip-path: circle(0% at 80% 50%);
+        opacity: 1;
+    }
+    to {
+        clip-path: circle(30% at 80% 50%);
+        opacity: 1;
+    }
 }
 
 .clipped-circle {
@@ -553,3 +622,5 @@ body.dark-mode .footer a:hover {
         clip-path: circle(100% at 50% 50%);
     }
 }
+
+/* #endregion */
