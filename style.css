@@ -1,5 +1,24 @@
 /*Prevents rescaling causing elements to break*/
 
+:root {
+    /* logo animation variables */
+    --n-start: 15%;
+    --n1-end: 27%;
+    --n1-start-height: 70%;
+    --n1-end-height: 30%;
+    --n2-start: calc(var(--n1-end) - 4%);
+    --n2-end: 44%;
+    --n2-start-height-top: calc(var(--n1-end-height) - 20%);
+    --n2-start-height-bottom: calc(var(--n2-start-height-top) + 50%);
+    --n2-end-height-top: calc(var(--n1-start-height) - 20%);
+    --n2-end-height-bottom: calc(var(--n2-end-height-top) + 50%);
+    --n3-start: calc(var(--n2-end));
+    --n3-end: 55%;
+    --n3-start-height: var(--n1-end-height);
+    --n3-end-height: var(--n1-start-height);
+    --logo-anim-speed: 0.6s;
+}
+
 * {
     -moz-box-sizing: inherit;
     -webkit-box-sizing: inherit;
@@ -469,30 +488,6 @@ body.dark-mode .footer a:hover {
     }
 }
 
-/* #endregion */
-
-:root {
-    /* logo animation variables */
-    --n-start: 15%;
-    --n1-end: 27%;
-    --n1-start-height: 70%;
-    --n1-end-height: 30%;
-
-    --n2-start: calc(var(--n1-end) - 4%);
-    --n2-end: 44%;
-    --n2-start-height-top: calc(var(--n1-end-height) - 20%);
-    --n2-start-height-bottom: calc(var(--n2-start-height-top) + 50%);
-    --n2-end-height-top: calc(var(--n1-start-height) - 20%);
-    --n2-end-height-bottom: calc(var(--n2-end-height-top) + 50%);
-
-    --n3-start: calc(var(--n2-end));
-    --n3-end: 55%;
-    --n3-start-height: var(--n1-end-height);
-    --n3-end-height: var(--n1-start-height);
-
-    --logo-anim-speed: 0.6s;
-}
-
 .clipped-poly-N1 {
     /* animation shorthand: Name | Duration | Timing | Delay | Fill-Mode */
     animation: clippedPolyN1 var(--logo-anim-speed) ease-out 0s forwards;
@@ -624,3 +619,5 @@ body.dark-mode .footer a:hover {
         clip-path: circle(100% at 50% 50%);
     }
 }
+
+/* #endregion */
