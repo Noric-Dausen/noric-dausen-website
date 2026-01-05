@@ -27,11 +27,12 @@ body {
 
 /* The container for dark mode switch */
 .switch {
-    position: relative;
+    position: absolute;
+    right: 1%;
     display: inline-block;
     width: 60px;
     height: 34px;
-    margin: 1.5rem;
+    margin: 1rem;
 }
 
     /* Hide the default checkbox */
@@ -161,7 +162,8 @@ body.dark-mode .logo-light {
     margin-left: 0rem;
     display: flex;
     list-style: none;
-    gap: 1rem;
+    gap: 1.5rem;
+    padding-inline-start: 0;
 }
 
     .nav-links a {
@@ -222,7 +224,7 @@ body.dark-mode .nav-links a {
     left: 0rem;
     margin-right: 0rem;
     margin-top: 0rem; /*1rem top margin for banner variant*/
-    margin-left: 8%;
+    margin-left: 0;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
@@ -234,8 +236,6 @@ body.dark-mode .nav-links a {
     text-decoration: none;
     cursor: pointer;
 }
-
-
 
 .hamburger-line {
     position: relative;
@@ -281,11 +281,14 @@ body.dark-mode .nav-links a {
 
 @media screen and (max-width: 1000px) {
     .logo-navbar-container {
-        width: 255px; /* Adjust to your logo size */
-        height: 34px;
-        margin-top: 0rem;
-        margin-right: -1rem;
+        width: 300px; /* Adjust to your logo size */
+        height: 40px;
     }
+
+    .switch {
+        margin-right: 1%;
+    }
+
 }
 
 /* 2. Mobile Styles (Screens smaller than 768px) */
