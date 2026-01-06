@@ -42,24 +42,36 @@
             <div class="logo-navbar-container">
                 <a href="index.html" class="logo-link">
                     <!--Use <picture> tags to create image with small and banner variants for screen sizes-->
-                    <img src="Assets\Images\NoricSeparateBannerLogo.png">
-                    <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
-                         class="banner-logo logo-dark clipped-poly-N1"
-                         alt="Noric Dausen Logo (Dark)"
-                         width="500">
-                    <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
-                         class="banner-logo logo-dark clipped-poly-N2"
-                         alt="Noric Dausen Logo (Dark)"
-                         width="500">
-                    <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
-                         class="banner-logo logo-dark clipped-poly-N3"
-                         alt="Noric Dausen Logo (Dark)"
-                         width="500">
-                    <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
-                         class="banner-logo logo-dark clipped-circle-D1"
-                         alt="Noric Dausen Logo (Dark)"
-                         width="500">
-                    <img src="Assets\Images\DausenSeparateBannerLogo.png">
+                    <div class="navbar-logo">
+                        <img src="Assets\Images\NoricSeparateBannerLogo1.png" 
+                             id="banner-logo-left">
+
+                        <!--ND animation logo (uses multiple logos in one for multiple clip-paths)-->
+                        <!--div id="ND-logo-animated">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N2"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N3"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-circle-D1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                        </div-->
+
+                        ND
+
+                        <img src="Assets\Images\DausenSeparateBannerLogo1.png"
+                             id="banner-logo-right">
+                    </div>
+                    
                     <picture>
                         <source media="(max-width: 768px)" srcset="Assets\Images\NoricDausenLogosTranslucentLight.png" />
                         <img src="Assets\Images\NoricDausenBannerLogosCentralizedLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)" />

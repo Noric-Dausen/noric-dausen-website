@@ -125,13 +125,6 @@ input:checked + .slider {
     width: 100%;
     transition: opacity 0.4s ease-in-out; /* This creates the fade */
 }
-.banner-logo {
-    --logo-width: 28%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: var(--logo-width);
-}
 
 /* Initially, hide the white/inverted logo */
 .logo-light {
@@ -200,6 +193,37 @@ body.dark-mode .logo-light {
         .nav-links a:hover {
             color: #3dafe9;
         }
+
+/*.banner-logo {
+    --logo-width: 28%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--logo-width);
+    border: dotted 2px purple;
+}*/
+
+#banner-logo-left {
+    border: dotted 2px red;
+}
+
+#banner-logo-right {
+    border: dotted 2px blue;
+}
+
+#banner-logo-left, #banner-logo-right {
+    flex-shrink: 1;
+    width: 20%;
+}
+
+.navbar-logo {
+    display: flex;
+    flex-wrap: nowrap;
+    border: dotted 2px green;
+    -webkit-justify-content: inherit;
+    justify-content: inherit;
+    align-items: center;
+}
 
 .nav-links-mobile {
     display: none;
