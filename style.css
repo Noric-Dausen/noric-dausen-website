@@ -1,4 +1,4 @@
-/*Prevents rescaling causing elements to break*/
+/*#region Defaults (plus variables)*/
 
 :root {
     /* logo animation variables */
@@ -22,7 +22,7 @@
 * {
     -moz-box-sizing: inherit;
     -webkit-box-sizing: inherit;
-    box-sizing: border-box;
+    box-sizing: border-box; /*Prevents rescaling causing elements to break*/
     transition: color 0.4s;
 }
 
@@ -41,6 +41,8 @@ body {
         background-color: #121212;
         color: #eee;
     }
+
+/*#endregion*/
 
 /*#region Dark Mode Toggle Switch */
 
@@ -188,10 +190,14 @@ body.dark-mode .logo-light {
         transition: color 0.3s;
         margin: 0.5rem;
         align-self: center;
+        border-bottom: 3px solid transparent;
+        transition: border-bottom 0.2s;
     }
 
         .nav-links a:hover {
             color: #3dafe9;
+            border-bottom: 3px solid #3dafe9;
+            padding-bottom: 0.1rem;
         }
 
 /*.banner-logo {
