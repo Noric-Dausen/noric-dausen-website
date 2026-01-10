@@ -209,27 +209,35 @@ body.dark-mode .logo-light {
     border: dotted 2px purple;
 }*/
 
-#banner-logo-left {
-    border: dotted 2px red;
-}
-
-#banner-logo-right {
-    border: dotted 2px blue;
-}
-
 #banner-logo-left, #banner-logo-right {
     flex-shrink: 1;
-    width: 20%;
+    height: 20px;
 }
 
 .navbar-logo {
     display: flex;
     flex-wrap: nowrap;
-    border: dotted 2px green;
+    /*border: dotted 2px green;*/
     -webkit-justify-content: inherit;
-    justify-content: inherit;
+    justify-content: center;
     align-items: center;
 }
+
+#ND-logo-animated {
+    position: relative; /* Sets the anchor point for the images */
+    width: 75px;
+    height: 75px;
+    /*border: dashed 2px orange;*/
+}
+
+    #ND-logo-animated img {
+        position: absolute; /* Pulls images out of flow to stack them */
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: auto;
+    }
 
 .nav-links-mobile {
     display: none;
@@ -333,8 +341,10 @@ body.dark-mode .nav-links a {
 
 @media screen and (max-width: 1000px) {
     .logo-navbar-container {
+        display: flex;
         width: 300px; /* Adjust to your logo size */
         height: 40px;
+        border: dotted 2px red;
     }
 
     .switch {
