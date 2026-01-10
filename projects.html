@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<!--head should be first element, not inside body-->
+<head>
+    <!--this is the name of the tab-->
+    <title>Noric Dausen</title>
+    <!--This description shows up on google search-->
+    <meta name="description" content="Official Website of Noric Dausen LLC">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!--just tells website this is the header, no styling-->
+    <header>
+        
+    </header>
+
+    <!--the navigation bar code-->
+    <nav class="navbar">
+
+        <!--In the navbar, there are 4 segments: the links segments (left and right), the logo, and the other segment-->
+
+        <div class="nav-main-container">
+
+            <!--list of links in the FULL navbar on the left-->
+            <ul class="nav-links links-left" id="nav-links">
+                <!--li = list item-->
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="projects.html">Projects</a>
+                </li>
+            </ul>
+
+
+            <!--logo-->
+            <div class="logo-navbar-container">
+                <a href="index.html" class="logo-link">
+                    <!--Use <picture> tags to create image with small and banner variants for screen sizes-->
+                    <div class="navbar-logo">
+                        <img src="Assets\Images\NoricSeparateBannerLogo1.png"
+                             id="banner-logo-left">
+
+                        <!--ND animation logo (uses multiple logos in one for multiple clip-paths)-->
+                        <!--div id="ND-logo-animated">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N2"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N3"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-circle-D1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                        </div-->
+                        ND
+
+                        <img src="Assets\Images\DausenSeparateBannerLogo1.png"
+                             id="banner-logo-right">
+                    </div>
+
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="Assets\Images\NoricDausenLogosTranslucentLight.png" />
+                        <img src="Assets\Images\NoricDausenBannerLogosCentralizedLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)" />
+                    </picture>
+                </a>
+            </div>
+
+            <!--list of links in the FULL navbar on the right-->
+            <ul class="nav-links links-right" id="nav-links">
+                <!--li = list item-->
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
+            </ul>
+
+            <!--the light-dark mode switch (the other segment)-->
+            <label class="switch">
+                <input type="checkbox" id="toggleInput">
+                <span class="slider"></span>
+            </label>
+
+            <button class="hamburger" id="hamburger">
+                <span class="hamburger-line hline-long" id="hline-long"></span>
+                <span class="hamburger-line hline-short" id="hline-short"></span>
+                <!--&#9776;-->
+            </button>
+
+        </div>
+
+    </nav>
+
+    <!--the dropdown menu for the small/mobile nav links-->
+    <ul class="nav-links-mobile" id="nav-links-mobile">
+        <!--li = list item-->
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>
+            <a href="projects.html">Projects</a>
+        </li>
+        <li>
+            <a href="about.html">About</a>
+        </li>
+        <li>
+            <a href="contact.html">Contact</a>
+        </li>
+    </ul>
+
+    <main class="projects-main">
+        
+        <span class="projects-container">
+
+            <h1 class="projects-title">Projects</h1>
+
+            <div class="project-card-container" id="projCardContainer">
+                <div class="project-card-float-wrapper">
+                    <div class="project-card" id="projCard">
+                        <h3>Test Card</h3>
+                        <p>Project Information goes here</p>
+                    </div>
+                </div>
+            </div>
+
+        </span>
+
+    </main>
+
+    <footer class="footer">
+
+        <span class="logo-footer-container">
+            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                 class="logo logo-dark" alt="Noric Dausen Logo (Dark)">
+            <img src="Assets\Images\NoricDausenLogosBlankTranslucentLight.png"
+                 class="logo logo-light" alt="Noric Dausen Logo (Light)">
+        </span>
+
+        <span>&copy; 2026 Noric Dausen LLC. All rights reserved.</span>
+
+        <a href="privacy.html">Privacy Policy</a> |
+        <a href="about.html">About Noric Dausen</a>
+
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="projCard.js"></script>
+</body>
+
+</html>

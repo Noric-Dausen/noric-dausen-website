@@ -661,3 +661,100 @@ body.dark-mode .footer a:hover {
 }
 
 /* #endregion */
+
+/*#region Projects Page*/
+
+.projects-main {
+    height: 40rem; /*Use to ensure page is not cut off by footer*/
+    margin-top: 5rem;
+}
+
+.projects-container {
+
+}
+
+.project-card-container {
+    -moz-perspective: inherit;
+    -ms-perspective: inherit;
+    -webkit-perspective: inherit;
+    perspective: 1000px;
+    width: 300px;
+    height: 400px;
+    justify-self: center;
+    position: relative;
+}
+
+.project-card {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135px, #6e8efb, #a777e3);
+    border-radius: 15px;
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    color: black;
+    background-color: #efefef;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.1s ease-out;
+    will-change: transform;
+    backface-visibility: hidden;
+    pointer-events: none;
+}
+
+    /*Glare for the card*/
+    .project-card:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /*The gradient (will be moved by js)*/
+        background: radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            rgba(255,255,255,0.3) 0%,
+            rgba(255, 255, 255, 0) 60%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none; /*So it doesn't block mouse events*/
+    }
+
+.project-card-container:hover .project-card {
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+.project-card-container:hover .project-card:after {
+    opacity: 1;
+}
+
+.projects-title {
+    text-align: center;
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+/*Floating Wobble Animation*/
+
+@keyframes card-float {
+    0%, 100% {transform: translateY(0px); }
+    50% {transform: translateY(-10px); }
+}
+
+.project-card-float-wrapper {
+    width: 100%;
+    height: 100%;
+    animation: card-float 3s ease-in-out infinite;
+    transform-style: preserve-3d;
+}
+
+.project-card-container:hover .project-card-float-wrapper {
+    /*animation-play-state: paused; */
+}
+
+/*#endregion*/
