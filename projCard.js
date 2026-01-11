@@ -1,5 +1,8 @@
-const container = document.getElementById('projCardContainer');
-const card = document.getElementById('projCard');
+const containers = document.querySelectorAll('.project-card-container');
+
+containers.forEach(container => {
+
+    const card = container.querySelector('.project-card');
 
 container.addEventListener('mousemove', (e) => {
     const rect = container.getBoundingClientRect();
@@ -29,4 +32,6 @@ container.addEventListener('mousemove', (e) => {
 
 container.addEventListener('mouseleave', () => {
     card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+});
+
 });

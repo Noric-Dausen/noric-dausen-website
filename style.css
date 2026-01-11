@@ -675,12 +675,15 @@ body.dark-mode .footer a:hover {
 /*#region Projects Page*/
 
 .projects-main {
-    height: 40rem; /*Use to ensure page is not cut off by footer*/
     margin-top: 5rem;
 }
 
 .projects-container {
-
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 2rem;
 }
 
 .project-card-container {
@@ -714,6 +717,7 @@ body.dark-mode .footer a:hover {
     will-change: transform;
     backface-visibility: hidden;
     pointer-events: none;
+    transition: background-color 0.3s;
 }
 
     /*Glare for the card*/
@@ -733,6 +737,11 @@ body.dark-mode .footer a:hover {
         opacity: 0;
         transition: opacity 0.3s;
         pointer-events: none; /*So it doesn't block mouse events*/
+    }
+
+    body.dark-mode .project-card {
+        background-color: #2a2a2a;
+        color: #eee;
     }
 
 .project-card-container:hover .project-card {
@@ -764,7 +773,7 @@ body.dark-mode .footer a:hover {
 }
 
 .project-card-container:hover .project-card-float-wrapper {
-    /*animation-play-state: paused; */
+    /*animation-play-state: paused; */ /*Optionally the float animation can stop when you are hovering*/
 }
 
 /*#endregion*/
