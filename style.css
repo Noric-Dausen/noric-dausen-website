@@ -199,25 +199,42 @@ body.dark-mode .logo-light {
             padding-bottom: 0.1rem;
         }
 
-#banner-logo-left, #banner-logo-right {
-    flex-shrink: 1;
-    height: 20px;
+.logo-navbar-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    width: 412px; /* Adjust to your logo size ---550w 70l for banner variant*/
+    height: 53px;
+    left: 0rem;
+    margin-right: 0rem;
+    margin-top: 0rem; /*1rem top margin for banner variant*/
+    margin-left: 0;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .navbar-logo {
     display: flex;
     flex-wrap: nowrap;
-    /*border: dotted 2px green;*/
     -webkit-justify-content: inherit;
     justify-content: center;
     align-items: center;
+    margin-top: -0.75rem;
+}
+
+#banner-logo-left, #banner-logo-right {
+    flex-shrink: 1;
+    height: 20px;
 }
 
 #ND-logo-animated {
     position: relative; /* Sets the anchor point for the images */
     width: 75px;
     height: 75px;
-    /*border: dashed 2px orange;*/
 }
 
     #ND-logo-animated img {
@@ -265,21 +282,6 @@ body.dark-mode .navbar {
 body.dark-mode .nav-links a {
     color: white;
     transition: color 0.3s;
-}
-
-.logo-navbar-container {
-    position: relative;
-    width: 412px; /* Adjust to your logo size ---550w 70l for banner variant*/
-    height: 53px;
-    left: 0rem;
-    margin-right: 0rem;
-    margin-top: 0rem; /*1rem top margin for banner variant*/
-    margin-left: 0;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-user-drag: none;
 }
 
 .logo-link {
@@ -366,7 +368,6 @@ body.dark-mode .nav-links a {
         display: flex; /* Show hamburger on mobile */
         position: absolute;
         right: 0.5rem;
-        /*border: dotted 2px red;*/
     }
 
     .nav-links-mobile {
@@ -502,7 +503,6 @@ body.dark-mode .footer a:hover {
     stroke-width: 16;
     stroke-linecap: square;
     stroke-linejoin: round;
-    border: dotted 1px black;
 }
 
 .letter {
