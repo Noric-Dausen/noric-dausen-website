@@ -222,7 +222,7 @@ body.dark-mode .logo-light {
     justify-content: center;
     align-items: center;
 }
-
+ 
 #ND-logo-animated {
     position: relative; /* Sets the anchor point for the images */
     width: 75px;
@@ -699,6 +699,12 @@ body.dark-mode .footer a:hover {
     padding: 3rem;
 }
 
+body.dark-mode .projects-details-sidebar {
+    background: #161616;
+    color: #eee;
+    border-left: 1px solid #444;
+}
+
 .projects-container {
     display: flex;
     gap: 2rem;
@@ -712,6 +718,7 @@ body.dark-mode .footer a:hover {
 
 .projects-main-view.expanded .projects-container {
     flex: 0.3;
+    align-items: center;
 }
 
 .project-card-container {
@@ -781,13 +788,29 @@ body.dark-mode .footer a:hover {
 }
 
 .project-card-content {
-    /*Parallax Effect*/
+    
 }
 
 .projects-title {
     text-align: center;
     font-size: 2rem;
     padding: 2rem;
+    display: block;
+}
+
+    .projects-title.hidden {
+        display: none;
+    }
+
+.projects-side-title {
+    text-align: center;
+    font-size: 2rem;
+    padding: 2rem;
+    display: none;
+}
+
+.projects-main-view.expanded .projects-side-title {
+    display: block;
 }
 
 /*Floating Wobble Animation*/

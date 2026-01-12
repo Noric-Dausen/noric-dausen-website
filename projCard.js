@@ -3,6 +3,7 @@ const containers = document.querySelectorAll('.project-card-container');
 
 const mainView = document.getElementById('projects-main-view');
 const sidebarContent = document.getElementById('sidebar-content');
+const projectsTitle = document.getElementById('projects-title');
 
 containers.forEach(container => {
 
@@ -42,16 +43,29 @@ container.addEventListener('mouseleave', () => {
         const cardTitle = container.querySelector('h3').innerText;
 
         sidebarContent.innerHTML = `
-        <h1>${cardTitle}</h1>
-            <p>Full details about this card go here...</p>
-            `;
+        <h1>${cardTitle}</h1>`;
+
+
+        // The information of each project is made by inserting HTML based on the card title
+        if (cardTitle === 'Test Card') {
+            sidebarContent.innerHTML += `<p>This is Test Card's detailed description.</p>`;
+        }
+
+        if (cardTitle === 'Test Card 2') {
+            sidebarContent.innerHTML += `<p>This is Test Card 2's completey different description. Note that Test Card 2 has a class containing its content while Test Card does not.</p>`;
+        }
+
+        if (cardTitle === 'Iristat') {
+            sidebarContent.innerHTML += `<p>Iristat is the current primary project of the Noric Dausen Corporation.</p>`;
+        }
 
         mainView.classList.add('expanded');
-
+        projectsTitle.classList.add('hidden');
     });
 
 });
 
 document.getElementById('projCloseButton').addEventListener('click', () => {
     mainView.classList.remove('expanded');
+    projectsTitle.classList.remove('hidden');
 });
