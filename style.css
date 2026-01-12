@@ -678,12 +678,40 @@ body.dark-mode .footer a:hover {
     margin-top: 5rem;
 }
 
+.projects-main-view {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.projects-details-sidebar {
+    flex: 0;
+    background: #f4f4f4;
+    overflow: hidden;
+    transition: flex 0.5s ease;
+    border-left: 1px solid #ddd;
+}
+
+.projects-main-view.expanded .projects-details-sidebar {
+    flex: 0.7;
+    padding: 3rem;
+}
+
 .projects-container {
     display: flex;
     gap: 2rem;
     justify-content: center;
     flex-wrap: wrap;
     padding: 2rem 2rem 6rem 2rem;
+    flex: 1;
+    overflow-y: auto;
+    transition: flex 0.5s ease;
+}
+
+.projects-main-view.expanded .projects-container {
+    flex: 0.3;
 }
 
 .project-card-container {

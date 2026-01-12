@@ -1,5 +1,9 @@
 const containers = document.querySelectorAll('.project-card-container');
 
+
+const mainView = document.getElementById('projects-main-view');
+const sidebarContent = document.getElementById('sidebar-content');
+
 containers.forEach(container => {
 
     const card = container.querySelector('.project-card');
@@ -34,4 +38,20 @@ container.addEventListener('mouseleave', () => {
     card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
 });
 
+    container.addEventListener('click', () => {
+        const cardTitle = container.querySelector('h3').innerText;
+
+        sidebarContent.innerHTML = `
+        <h1>${cardTitle}</h1>
+            <p>Full details about this card go here...</p>
+            `;
+
+        mainView.classList.add('expanded');
+
+    });
+
+});
+
+document.getElementById('projCloseButton').addEventListener('click', () => {
+    mainView.classList.remove('expanded');
 });
