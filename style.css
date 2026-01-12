@@ -161,7 +161,6 @@ body.dark-mode .logo-light {
     z-index: 1000;
 
     background-color: white;
-    /* border-bottom: 1px solid #eee; */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: background-color 0.4s;
 }
@@ -199,15 +198,6 @@ body.dark-mode .logo-light {
             border-bottom: 3px solid #3dafe9;
             padding-bottom: 0.1rem;
         }
-
-/*.banner-logo {
-    --logo-width: 28%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: var(--logo-width);
-    border: dotted 2px purple;
-}*/
 
 #banner-logo-left, #banner-logo-right {
     flex-shrink: 1;
@@ -344,7 +334,6 @@ body.dark-mode .nav-links a {
         display: flex;
         width: 300px; /* Adjust to your logo size */
         height: 40px;
-        border: dotted 2px red;
     }
 
     .switch {
