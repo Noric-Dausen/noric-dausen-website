@@ -20,8 +20,8 @@ container.addEventListener('mousemove', (e) => {
     const centerY = rect.height / 2;
 
     // Calculate rotation angles (value can be adjusted for more/less tilt ||| NOTE: higher values mean less tilt)
-    const rotateX = (centerY - y) / 10;
-    const rotateY = (x - centerX) / 10;
+    const rotateX = (centerY - y) / 20;
+    const rotateY = (x - centerX) / 20;
 
     // Apply rotation and scale to the card
     card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
