@@ -1,0 +1,990 @@
+/*#region Defaults (plus variables)*/
+
+:root {
+    /* logo animation variables */
+    --n-start: 15%;
+    --n1-end: 27%;
+    --n1-start-height: 70%;
+    --n1-end-height: 30%;
+    --n2-start: calc(var(--n1-end) - 4%);
+    --n2-end: 44%;
+    --n2-start-height-top: calc(var(--n1-end-height) - 20%);
+    --n2-start-height-bottom: calc(var(--n2-start-height-top) + 50%);
+    --n2-end-height-top: calc(var(--n1-start-height) - 20%);
+    --n2-end-height-bottom: calc(var(--n2-end-height-top) + 50%);
+    --n3-start: calc(var(--n2-end));
+    --n3-end: 55%;
+    --n3-start-height: var(--n1-end-height);
+    --n3-end-height: var(--n1-start-height);
+    --logo-anim-speed: 0.6s;
+}
+
+* {
+    -moz-box-sizing: inherit;
+    -webkit-box-sizing: inherit;
+    box-sizing: border-box; /*Prevents rescaling causing elements to break*/
+    transition: color 0.4s;
+}
+
+html, body { 
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    background-color: #fff;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+    body.dark-mode {
+        background-color: #121212;
+        color: #eee;
+    }
+
+/*#endregion*/
+
+/*#region Dark Mode Toggle Switch */
+
+/* The container for dark mode switch */
+.switch {
+    position: absolute;
+    right: 1%;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 1rem;
+}
+
+    /* Hide the default checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+/* The slider track */
+.slider {
+    position: absolute;
+    width: 60px;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+    /* The sliding circle (the knob) */
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+/* When checked: change background to blue */
+input:checked + .slider {
+    background-color: #122055;
+}
+
+    /* When checked: move the circle to the right */
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+/*#endregion */
+
+/*#region Logos */
+
+/* display logos in a flex container */
+.logos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+.logo-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.4s ease-in-out; /* This creates the fade */
+}
+
+/* Initially, hide the white/inverted logo */
+.logo-light {
+    opacity: 0;
+}
+
+/* When the 'dark-mode' class is added to the body... */
+body.dark-mode .logo-dark {
+    opacity: 0;
+}
+
+body.dark-mode .logo-light {
+    opacity: 1;
+}
+
+/*#endregion */
+
+/* #region Navbar */
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    padding: 0 0% 0 0%;
+    width: 100%; 
+    height: 5rem;
+    z-index: 1000;
+
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.4s;
+}
+
+.nav-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 4rem;
+    padding: 0 0% 0 0%;
+}
+
+.nav-links {
+    margin-left: 0rem;
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    padding-inline-start: 0;
+}
+
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+        margin: 0.5rem;
+        align-self: center;
+        border-bottom: 3px solid transparent;
+        transition: border-bottom 0.2s;
+    }
+
+        .nav-links a:hover {
+            color: #3dafe9;
+            border-bottom: 3px solid #3dafe9;
+            padding-bottom: 0.1rem;
+        }
+
+.slide-in-from-right {
+        animation: slideLeft 1s forwards;
+}
+
+.slide-in-from-left {
+        animation: slideRight 1s forwards;
+}
+
+.hide-overflow {
+    display: block;
+    overflow: hidden;
+    /* The blur will happen INSIDE this padding. */
+    padding: 0 50px;
+    /* Offset the padding with a negative margin so the links 
+          still line up visually where they belong in the navbar. */
+    margin: 0 -50px;
+    /* Mask */
+    -webkit-mask-image: linear-gradient( to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100% );
+    mask-image: linear-gradient( to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100% );
+}
+
+@keyframes slideLeft {
+        from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.logo-navbar-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    width: 412px; /* Adjust to your logo size ---550w 70l for banner variant*/
+    height: 53px;
+    left: 0rem;
+    margin-right: 0rem;
+    margin-top: 0rem; /*1rem top margin for banner variant*/
+    margin-left: 0;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.navbar-logo {
+    display: flex;
+    flex-wrap: nowrap;
+    -webkit-justify-content: inherit;
+    justify-content: center;
+    align-items: center;
+    margin-top: -0.75rem;
+}
+
+#banner-logo-left, #banner-logo-right {
+    flex-shrink: 1;
+    height: 20px;
+}
+ 
+#ND-logo-animated {
+    position: relative; /* Sets the anchor point for the images */
+    width: 75px;
+    height: 75px;
+}
+
+    #ND-logo-animated img {
+        position: absolute; /* Pulls images out of flow to stack them */
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+.nav-links-mobile {
+    display: none;
+    margin-left: 2rem;
+    list-style: none;
+    gap: 1rem;
+    background-color: #f4f4f4;
+}
+
+body.dark-mode .nav-links-mobile {
+    background-color: #2a2a2a;
+}
+
+    .nav-links-mobile a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+        margin: 0.5rem;
+        align-self: center;
+    }
+
+    body.dark-mode .nav-links-mobile a {
+        color: #eee;
+    }
+
+        .nav-links-mobile a:hover {
+            color: #3dafe9;
+        }
+
+body.dark-mode .navbar {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .nav-links a {
+    color: white;
+    transition: color 0.3s;
+}
+
+.logo-link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.hamburger-line {
+    position: relative;
+    top: 0.5rem;
+    left: 0.15rem;
+    width: 2.5rem;
+    height: 0.25rem;
+    cursor: pointer;
+    background-color: #393939;
+    transition: .4s;
+    border-radius: 4rem;
+}
+
+.hline-short {
+    width: 1.5rem;
+    top: 0.75rem;
+    left: 0.7rem;
+}
+
+.hamburger {
+    display: none; /* Hidden by default, shown on smaller screens */
+    flex-direction: column;
+    cursor: pointer;
+    font-size: 30px;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    background-color: transparent;
+    background: none;
+    border: none;
+    gap: 5px;
+    width: 60px;
+    height: 40px;
+    -webkit-tap-highlight-color: transparent;
+    margin-left: 2.5rem;
+}
+
+/* 1. Medium Style/Smaller Banner Logo (Screens smaller than 1000px) 
+    Note that this is to prevent the logo from being shrunk by the screen for being too big on medium screens.
+*/
+
+@media screen and (max-width: 1000px) {
+    .logo-navbar-container {
+        display: flex;
+        width: 300px; /* Adjust to your logo size */
+        height: 40px;
+    }
+
+    .switch {
+        margin-right: 1%;
+    }
+
+}
+
+/* 2. Mobile Styles (Screens smaller than 768px) */
+@media screen and (max-width: 768px) {
+
+    .navbar {
+        width: 100%;
+        position: center;
+        height: 4rem;
+    }
+
+    .nav-main-container {
+        justify-content: flex-start;
+    }
+
+    .switch {
+        position: absolute;
+        right: 2rem;
+        justify-self: flex-end;
+        margin-right: 2.5rem;
+    }
+
+    .hamburger {
+        display: flex; /* Show hamburger on mobile */
+        position: absolute;
+        right: 0.5rem;
+    }
+
+    .nav-links-mobile {
+        display: flex; /* enable the mobile nav-link segment */
+        flex-direction: column;
+        position: absolute;
+        top: -12rem; /* Hide links above screen by default on mobile */
+        right: 0;
+        background: white;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+        padding: 1rem 0;
+        height: 10rem;
+        transition: 0.25s ease-in-out; /*hamburger menu fall transition*/
+        z-index: 1;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links-mobile li {
+        opacity: 0;
+        transition: 0.25s ease-in-out; /*hamburger menu text transition*/
+    }
+
+        /* This class will be added via JavaScript */
+        .nav-links-mobile.active {
+            top: 45px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+            .nav-links-mobile.active li {
+                opacity: 1;
+            }
+
+    .hline-short.active {
+        top: 0rem;
+    }
+
+    .hline-long.active {
+        top: 1.375rem; 
+    }
+
+    .logo-navbar-container {
+        width: 80px; /* Adjust to your logo size */
+        height: 80px;
+        margin-top: 0rem;
+    }
+
+}
+
+/* #endregion*/
+
+/*#region Footer*/
+
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: #f4f4f4;
+    color: #333;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.4s, color 0.4s;
+    align-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+body.dark-mode .footer {
+    background-color: #1a1a1a;
+    color: #eee;
+}
+
+.footer a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+    margin: 0rem 1rem 0 1rem;
+}
+
+body.dark-mode .footer a {
+    color: #eee;
+}
+
+
+.footer a:hover {
+    border-bottom: 3px solid #333;
+    padding-bottom: 0.2rem;
+    display: inline-block;
+}
+
+body.dark-mode .footer a:hover {
+    border-bottom: 3px solid #eee;
+}
+
+.logo-footer-container {
+    position: absolute;
+    width: 60px; /* Adjust to your logo size */
+    height: 60px;
+    margin-top: -1.5rem;
+    margin-left: -4.5rem;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+@media screen and (max-width: 768px) {
+
+    .logo-footer-container {
+        display: none; /*There's not room for the logo on mobile screens, so just turn it off*/
+    }
+
+    .footer span {
+        display: block; /*stack the <span> (Copyright + All rights reserved) on top of the links*/
+        margin-bottom: 0.75rem;
+    }
+}
+
+/*#endregion*/
+
+/* #region Logo Animation */
+
+.logo-svg {
+    width: 300px;
+    fill: none;
+    stroke: #000;
+    stroke-width: 16;
+    stroke-linecap: square;
+    stroke-linejoin: round;
+}
+
+.letter {
+    /* 1. define a dash length longer than the path itself */
+    stroke-dasharray: 300;
+    /* 2. push the dash completely off the screen */
+    stroke-dashoffset: 300;
+}
+
+/* The Animation Trigger */
+.logo-svg:hover .letter {
+    animation: drawIn 2s forwards ease-in-out;
+}
+
+@keyframes drawIn {
+    0% {
+        stroke-dashoffset: 300; /* Fully hidden */
+    }
+
+    100% {
+        stroke-dashoffset: 0; /* Fully drawn */
+    }
+}
+
+.clipped-poly-N1 {
+    /* animation shorthand: Name | Duration | Timing | Delay | Fill-Mode */
+    animation: clippedPolyN1 var(--logo-anim-speed) ease-out 0s forwards;
+}
+
+.clipped-poly-N2 {
+    opacity: 0;
+    animation: clippedPolyN2 var(--logo-anim-speed) ease-out var(--logo-anim-speed) forwards;
+}
+
+.clipped-poly-N3 {
+    opacity: 0;
+    animation: clippedPolyN3 var(--logo-anim-speed) ease-out 0s forwards;
+}
+
+.clipped-circle-D1 {
+    opacity: 0;
+    animation: clippedCircleD calc(var(--logo-anim-speed) * 3) ease-out forwards;
+}
+
+.clipped-circle-D2 {
+    --x1: 55%;
+    --y1: 30%;
+    --x2: 90%;
+    --y2: 70%;
+    clip-path: polygon(
+        var(--x1) var(--y1), 
+        var(--x1) var(--y2), 
+        var(--x2) var(--y2), 
+        var(--x2) var(--y1)
+    );
+
+    opacity: 0;
+}
+
+@keyframes clippedPolyN1 {
+    0% {
+        clip-path: polygon(
+            var(--n-start) var(--n1-start-height), 
+            var(--n1-end) var(--n1-start-height), 
+            var(--n1-end) var(--n1-start-height), 
+            var(--n-start) var(--n1-start-height)
+        );
+    }
+    /* 67 HAHAHAHAHAHAHA */
+    100% {
+        clip-path: polygon(
+            var(--n-start) var(--n1-end-height), 
+            calc(var(--n1-end) - 0.75%) var(--n1-end-height), 
+            var(--n1-end) var(--n1-start-height), 
+            var(--n-start) var(--n1-start-height)
+        );
+    }
+}
+
+@keyframes clippedPolyN2 {
+    0% {
+        opacity: 1;
+        clip-path: polygon(
+            var(--n2-start) var(--n2-start-height-top),
+            var(--n2-start) var(--n2-start-height-bottom),
+            var(--n2-start) var(--n2-start-height-bottom),
+            var(--n2-start) var(--n2-start-height-top)
+        );
+    }
+    100% {
+        opacity: 1;
+        clip-path: polygon(
+            var(--n2-start) var(--n2-start-height-top),
+            var(--n2-start) var(--n2-start-height-bottom),
+            var(--n2-end) var(--n2-end-height-bottom),
+            var(--n2-end) var(--n2-end-height-top)
+        );
+    }
+}
+
+@keyframes clippedPolyN3 {
+    0% {
+        opacity: 1;
+        clip-path: polygon(
+            var(--n3-start) var(--n3-start-height),
+            var(--n3-start) var(--n3-start-height),
+            var(--n3-end) var(--n3-start-height),
+            var(--n3-end) var(--n3-start-height)
+        );
+    }
+    100% {
+        opacity: 1;
+        clip-path: polygon(
+            var(--n3-start) var(--n3-start-height),
+            var(--n3-start) var(--n3-end-height),
+            var(--n3-end) var(--n3-end-height),
+            var(--n3-end) var(--n3-start-height)
+        );
+    }
+}
+
+@keyframes clippedCircleD {
+    0% {
+        clip-path: circle(0% at 80% 50%);
+        opacity: 1;
+    }
+    to {
+        clip-path: circle(30% at 80% 50%);
+        opacity: 1;
+    }
+}
+
+.clipped-circle {
+    /* logo animation variables */
+    --n-start: 16.5%;
+    --n1-end: 26.5%;
+    --n1-current-height: 69.2%;
+    --n1-start-height: 69.2%;
+    /*background-color: #3dafe9;*/
+
+    animation: clippedCircle 2s ease-out forwards;
+}
+
+@keyframes clippedCircle {
+    0% {
+        /* background-color: #FF0000; */
+        clip-path: circle(0% at 50% 50%);
+    }
+
+    100% {
+        /* background-color: #B700FF; */
+
+        clip-path: circle(100% at 50% 50%);
+    }
+}
+
+/* #endregion */
+
+/*#region Projects Page*/
+
+.projects-main {
+    margin-top: 5rem;
+}
+
+.projects-main-view {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.projects-details-sidebar {
+    flex: 0;
+    background: #f4f4f4;
+    overflow: hidden;
+    transition: flex 0.5s ease;
+    border-left: 1px solid #ddd;
+
+    transition: background-color 0.4s;
+}
+
+.projects-main-view.expanded .projects-details-sidebar {
+    flex: 0.7;
+    padding: 3rem;
+}
+
+body.dark-mode .projects-details-sidebar {
+    background: #161616;
+    color: #eee;
+    border-left: 1px solid #444;
+}
+
+.projects-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 2rem 2rem 6rem 2rem;
+    flex: 1;
+    overflow-y: auto;
+    transition: flex 0.5s ease;
+    max-width: 60%;
+    margin: auto;
+}
+
+.projects-main-view.expanded .projects-container {
+    flex: 0.3;
+    align-items: center;
+}
+
+.project-card-container {
+    -moz-perspective: inherit;
+    -ms-perspective: inherit;
+    -webkit-perspective: inherit;
+    perspective: 1000px;
+    width: 300px;
+    height: 400px;
+    justify-self: center;
+    position: relative;
+}
+
+.project-card {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135px, #6e8efb, #a777e3);
+    border-radius: 15px;
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    color: black;
+    background-color: #efefef;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.1s ease-out;
+    will-change: transform;
+    backface-visibility: hidden;
+    pointer-events: none;
+    transition: background-color 0.3s;
+}
+
+    /*Glare for the card*/
+    .project-card:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /*The gradient (will be moved by js)*/
+        background: radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            rgba(255,255,255,0.3) 0%,
+            rgba(255, 255, 255, 0) 60%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none; /*So it doesn't block mouse events*/
+    }
+
+    body.dark-mode .project-card {
+        background-color: #2a2a2a;
+        color: #eee;
+    }
+
+.project-card-container:hover .project-card {
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+.project-card-container:hover .project-card:after {
+    opacity: 1;
+}
+
+.project-card-content {
+    
+}
+
+    .project-card-content h3 {
+        margin: 0;
+        padding: 0.5rem;
+        text-align: center;
+    }
+
+    .project-card-content p {
+        padding: 0.5rem;
+        text-align: center;
+    }
+
+.projects-title {
+    text-align: center;
+    font-size: 2rem;
+    padding: 2rem;
+    display: block;
+}
+
+    .projects-title.hidden {
+        display: none;
+    }
+
+.projects-side-title {
+    text-align: center;
+    font-size: 2rem;
+    padding: 2rem;
+    display: none;
+}
+
+.projects-main-view.expanded .projects-side-title {
+    display: block;
+}
+
+/*Floating Wobble Animation*/
+
+@keyframes card-float {
+    0%, 100% {transform: translateY(0px); }
+    50% {transform: translateY(-10px); }
+}
+
+.project-card-float-wrapper {
+    width: 100%;
+    height: 100%;
+    animation: card-float 3s ease-in-out infinite;
+    transform-style: preserve-3d;
+}
+
+.project-card-container:hover .project-card-float-wrapper {
+    /*animation-play-state: paused; */ /*Optionally the float animation can stop when you are hovering*/
+}
+
+/*#endregion*/
+
+/*#region Console*/
+
+.console {
+    width: 40%;
+    height: 60%;
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    padding: 1rem;
+    border: solid 2px #ccc;
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    z-index: 1001;
+}
+
+.console-text-window {
+    width: 100%;
+    height: 80%;
+    background-color: #aaa;
+    color: #222;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    padding: 0 1rem 1rem 1rem;
+    border-radius: 5px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    border: solid 2px #444;
+    margin-top: 1rem;
+}
+
+.console-input-field {
+    margin-top: 1rem;
+    border-radius: 5px;
+    border: solid 2px #444;
+    width: 100%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+}
+
+/*#region Console Themes*/
+
+.console-dark {
+    background-color: #444;
+    color: #eee;
+    transition: background-color 0.4s;
+    border-color: #777;
+}
+
+    .console-dark .console-text-window {
+        background-color: #222;
+        color: #eee;
+        border: solid 2px #777;
+        transition: background-color 0.4s;
+    }
+
+    .console-dark .console-input-field {
+        background-color: #333;
+        color: #eee;
+        border: solid 2px #777;
+        transition: background-color 0.4s;
+    }
+
+.console-matrix {
+    background-color: #333;
+    color: #a3ffa8;
+    transition: background-color 0.4s;
+    border-color: #555;
+}
+
+    .console-matrix .console-text-window {
+        background-color: #111;
+        color: #138519;
+        border: solid 2px #555;
+        transition: background-color 0.4s;
+    }
+
+    .console-matrix .console-input-field {
+        background-color: #222;
+        color: #138519;
+        border: solid 2px #555;
+        transition: background-color 0.4s;
+    }
+
+.console-abyss {
+    background-color: #10192c;
+    color: #9966b8;
+    transition: background-color 0.4s;
+    border-color: #6688cc;
+}
+
+    .console-abyss .console-text-window {
+        background-color: #000c18;
+        color: #6688cc;
+        border: solid 2px #6688cc;
+        transition: background-color 0.4s;
+    }
+
+    .console-abyss .console-input-field {
+        background-color: #082050;
+        color: #406385;
+        border: solid 2px #6688cc;
+        transition: background-color 0.4s;
+    }
+
+/*#endregion*/
+
+/*#endregion*/
