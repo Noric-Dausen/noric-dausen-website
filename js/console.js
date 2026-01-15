@@ -12,6 +12,7 @@ const helpMessage = `Available commands:
  > darkmode - toggles dark mode
  > theme - changes the console\'s theme
  > game - enter the experimental game
+ > hi - greet the console
 `;
 
 window.addEventListener('keydown', (event) => {
@@ -105,6 +106,10 @@ window.addEventListener('keydown', (event) => {
                     setTimeout(function () {
                         window.location.href = 'testing.html';
                     }, 3000);
+                    return;
+
+                case 'hi':
+                    textwindowContent.textContent += 'hey cutie :)';
                     return;
 
             }
