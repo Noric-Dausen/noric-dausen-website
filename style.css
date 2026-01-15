@@ -825,6 +825,17 @@ body.dark-mode .projects-details-sidebar {
     
 }
 
+    .project-card-content h3 {
+        margin: 0;
+        padding: 0.5rem;
+        text-align: center;
+    }
+
+    .project-card-content p {
+        padding: 0.5rem;
+        text-align: center;
+    }
+
 .projects-title {
     text-align: center;
     font-size: 2rem;
