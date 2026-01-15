@@ -199,6 +199,49 @@ body.dark-mode .logo-light {
             padding-bottom: 0.1rem;
         }
 
+.slide-in-from-right {
+        animation: slideLeft 1s forwards;
+}
+
+.slide-in-from-left {
+        animation: slideRight 1s forwards;
+}
+
+.hide-overflow {
+    display: block;
+    overflow: hidden;
+    /* The blur will happen INSIDE this padding. */
+    padding: 0 50px;
+    /* Offset the padding with a negative margin so the links 
+          still line up visually where they belong in the navbar. */
+    margin: 0 -50px;
+    /* Mask */
+    -webkit-mask-image: linear-gradient( to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100% );
+    mask-image: linear-gradient( to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100% );
+}
+
+@keyframes slideLeft {
+        from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 .logo-navbar-container {
     display: flex;
     align-content: center;
@@ -705,6 +748,8 @@ body.dark-mode .projects-details-sidebar {
     flex: 1;
     overflow-y: auto;
     transition: flex 0.5s ease;
+    max-width: 60%;
+    margin: auto;
 }
 
 .projects-main-view.expanded .projects-container {
@@ -783,6 +828,17 @@ body.dark-mode .projects-details-sidebar {
 .project-card-content {
     
 }
+
+    .project-card-content h3 {
+        margin: 0;
+        padding: 0.5rem;
+        text-align: center;
+    }
+
+    .project-card-content p {
+        padding: 0.5rem;
+        text-align: center;
+    }
 
 .projects-title {
     text-align: center;

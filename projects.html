@@ -8,14 +8,13 @@
     <!--This description shows up on google search-->
     <meta name="description" content="Official Website of Noric Dausen LLC">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
     <!--just tells website this is the header, no styling-->
     <header>
-        
     </header>
 
     <!--the navigation bar code-->
@@ -26,15 +25,16 @@
         <div class="nav-main-container">
 
             <!--list of links in the FULL navbar on the left-->
-            <ul class="nav-links">
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-                <li>
-                    <a href="projects.html">Projects</a>
-                </li>
-            </ul>
-
+            <div>
+                <ul class="nav-links slide-in-from-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="projects.html">Projects</a>
+                    </li>
+                </ul>
+            </div>
 
             <!--logo-->
             <div class="logo-navbar-container">
@@ -42,8 +42,12 @@
                 <a href="index.html" class="logo-link">
                     <!--Use <picture> tags to create image with small and banner variants for screen sizes-->
                     <div class="navbar-logo">
-                        <img src="Assets\Images\NoricSeparateBannerLogo1.png"
-                             id="banner-logo-left">
+                        <span class="hide-overflow">
+                            <img src="Assets\Images\NoricSeparateBannerLogo1.png"
+                                 id="banner-logo-left"
+                                 class="slide-in-from-right">
+                        </span>
+
 
                         <!--ND animation logo (uses multiple logos in one for multiple clip-paths)-->
                         <div id="ND-logo-animated">
@@ -65,10 +69,15 @@
                                  width="500">
                         </div>
 
-                        <img src="Assets\Images\DausenSeparateBannerLogo1.png"
-                             id="banner-logo-right">
+                        <span class="hide-overflow">
+                            <img src="Assets\Images\DausenSeparateBannerLogo1.png"
+                                 id="banner-logo-right"
+                                 class="slide-in-from-left">
+                        </span>
+
                     </div>
 
+                    <!--for small screens-->
                     <picture>
                         <source media="(max-width: 768px)" srcset="Assets\Images\NoricDausenLogosTranslucentLight.png" />
                         <img src="Assets\Images\NoricDausenBannerLogosCentralizedLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)" />
@@ -77,15 +86,17 @@
             </div>
 
             <!--list of links in the FULL navbar on the right-->
-            <ul class="nav-links links-right" id="nav-links">
-                <!--li = list item-->
-                <li>
-                    <a href="about.html">About</a>
-                </li>
-                <li>
-                    <a href="contact.html">Contact</a>
-                </li>
-            </ul>
+            <div>
+                <ul class="nav-links links-right slide-in-from-left" id="nav-links">
+                    <!--li = list item-->
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
 
             <!--the light-dark mode switch (the other segment)-->
             <label class="switch">
@@ -130,8 +141,10 @@
                 <div class="project-card-container" id="card1">
                     <div class="project-card-float-wrapper">
                         <div class="project-card">
-                            <h3>Test Card</h3>
-                            <p>Project Information goes here...</p>
+                            <div class="project-card-content">
+                                <h3>Test Card</h3>
+                                <p>Project Information goes here...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,32 +171,23 @@
                     </div>
                 </div>
 
-                <div class="project-card-container" id="card4">
-                    <div class="project-card-float-wrapper">
-                        <div class="project-card">
-                            <h3>Card 4</h3>
-                            <p>Project Information goes here...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card-container" id="card5">
+                <div class="project-card-container">
                     <div class="project-card-float-wrapper">
                         <div class="project-card">
                             <div class="project-card-content">
-                                <h3>Card 5</h3>
-                                <p>This card is different!</p>
+                                <h3>Irime</h3>
+                                <p>State of the Art Anime Development Software</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card-container" id="card6">
+                <div class="project-card-container">
                     <div class="project-card-float-wrapper">
                         <div class="project-card">
                             <div class="project-card-content">
-                                <h3>Card 6</h3>
-                                <p>State of the Art Statistical Visualization Software</p>
+                                <h3>Iriwave</h3>
+                                <p>State of the Art Digital Audio Workstation (DAW)</p>
                             </div>
                         </div>
                     </div>
@@ -221,9 +225,9 @@
 
     </footer>
 
-    <script src="script.js"></script>
-    <script src="projCard.js"></script>
-    <script src="console.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/projCard.js"></script>
+    <script src="js/console.js"></script>
 </body>
 
 </html>
