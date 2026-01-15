@@ -119,8 +119,10 @@ function pixelsToViewPort(value, height) {
     return (value / window.innerHeight) * 100;
 }
 
-document.addEventListener('execute', function (e) {
+document.addEventListener('execution', (e) => {
+    alert('Execution Succeeded: ' + e.detail.data);
+});
 
-    alert('Execution Succeeded: ' + e.detail.message);
-
+window.addEventListener('alert', (e) => {
+    alert('Execution Succeeded: ' + e.detail.data);
 });
