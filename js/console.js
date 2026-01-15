@@ -6,6 +6,14 @@ let inputField = null;
 
 const darkModeSwitch = document.getElementById('toggleInput');
 
+const helpMessage = `Available commands:
+ > help - show this help message
+ > clear - clear the console output
+ > darkmode - toggles dark mode
+ > theme - changes the console\'s theme
+ > game - enter the experimental game
+`;
+
 window.addEventListener('keydown', (event) => {
 
     //Opening and closing the console with Shift + `
@@ -39,6 +47,8 @@ window.addEventListener('keydown', (event) => {
 
     }
 
+    
+
     // Enter key to submit commands
     if (event.code === 'Enter' && consoleVisible) {
 
@@ -63,7 +73,7 @@ window.addEventListener('keydown', (event) => {
             switch (args[0].toLowerCase()) {
 
                 case 'help':
-                    textwindowContent.textContent += 'Available commands: \nhelp - Show this help message\nclear - Clear the console output\ndarkmode - toggles dark mode\ntheme - changes the console\'s theme\ngame - enter the experimental game';
+                    textwindowContent.textContent += helpMessage;
                     return;
 
                 case 'clear':
@@ -96,6 +106,7 @@ window.addEventListener('keydown', (event) => {
                         window.location.href = 'testing.html';
                     }, 3000);
                     return;
+
             }
 
         } else {
