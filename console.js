@@ -56,7 +56,7 @@ window.addEventListener('keydown', (event) => {
         if (command.length === 0) { return; }
 
         if (command.toLowerCase() === 'help') {
-            textwindowContent.textContent += 'Available commands: \nhelp - Show this help message\nclear - Clear the console output\ndarkmode - toggles dark mode\ntheme - changes the console\'s theme\ngame - enter the experimental game';
+            textwindowContent.textContent += 'Available commands: \nhelp - Show this help message\nclear - Clear the console output\ndarkmode - toggles dark mode\ntheme - changes the console\'s theme\ngame - enter the experimental game\nreset - reset various elements\nemulate - dispatch an event\nexecute - run a custom event';
             return;
         }
 
@@ -114,6 +114,41 @@ window.addEventListener('keydown', (event) => {
             setTimeout(function () {
                 window.location.href = 'testing.html';
             }, 3000);
+            return;
+        }
+
+        if (command.split(' ')[0].toLowerCase() === 'reset') {
+            if (command.split(' ').length < 2) {
+                textwindowContent.textContent += 'Usage: reset [DOMContent/cards|page]';
+            }
+
+            const target = command.split(' ')[1].toLowerCase();
+
+            if (target === 'cards' || target === 'domcontent') {
+                document.dispatchEvent(new Event('DOMContentLoaded'));
+            }
+
+            if (target === 'page') {
+                window.location.reload();
+            }
+
+            textwindowContent.textContent += `Attempting to reset: ${target}`;
+            return;
+        }
+
+        if (command.toLowerCase() === 'emulate') {
+
+            const eventData = { message: "Transmission successful!" };
+
+            document.dispatchEvent(new Event(''));
+
+            textwindowContent.textContent += `Theme set to ${theme}`;
+            return;
+        }
+
+        if (command.toLowerCase() === 'execute') {
+
+
             return;
         }
 

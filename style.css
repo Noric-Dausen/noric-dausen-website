@@ -720,7 +720,9 @@ body.dark-mode .projects-details-sidebar {
     width: 300px;
     height: 400px;
     justify-self: center;
-    position: relative;
+    position: absolute;
+    transition: width 0.4s;
+    transition: height 0.4s;
 }
 
 .project-card {
