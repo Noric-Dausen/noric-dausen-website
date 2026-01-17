@@ -1,4 +1,5 @@
 const containers = document.querySelectorAll('.project-card-container');
+let currentSelection = 'none';
 
 containers.forEach(container => {
 
@@ -36,8 +37,14 @@ container.addEventListener('mouseleave', () => {
 
     container.addEventListener('click', () => {
 
-        container.style.width = '65vw';
-        container.style.height = '75vh';
+        //Update Selection
+        deselectCard(getCardFromID(currentSelection));
+        
+
+        currentSelection = container.id;
+
+        //Update Position
+        positionCards();
     });
 
 });
@@ -49,6 +56,11 @@ document.getElementById('projCloseButton').addEventListener('click', () => {
 // Position all cards to their respective positions on the grid on DOM load
 document.addEventListener('DOMContentLoaded', function () { 
     
+    positionCards();
+
+});
+
+function positionCards() {
     containers.forEach(container => {
 
         const card = container.querySelector('.project-card');
@@ -61,11 +73,28 @@ document.addEventListener('DOMContentLoaded', function () {
         container.style.left = getCardPositionById(id, containerSize).x + 'vw';
         container.style.top = getCardPositionById(id, containerSize).y + 'vh';
 
+        //Procceed only if variant 2
+        if (currentSelection === 'none') {
+            return;
+        }
+
+        if (container.id === currentSelection) {
+
+            const newSize = { width: 70, height: 85 };
+
+            container.style.width = newSize.width + 'vw';
+            container.style.height = newSize.height + 'vh';
+
+            container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
+            container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
+
+        }
+        
+
     });
+}
 
-});
-
-// A Seperate Function to Find the position of a card based on its ID
+// A Seperate Function to Find the position of a card based on its ID (returns in viewport units)
 function getCardPositionById(rawID, cardSize) {
 
     //Number of Columns
@@ -111,6 +140,52 @@ function getCardPositionById(rawID, cardSize) {
     return currentPos;
 }
 
+//Function to convert centerized units (coordinates of the center of an object) to cornerized units (cooridnates of the top-left corner of an object)
+function cornerizeUnits(position, objectRect, convertToViewport) {
+
+    rectWidth = objectRect.width;
+    rectHeight = objectRect.height;
+
+    //Convert to viewport units if requested
+    if (convertToViewport) {
+        rectWidth = pixelsToViewPort(objectRect.width);
+        rectHeight = pixelsToViewPort(objectRect.height, true);
+    }
+
+    //Variable to modify and return
+    const currentPos = { x: 0, y: 0 };
+
+    //Convert to Corner
+    currentPos.x = position.x - (rectWidth / 2);
+    currentPos.y = -((-position.y) + (rectHeight / 2));
+
+    return currentPos;
+}
+
+//Function that sets cards back to their regular size
+function deselectCard(container) {
+
+    if (container === 'null') {
+        return;
+    }
+
+    container.style.width = '300px';
+    container.style.height = '400px';
+}
+
+function getCardFromID(rawID) {
+
+    let returnContainer = 'null';
+
+    containers.forEach(container => {
+        if (container.id === rawID) {
+            returnContainer = container;
+        }
+    });
+
+    return returnContainer;
+}
+
 //Function to quickly convert from pixels to vw and vh
 function pixelsToViewPort(value, height) {
     if (!height) {
@@ -125,4 +200,22 @@ document.addEventListener('execution', (e) => {
 
 window.addEventListener('alert', (e) => {
     alert('Execution Succeeded: ' + e.detail.data);
+});
+
+document.addEventListener('getSelection', (e) => {
+    alert('Current Selection: ' + currentSelection);
+});
+
+document.addEventListener('pxToViewport', (e) => {
+
+    let msg = e.detail.data[0] + "px is equivalent to ";
+
+    if (e.detail.data[1] === 'true') {
+        msg += pixelsToViewPort(e.detail.data[0], true) + 'vh';
+    } else {
+        msg += pixelsToViewPort(e.detail.data[0]) + 'vw';
+    }
+
+    alert(msg);
+
 });
