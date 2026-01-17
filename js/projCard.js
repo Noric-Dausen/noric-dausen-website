@@ -39,7 +39,6 @@ container.addEventListener('mouseleave', () => {
 
         //Update Selection
         deselectCard(getCardFromID(currentSelection));
-        
 
         currentSelection = container.id;
 
@@ -87,9 +86,7 @@ function positionCards() {
 
             container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
             container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
-
         }
-        
 
     });
 }
@@ -98,7 +95,7 @@ function positionCards() {
 function getCardPositionById(rawID, cardSize) {
 
     //Number of Columns
-    const columns = 5;
+    let columns = 5;
 
     //Size of gaps
     const gapX = 1;
@@ -111,16 +108,30 @@ function getCardPositionById(rawID, cardSize) {
     const currentPos = { x: 0, y: 0 };
 
     //Current Card ID number
-    const id = parseInt(rawID.replace('card', ''));
+    let id = parseInt(rawID.replace('card', ''));
+
+    //Where the center of the column should be located; the X center of the page (in viewport width units) is always 50vw; 13.5vw for side position.
+    let centerColumnX = 50;
+
+    //Switch to variant two once a card is selected
+    if (currentSelection !== 'none') {
+        //If the current ID is above the selected CardID it needs to have one subtracted to fill the empty space left by the selected card
+        if (id > parseInt(currentSelection.replace('card', ''))) {
+            id--;
+        }
+
+        //Change Column and start positions
+
+        columns = 1;
+        centerColumnX = 13.5;
+
+    }
 
     //Find Row Displacement; Row Displacement is the amount of columns left/right from the center
     const rowDisplacement = Math.floor(columns / 2); //Alternatively you could use modulo: (columns-(columns%2))/2
 
     //Find the current column of the card and offset it so that the the third column is the center (0)
     const currentColumn = (((id - 1) % columns)-rowDisplacement);
-
-    //The X center of the page (in viewport width units) is always 50vw
-    const centerColumnX = 50;
 
     //Find the distance to move the cards to center it OR if even columns, to properly position it
     let centerOffset = pixelsToViewPort(cardSize.width / 2);
@@ -171,6 +182,8 @@ function deselectCard(container) {
 
     container.style.width = '300px';
     container.style.height = '400px';
+
+    currentSelection = 'none';
 }
 
 function getCardFromID(rawID) {
@@ -217,5 +230,11 @@ document.addEventListener('pxToViewport', (e) => {
     }
 
     alert(msg);
+
+});
+
+document.addEventListener('deselect', (e) => {
+
+    deselectCard(getCardFromID(e.detail.data[0]));
 
 });
