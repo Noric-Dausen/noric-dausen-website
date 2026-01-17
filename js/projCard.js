@@ -1,4 +1,5 @@
 const containers = document.querySelectorAll('.project-card-container');
+const projectsTitle = document.querySelector('.projects-title');
 let currentSelection = 'none';
 let defaultContainerSize; //This variable is filled on DOMContentLoaded with the current size of a card.
 
@@ -63,6 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function positionCards() {
+
+    positionTitle();
+
     containers.forEach(container => {
 
         const card = container.querySelector('.project-card');
@@ -75,8 +79,12 @@ function positionCards() {
 
         const newPosition = getCardPositionById(id, containerSize);
 
-        container.style.left = newPosition.x + 'vw';
-        container.style.top = newPosition.y + 'vh';
+        //container.style.left = newPosition.x + 'vw';
+        //container.style.top = newPosition.y + 'vh';
+
+        absTranslate(container, newPosition);
+
+        /*container.style.transform = `translate(${newPosition.x}vw, ${newPosition.y}vh)`;*/
 
         //Procceed only if variant 2
         if (currentSelection === 'none') {
@@ -90,11 +98,30 @@ function positionCards() {
             container.style.width = newSize.width + 'vw';
             container.style.height = newSize.height + 'vh';
 
-            container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
-            container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
+            //container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
+            //container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
+
+            absTranslate(container, cornerizeUnits({ x: 62, y: 55 }, newSize));
+
         }
 
     });
+}
+
+function positionTitle() {
+
+    let centerColumnX = 50;
+
+    if (currentSelection !== 'none') {
+        centerColumnX = 13.5;
+    }
+
+    const newPosX = centerColumnX - pixelsToViewPort(projectsTitle.clientWidth / 2);
+
+    /*projectsTitle.style.transform = `translate(${newPosX}, 0px)`;*/
+
+    absTranslate(projectsTitle, { x: newPosX, y: projectsTitle.style.top })
+
 }
 
 // A Seperate Function to Find the position of a card based on its ID (returns in viewport units)
@@ -211,6 +238,19 @@ function pixelsToViewPort(value, height) {
         return (value/window.innerWidth)*100;
     }
     return (value / window.innerHeight) * 100;
+}
+
+//function that moves an object from its old position to a new one via the translate() cs function
+function absTranslate(object, newPosition) {
+
+    const oldPosition = { x: object.style.left, y: object.style.top };
+
+    let difference = { x: 0, y: 0 };
+
+    difference.x = newPosition.x - oldPosition.x;
+    difference.y = newPosition.y - oldPosition.y;
+
+    object.style.transform = `translate(${difference.x}vw, ${difference.y}vh)`;
 }
 
 function log(message) {

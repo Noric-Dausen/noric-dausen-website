@@ -766,8 +766,9 @@ body.dark-mode .projects-details-sidebar {
     height: 400px;
     justify-self: center;
     position: absolute;
-    transition: width 0.4s;
-    transition: height 0.4s;
+    transition: transform 0.6s;
+    top: 0vh;
+    left: 0vw;
 }
 
 .project-card {
@@ -845,6 +846,8 @@ body.dark-mode .projects-details-sidebar {
     font-size: 2rem;
     padding: 2rem;
     display: block;
+    position: absolute;
+    transition: transform 0.4s;
 }
 
     .projects-title.hidden {
