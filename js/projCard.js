@@ -1,5 +1,6 @@
 const containers = document.querySelectorAll('.project-card-container');
 let currentSelection = 'none';
+let defaultContainerSize; //This variable is filled on DOMContentLoaded with the current size of a card.
 
 containers.forEach(container => {
 
@@ -54,7 +55,9 @@ document.getElementById('projCloseButton').addEventListener('click', () => {
 
 // Position all cards to their respective positions on the grid on DOM load
 document.addEventListener('DOMContentLoaded', function () { 
-    
+
+    defaultContainerSize = containers[0].getBoundingClientRect();
+
     positionCards();
 
 });
@@ -66,11 +69,14 @@ function positionCards() {
 
         //Get the ID of the container to determine its position
         const id = container.id;
-        const containerSize = container.getBoundingClientRect();
+        const containerSize = defaultContainerSize;
 
         container.style.position = 'absolute';
-        container.style.left = getCardPositionById(id, containerSize).x + 'vw';
-        container.style.top = getCardPositionById(id, containerSize).y + 'vh';
+
+        const newPosition = getCardPositionById(id, containerSize);
+
+        container.style.left = newPosition.x + 'vw';
+        container.style.top = newPosition.y + 'vh';
 
         //Procceed only if variant 2
         if (currentSelection === 'none') {
