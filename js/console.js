@@ -334,3 +334,10 @@ window.addEventListener('keydown', (event) => {
 
     
 });
+
+
+window.addEventListener('consoleLog', (event) => {
+    if (consoleElement === null) { return; }
+
+    textwindowContent.textContent += event.detail.data + "\n";
+});

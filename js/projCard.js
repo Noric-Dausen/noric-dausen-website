@@ -207,12 +207,24 @@ function pixelsToViewPort(value, height) {
     return (value / window.innerHeight) * 100;
 }
 
+function log(message) {
+
+    const logOperation = new CustomEvent('consoleLog', {
+        detail: { data: message }
+    })
+
+    window.dispatchEvent(logOperation);
+}
+
+//Console Listeners (allows easier debugging)
 document.addEventListener('execution', (e) => {
     alert('Execution Succeeded: ' + e.detail.data);
 });
 
 window.addEventListener('alert', (e) => {
     alert('Execution Succeeded: ' + e.detail.data);
+
+    window.dispatchEvent('alert2');
 });
 
 document.addEventListener('getSelection', (e) => {
