@@ -38,3 +38,7 @@ async function resetHamburgerTimer() {
     await delay(350); // The delay (milliseconds) before the user can open/close the hamburger menu again
     hamburgerRecentlyClicked = false;
 }
+
+toggle.addEventListener('test', (e) => {
+    alert('Test Succeeded: ' + e.detail.data);
+});

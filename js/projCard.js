@@ -1,9 +1,7 @@
 const containers = document.querySelectorAll('.project-card-container');
-
-
-const mainView = document.getElementById('projects-main-view');
-const sidebarContent = document.getElementById('sidebar-content');
-const projectsTitle = document.getElementById('projects-title');
+const projectsTitle = document.querySelector('.projects-title');
+let currentSelection = 'none';
+let defaultContainerSize; //This variable is filled on DOMContentLoaded with the current size of a card.
 
 containers.forEach(container => {
 
@@ -40,32 +38,261 @@ container.addEventListener('mouseleave', () => {
 });
 
     container.addEventListener('click', () => {
-        const cardTitle = container.querySelector('h3').innerText;
 
-        sidebarContent.innerHTML = `
-        <h1>${cardTitle}</h1>`;
+        //Update Selection
+        deselectCard(getCardFromID(currentSelection));
 
+        currentSelection = container.id;
 
-        // The information of each project is made by inserting HTML based on the card title
-        if (cardTitle === 'Test Card') {
-            sidebarContent.innerHTML += `<p>This is Test Card's detailed description.</p>`;
-        }
-
-        if (cardTitle === 'Test Card 2') {
-            sidebarContent.innerHTML += `<p>This is Test Card 2's completey different description. Note that Test Card 2 has a class containing its content while Test Card does not.</p>`;
-        }
-
-        if (cardTitle === 'Iristat') {
-            sidebarContent.innerHTML += `<p>Iristat is the current primary project of the Noric Dausen Corporation.</p>`;
-        }
-
-        mainView.classList.add('expanded');
-        projectsTitle.classList.add('hidden');
+        //Update Position
+        positionCards();
     });
 
 });
 
 document.getElementById('projCloseButton').addEventListener('click', () => {
-    mainView.classList.remove('expanded');
-    projectsTitle.classList.remove('hidden');
+
+});
+
+// Position all cards to their respective positions on the grid on DOM load
+document.addEventListener('DOMContentLoaded', function () { 
+
+    defaultContainerSize = containers[0].getBoundingClientRect();
+
+    positionCards();
+
+});
+
+function positionCards() {
+
+    positionTitle();
+
+    containers.forEach(container => {
+
+        const card = container.querySelector('.project-card');
+
+        //Get the ID of the container to determine its position
+        const id = container.id;
+        const containerSize = defaultContainerSize;
+
+        container.style.position = 'absolute';
+
+        const newPosition = getCardPositionById(id, containerSize);
+
+        //container.style.left = newPosition.x + 'vw';
+        //container.style.top = newPosition.y + 'vh';
+
+        absTranslate(container, newPosition);
+
+        /*container.style.transform = `translate(${newPosition.x}vw, ${newPosition.y}vh)`;*/
+
+        //Procceed only if variant 2
+        if (currentSelection === 'none') {
+            return;
+        }
+
+        if (container.id === currentSelection) {
+
+            const newSize = { width: 70, height: 85 };
+
+            container.style.width = newSize.width + 'vw';
+            container.style.height = newSize.height + 'vh';
+
+            //container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
+            //container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
+
+            absTranslate(container, cornerizeUnits({ x: 62, y: 55 }, newSize));
+
+        }
+
+    });
+}
+
+function positionTitle() {
+
+    let centerColumnX = 50;
+
+    if (currentSelection !== 'none') {
+        centerColumnX = 13.5;
+    }
+
+    const newPosX = centerColumnX - pixelsToViewPort(projectsTitle.clientWidth / 2);
+
+    /*projectsTitle.style.transform = `translate(${newPosX}, 0px)`;*/
+
+    absTranslate(projectsTitle, { x: newPosX, y: projectsTitle.style.top })
+
+}
+
+// A Seperate Function to Find the position of a card based on its ID (returns in viewport units)
+function getCardPositionById(rawID, cardSize) {
+
+    //Number of Columns
+    let columns = 5;
+
+    //Size of gaps
+    const gapX = 1;
+    const gapY = 1;
+
+    //How far down the grid of cards starts
+    const YStartingPos = 25;
+
+    //The variable that will be modified and eventually returned; starts empty
+    const currentPos = { x: 0, y: 0 };
+
+    //Current Card ID number
+    let id = parseInt(rawID.replace('card', ''));
+
+    //Where the center of the column should be located; the X center of the page (in viewport width units) is always 50vw; 13.5vw for side position.
+    let centerColumnX = 50;
+
+    //Switch to variant two once a card is selected
+    if (currentSelection !== 'none') {
+        //If the current ID is above the selected CardID it needs to have one subtracted to fill the empty space left by the selected card
+        if (id > parseInt(currentSelection.replace('card', ''))) {
+            id--;
+        }
+
+        //Change Column and start positions
+
+        columns = 1;
+        centerColumnX = 13.5;
+
+    }
+
+    //Find Row Displacement; Row Displacement is the amount of columns left/right from the center
+    const rowDisplacement = Math.floor(columns / 2); //Alternatively you could use modulo: (columns-(columns%2))/2
+
+    //Find the current column of the card and offset it so that the the third column is the center (0)
+    const currentColumn = (((id - 1) % columns)-rowDisplacement);
+
+    //Find the distance to move the cards to center it OR if even columns, to properly position it
+    let centerOffset = pixelsToViewPort(cardSize.width / 2);
+
+    if (columns % 2 !== 1) {
+        centerOffset = -gapX / 2;
+    }
+
+    //Find the current column and set the X position based on that
+    currentPos.x = (centerColumnX + ((pixelsToViewPort(cardSize.width)+gapX) * currentColumn))-centerOffset; //Note: - 1 half of the cardwith from the position because we are setting the position of the corner, not the center
+
+    //Find the current row of the card (subtraction on the end ensures that starting row is always 0)
+    const currentRow = ((id - ((id-1) % columns)) / columns) - (1/columns);
+
+    currentPos.y =  YStartingPos + ((pixelsToViewPort(cardSize.height, true)+gapY)*currentRow);
+
+    return currentPos;
+}
+
+//Function to convert centerized units (coordinates of the center of an object) to cornerized units (cooridnates of the top-left corner of an object)
+function cornerizeUnits(position, objectRect, convertToViewport) {
+
+    rectWidth = objectRect.width;
+    rectHeight = objectRect.height;
+
+    //Convert to viewport units if requested
+    if (convertToViewport) {
+        rectWidth = pixelsToViewPort(objectRect.width);
+        rectHeight = pixelsToViewPort(objectRect.height, true);
+    }
+
+    //Variable to modify and return
+    const currentPos = { x: 0, y: 0 };
+
+    //Convert to Corner
+    currentPos.x = position.x - (rectWidth / 2);
+    currentPos.y = -((-position.y) + (rectHeight / 2));
+
+    return currentPos;
+}
+
+//Function that sets cards back to their regular size
+function deselectCard(container) {
+
+    if (container === 'null') {
+        return;
+    }
+
+    container.style.width = '300px';
+    container.style.height = '400px';
+
+    currentSelection = 'none';
+}
+
+function getCardFromID(rawID) {
+
+    let returnContainer = 'null';
+
+    containers.forEach(container => {
+        if (container.id === rawID) {
+            returnContainer = container;
+        }
+    });
+
+    return returnContainer;
+}
+
+//Function to quickly convert from pixels to vw and vh
+function pixelsToViewPort(value, height) {
+    if (!height) {
+        return (value/window.innerWidth)*100;
+    }
+    return (value / window.innerHeight) * 100;
+}
+
+//function that moves an object from its old position to a new one via the translate() cs function
+function absTranslate(object, newPosition) {
+
+    const oldPosition = { x: object.style.left, y: object.style.top };
+
+    let difference = { x: 0, y: 0 };
+
+    difference.x = newPosition.x - oldPosition.x;
+    difference.y = newPosition.y - oldPosition.y;
+
+    object.style.transform = `translate(${difference.x}vw, ${difference.y}vh)`;
+}
+
+function log(message) {
+
+    const logOperation = new CustomEvent('consoleLog', {
+        detail: { data: message }
+    })
+
+    window.dispatchEvent(logOperation);
+}
+
+//Console Listeners (allows easier debugging)
+document.addEventListener('execution', (e) => {
+    alert('Execution Succeeded: ' + e.detail.data);
+});
+
+window.addEventListener('alert', (e) => {
+    alert('Execution Succeeded: ' + e.detail.data);
+
+    window.dispatchEvent('alert2');
+});
+
+document.addEventListener('getSelection', (e) => {
+    alert('Current Selection: ' + currentSelection);
+});
+
+document.addEventListener('pxToViewport', (e) => {
+
+    let msg = e.detail.data[0] + "px is equivalent to ";
+
+    if (e.detail.data[1] === 'true') {
+        msg += pixelsToViewPort(e.detail.data[0], true) + 'vh';
+    } else {
+        msg += pixelsToViewPort(e.detail.data[0]) + 'vw';
+    }
+
+    alert(msg);
+
+});
+
+document.addEventListener('deselect', (e) => {
+
+    deselectCard(getCardFromID(e.detail.data[0]));
+
 });

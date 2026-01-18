@@ -13,7 +13,38 @@ const helpMessage = `Available commands:
  > theme - changes the console\'s theme
  > game - enter the experimental game
  > hi - greet the console
+ > reset - reset various elements
+ > emulate - dispatch an event
+ > execute - run a custom event
+ > commandguide - explains usage syntax
 `;
+
+const guideMessage = `COMMAND GUIDE:
+PREFIX SYMBOLS:
+    \'#\' - Hash symbol is used for opening specific command guides (Example: #emulate)
+    \'!\' - Exclaimation Mark is used to specify that your command is operating with the DOCUMENT in mind
+    \'?\' - Question Mark tells the command that your operating the command with a customly set object in mind
+    \' \' - No prefix is used to specify that your command is operating with the WINDOW in mind
+
+USAGE SYMBOLS:
+    \'[]\' - Container for available options
+    \'|\' - Seperates options in container
+    \'<>\' - suggests that there are many options or that the options are unlimited
+    \'<>+>\' - suggests that there are an unlimited amount of additional arguments
+    `;
+
+const emulateMessage = `Usage:
+emulate: emulate <Event>
+#emulate: #emulate
+!emulate: !emulate <Event>
+?emulate: ?emulate <Event> <target>`;
+
+const executeMessage = `Usage:
+execute: execute <Event> <Data>+>
+#execute: #execute
+!execute: !execute <Event> <data>+>
+?emulate: ?emulate <Event> <target> <data>+>`;
+
 
 window.addEventListener('keydown', (event) => {
 
@@ -112,10 +143,56 @@ window.addEventListener('keydown', (event) => {
                     textwindowContent.textContent += 'hey cutie :)';
                     return;
 
+                case 'reset':
+                    textwindowContent.textContent += 'Usage: reset [DOMContent|page]';
+                    return;
+
+                case 'emulate':
+                    textwindowContent.textContent += 'Usage: emulate <Event>';
+                    return;
+
+                case '#emulate':
+                    textwindowContent.textContent += emulateMessage;
+                    return;
+
+                case 'execute':
+                    textwindowContent.textContent += 'Usage: execute <Event> <data>+>';
+                    return;
+
+                case '#execute':
+                    textwindowContent.textContent += executeMessage;
+                    return;
+
+                case 'commandguide':
+                    textwindowContent.textContent += guideMessage;
+                    return;
             }
 
         } else {
 
+            //determine type of operation 
+            let type = '';
+            let typedCommand = '';
+
+            switch (args[0][0]) {
+                case '#':
+                    type = '#';
+                    typedCommand = args[0].toLowerCase().slice(1);
+                    break;
+                case '!':
+                    type = '!';
+                    typedCommand = args[0].toLowerCase().slice(1);
+                    break;
+                case '?':
+                    type = '?';
+                    typedCommand = args[0].toLowerCase().slice(1);
+                    break;
+                default:
+                    typedCommand = args[0].toLowerCase();
+                    break;
+            }
+
+            //Default Commands (no type applied)
             if (args[0].toLowerCase() === 'theme') {
                 if (args.length < 2) {
                     textwindowContent.textContent += '\nUsage: theme [light|dark|matrix|abyss]';
@@ -144,6 +221,111 @@ window.addEventListener('keydown', (event) => {
                 return;
             }
 
+            if (args[0].toLowerCase() === 'reset') {
+                if (args.length < 2) {
+                    textwindowContent.textContent += '\nUsage: reset [DOMContent|page]';
+                }
+
+                const target = command.split(' ')[1].toLowerCase();
+
+                switch (target) {
+                    case 'domcontent':
+                        document.dispatchEvent(new Event('DOMContentLoaded'));
+                        break;
+                    case 'page':
+                        window.location.reload();
+                        break;
+                    default: 
+                        textWindowContent.textContent += 'Invalid reset target. Available targets: page, DOMContent.';
+                }
+
+                textwindowContent.textContent += `Reseting ${target}`;
+                return;
+            }
+
+            if (typedCommand === 'emulate') {
+                if (args.length < 3 && type === '?') {
+                    textwindowContent.textContent += '\nUsage: emulate <Event>';
+                    return;
+                }
+
+                if (args.length > 2 && type !== '?') {
+                    textwindowContent.textContent += '\nUsage: emulate <Event>';
+                    return;
+                }
+
+
+                switch (type) {
+                    case '?':
+
+                        let target = document.getElementById(args[2]);
+
+                        target.dispatchEvent(new Event(args[1]));
+                        textwindowContent.textContent += `Emulating ${args[1]} event for ${args[2]}`;
+                        break;
+                    case '!':
+                        document.dispatchEvent(new Event(args[1]));
+                        textwindowContent.textContent += `Emulating ${args[1]} event for DOCUMENT`;
+                        break;
+                    default:
+                        window.dispatchEvent(new Event(args[1]));
+                        textwindowContent.textContent += `Emulating ${args[1]} event for WINDOW`;
+
+                }
+
+                return;
+            }
+
+            if (typedCommand === 'execute') {
+
+                if (type === '?' && args.length < 3) {
+                    textwindowContent.textContent += '\nUsage: execute <Event> <data>+>';
+                    return;
+                }
+
+                //Num allows ? to reuse the same code as ! and ' '
+                let num = 2;
+
+                if (type === '?') {
+                    num = 3;
+                }
+
+                const variableList = [];
+
+                const amountOfVariables = args.length - num;
+
+                for (let i = 0; i < amountOfVariables; i++) {
+                    let newVariable = args[i + num];
+
+                    variableList.push(newVariable);
+                }
+
+                const operation = new CustomEvent(args[1], {
+                    detail: { data: variableList }
+                })
+
+                switch (type) {
+                    case '?':
+
+                        let target = document.getElementById(args[2]);
+
+                        target.dispatchEvent(operation);
+                        textwindowContent.textContent += `Executing ${args[1]} event for ${args[2]}`;
+                        break;
+                    case '!':
+                        document.dispatchEvent(operation);
+                        textwindowContent.textContent += `Executing ${args[1]} event for DOCUMENT`;
+                        break;
+                    default:
+                        window.dispatchEvent(operation);
+                        textwindowContent.textContent += `Executing ${args[1]} event for WINDOW`;
+
+                }
+
+                return;
+
+            }
+
         }
 
         textwindowContent.textContent += `Unknown command: ${command}. Type 'help' for a list of commands.`;
@@ -151,4 +333,11 @@ window.addEventListener('keydown', (event) => {
     }
 
     
+});
+
+
+window.addEventListener('consoleLog', (event) => {
+    if (consoleElement === null) { return; }
+
+    textwindowContent.textContent += event.detail.data + "\n";
 });
