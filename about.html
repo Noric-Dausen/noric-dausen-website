@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<!--head should be first element, not inside body-->
+<head>
+    <!--this is the name of the tab-->
+    <title>Noric Dausen</title>
+    <!--This description shows up on google search-->
+    <meta name="description" content="Official Website of Noric Dausen LLC">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!--just tells website this is the header, no styling-->
+    <header>
+        <h1>Noric Dausen</h1>
+        <span>Official Website of Noric Dausen LLC</span>
+    </header>
+
+    <!--the navigation bar code-->
+    <nav class="navbar">
+
+        <!--In the navbar, there are 4 segments: the links segments (left and right), the logo, and the other segment-->
+
+        <div class="nav-main-container">
+
+            <!--list of links in the FULL navbar on the left-->
+            <div>
+                <ul class="nav-links slide-in-from-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="projects.html">Projects</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--logo-->
+            <div class="logo-navbar-container">
+
+                <a href="index.html" class="logo-link">
+                    <!--Use <picture> tags to create image with small and banner variants for screen sizes-->
+                    <div class="navbar-logo">
+                        <span class="hide-overflow">
+                            <img src="Assets\Images\NoricSeparateBannerLogo1.png"
+                                 id="banner-logo-left"
+                                 class="slide-in-from-right">
+                        </span>
+
+
+                        <!--ND animation logo (uses multiple logos in one for multiple clip-paths)-->
+                        <div id="ND-logo-animated">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N2"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N3"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-circle-D1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                        </div>
+
+                        <span class="hide-overflow">
+                            <img src="Assets\Images\DausenSeparateBannerLogo1.png"
+                                 id="banner-logo-right"
+                                 class="slide-in-from-left">
+                        </span>
+
+                    </div>
+
+                    <!--for small screens-->
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="Assets\Images\NoricDausenLogosTranslucentLight.png" />
+                        <img src="Assets\Images\NoricDausenBannerLogosCentralizedLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)" />
+                    </picture>
+                </a>
+            </div>
+
+            <!--list of links in the FULL navbar on the right-->
+            <div>
+                <ul class="nav-links links-right slide-in-from-left" id="nav-links">
+                    <!--li = list item-->
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--the light-dark mode switch (the other segment)-->
+            <label class="switch">
+                <input type="checkbox" id="toggleInput">
+                <span class="slider"></span>
+            </label>
+
+            <button class="hamburger" id="hamburger">
+                <span class="hamburger-line hline-long" id="hline-long"></span>
+                <span class="hamburger-line hline-short" id="hline-short"></span>
+            </button>
+
+        </div>
+
+    </nav>
+
+    <!--the dropdown menu for the small/mobile nav links-->
+    <ul class="nav-links-mobile" id="nav-links-mobile">
+        <!--li = list item-->
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>
+            <a href="projects.html">Projects</a>
+        </li>
+        <li>
+            <a href="about.html">About</a>
+        </li>
+        <li>
+            <a href="contact.html">Contact</a>
+        </li>
+    </ul>
+
+    <main class="about-page">
+        <!--Header part, make similar to https://stripe.com/-->
+        <header>
+            <div>
+                <h1>Tools built for the spectrum of human thought</h1>
+                <p>Noric Dausen creates high-performance software for data, design, and beyone. Start with Iristat, the next generation of interactive data organization.</p>
+            </div>
+        </header>
+
+        <!--First section-->
+        <h2>The analytical infrastructure for vibrant ideas</h2>
+        <h3>Noric Dausen is a software lab engineering the tools of tomorrow.</h3>
+        <p>
+            We specialize in transforming complex systems into intuitive, multi-faceted experiences.
+            We believe that utility should never come at the expense of inspiration.
+            By merging high-performance logic with our signature "Iridescent" UI philosophy, we build
+            environments where data and design move in perfect harmony.
+        </p>
+
+        <!--Second section - 3 column grid-->
+        <h2>The Core Pillars</h2>
+        <!--Column 1-->
+        <div>
+            <h3>Technical Precision</h3>
+            <p>
+                Every project is built on a foundation of optimized,
+                low-latency code. Whether it's data processing or real-time visualization,
+                we prioritize stability and surgical accuracy.
+            </p>
+        </div>
+        <!--Column 2-->
+        <div>
+            <h3>Visual Intelligence</h3>
+            <p>
+                Our "Iri" design system brings a new visual language to analytical tools.
+                Iridescence represents the fluid, shifting nature of
+                information—making complex data feel alive and accessible.
+            </p>
+        </div>
+        <!--Column 3-->
+        <div>
+            <h3>Human-Centric Logic</h3>
+            <p>
+                The best software simplifies the complex. We focus
+                on removing the friction between raw input and actionable
+                insight, ensuring our tools work for the way you think.
+            </p>
+        </div>
+
+
+        <!--Third secion-->
+        <h3>Origins</h3>
+        <p>
+            Noric Dausen began as a series of experiments in a developer console
+            a quest to see if analytical software could be as beautiful as it is powerful.
+            Today, our lab continues to push the boundaries of data organization and interactive design.
+
+            What started as a search for the perfect "N" and "D"
+            has evolved into the "Iri" ecosystem: a suite of tools designed
+            for the next generation of analysts, engineers, and creators.
+        </p>
+
+        <!--Fourth section - The Roadmap-->
+        <h2>The Roadmap</h2>
+        <h3>Phase 01: The Digital Gateway</h3>
+        <p>
+            Establishing the Noric Dausen identity and
+            testing out interactive UI components across the web.
+        </p>
+        <h3>Phase 02: Iristat</h3>
+        <p>
+            Our flagship data engine. A platform designed for making interactive
+            graphs, charts, and data visualizations that are as intuitive as they are powerful.
+        </p>
+        <h3>Phase 03: The Expanded Ecosystem</h3>
+        <p>
+            The development of new tools that build on the Iri design system,
+            expanding into areas like creative software, productivity, and beyond.
+        </p>
+
+
+    </main>
+
+    <footer class="footer">
+
+        <span class="logo-footer-container">
+            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                 class="logo logo-dark" alt="Noric Dausen Logo (Dark)">
+            <img src="Assets\Images\NoricDausenLogosBlankTranslucentLight.png"
+                 class="logo logo-light" alt="Noric Dausen Logo (Light)">
+        </span>
+
+        <span>&copy; 2026 Noric Dausen LLC. All rights reserved.</span>
+
+        <a href="privacy.html">Privacy Policy</a> |
+        <a href="about.html">About Noric Dausen</a>
+
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/console.js"></script>
+</body>
+
+</html>
