@@ -724,7 +724,6 @@ body.dark-mode .footer a:hover {
     overflow: hidden;
     transition: flex 0.5s ease;
     border-left: 1px solid #ddd;
-
     transition: background-color 0.4s;
 }
 
@@ -766,7 +765,7 @@ body.dark-mode .projects-details-sidebar {
     height: 400px;
     justify-self: center;
     position: absolute;
-    transition: transform 0.6s;
+    transition: transform 0s, height 0s ease-in-out 0s, width 0s ease-in-out 0s; /*Everything here is 0s because it all set in projCard.js*/
     top: 0vh;
     left: 0vw;
 }
@@ -847,7 +846,7 @@ body.dark-mode .projects-details-sidebar {
     padding: 2rem;
     display: block;
     position: absolute;
-    transition: transform 0.4s;
+    transition: transform 0s ease-out;
 }
 
     .projects-title.hidden {
@@ -993,7 +992,6 @@ body.dark-mode .projects-details-sidebar {
 /*#endregion*/
 
 /*#endregion*/
-
 
 /*#region About Page*/
 

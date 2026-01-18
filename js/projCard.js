@@ -63,6 +63,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+window.addEventListener("load", (event) => {
+
+    //To avoid everything animating itself moving from the corner, all animations are 0s until the full page has laoded
+    projectsTitle.style.transitionDuration = '0.4s';
+
+    containers.forEach(container => {
+
+        //Height and width changes are delayed and shorter than the movement to improve smoothness.
+        container.style.transition = 'transform 0.6s, height 0.3s ease-in-out 0.1s, width 0.3s ease-in-out 0.1s';
+
+    });
+
+});
+
 function positionCards() {
 
     positionTitle();
