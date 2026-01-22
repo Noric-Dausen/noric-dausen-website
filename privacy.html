@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<!--head should be first element, not inside body-->
+<head>
+    <!--this is the name of the tab-->
+    <title>Noric Dausen</title>
+    <!--This description shows up on google search-->
+    <meta name="description" content="Official Website of Noric Dausen LLC">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!--just tells website this is the header, no styling-->
+    <header class="privacy-policy-header">
+
+    </header>
+
+    <!--the navigation bar code-->
+    <nav class="navbar">
+
+        <!--In the navbar, there are 4 segments: the links segments (left and right), the logo, and the other segment-->
+
+        <div class="nav-main-container">
+
+            <!--list of links in the FULL navbar on the left-->
+            <div>
+                <ul class="nav-links slide-in-from-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="projects.html">Projects</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--logo-->
+            <div class="logo-navbar-container">
+
+                <a href="index.html" class="logo-link">
+                    <!--Use <picture> tags to create image with small and banner variants for screen sizes-->
+                    <div class="navbar-logo">
+                        <span class="hide-overflow">
+                            <img src="Assets\Images\NoricSeparateBannerLogo1.png"
+                                 id="banner-logo-left"
+                                 class="slide-in-from-right">
+                        </span>
+
+
+                        <!--ND animation logo (uses multiple logos in one for multiple clip-paths)-->
+                        <div id="ND-logo-animated">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N2"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-poly-N3"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="logo-dark clipped-circle-D1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                        </div>
+
+                        <span class="hide-overflow">
+                            <img src="Assets\Images\DausenSeparateBannerLogo1.png"
+                                 id="banner-logo-right"
+                                 class="slide-in-from-left">
+                        </span>
+
+                    </div>
+
+                    <!--for small screens-->
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="Assets\Images\NoricDausenLogosTranslucentLight.png" />
+                        <img src="Assets\Images\NoricDausenBannerLogosCentralizedLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)" />
+                    </picture>
+                </a>
+            </div>
+
+            <!--list of links in the FULL navbar on the right-->
+            <div>
+                <ul class="nav-links links-right slide-in-from-left" id="nav-links">
+                    <!--li = list item-->
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--the light-dark mode switch (the other segment)-->
+            <label class="switch">
+                <input type="checkbox" id="toggleInput">
+                <span class="slider"></span>
+            </label>
+
+            <button class="hamburger" id="hamburger">
+                <span class="hamburger-line hline-long" id="hline-long"></span>
+                <span class="hamburger-line hline-short" id="hline-short"></span>
+            </button>
+
+        </div>
+
+    </nav>
+
+    <!--the dropdown menu for the small/mobile nav links-->
+    <ul class="nav-links-mobile" id="nav-links-mobile">
+        <!--li = list item-->
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>
+            <a href="projects.html">Projects</a>
+        </li>
+        <li>
+            <a href="about.html">About</a>
+        </li>
+        <li>
+            <a href="contact.html">Contact</a>
+        </li>
+    </ul>
+
+    <main>
+
+        <div class="privacy-policy-main">
+
+            <div class="privacy-policy-sidebar">
+                <div class="privacy-policy-item privacy-policy-top-item">
+
+                    <a href="#">Top</a>
+
+                </div>
+                <div class="privacy-policy-item">
+
+                    <a href="#sec1">Section 1</a>
+
+                </div>
+                <div class="privacy-policy-item">
+
+                    <a href="#sec2">Section 2</a>
+
+                </div>
+                <div class="privacy-policy-item">
+
+                    <a href="#sec3">Section 3</a>
+
+                </div>
+                <div class="privacy-policy-item">
+
+                    <a href="#sec4">Section 4</a>
+
+                </div>
+                <div class="privacy-policy-item">
+
+                    <a href="#sec5">Section 5</a>
+
+                </div>
+
+            </div>
+
+            <div class="privacy-policy-container">
+
+                <div class="privacy-policy-bar"></div>
+
+                <div class="privacy-policy">
+
+                    <h1 id="sec1">SECTION 1</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                    </p>
+
+                </div>
+
+                <div class="privacy-policy">
+
+                    <h1 id="sec2">SECTION 2</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                    </p>
+
+                </div>
+
+                <div class="privacy-policy">
+
+                    <h1 id="sec3">SECTION 3</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                    </p>
+
+                </div>
+
+                <div class="privacy-policy">
+
+                    <h1 id="sec4">SECTION 4</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                    </p>
+
+                </div>
+
+                <div class="privacy-policy privacy-policy-final">
+
+                    <h1 id="sec5">SECTION 5</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                    </p>
+
+                </div>
+
+                <div class="privacy-policy-bar privacy-policy-bar-bottom"></div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="footer">
+
+        <span class="logo-footer-container">
+            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                 class="logo logo-dark" alt="Noric Dausen Logo (Dark)">
+            <img src="Assets\Images\NoricDausenLogosBlankTranslucentLight.png"
+                 class="logo logo-light" alt="Noric Dausen Logo (Light)">
+        </span>
+
+        <span>&copy; 2026 Noric Dausen LLC. All rights reserved.</span>
+
+        <a href="privacy.html">Privacy Policy</a> |
+        <a href="about.html">About Noric Dausen</a>
+
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/console.js"></script>
+</body>
+
+</html>
