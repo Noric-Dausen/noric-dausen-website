@@ -864,8 +864,16 @@ body.dark-mode .projects-details-sidebar {
     display: block;
 }
 
-/*Floating Wobble Animation*/
+.projCloseButton {
+    width: 100px;
+    height: 100px;
+    display: block;
+    position: relative;
+    top: -95%;
+    left: 5%;
+}
 
+/*Floating Wobble Animation*/
 @keyframes card-float {
     0%, 100% {transform: translateY(0px); }
     50% {transform: translateY(-10px); }
@@ -876,6 +884,7 @@ body.dark-mode .projects-details-sidebar {
     height: 100%;
     animation: card-float 3s ease-in-out infinite;
     transform-style: preserve-3d;
+    pointer-events: none;
 }
 
 .project-card-container:hover .project-card-float-wrapper {
