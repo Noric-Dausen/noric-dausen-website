@@ -2,6 +2,10 @@ const containers = document.querySelectorAll('.project-card-container');
 const projectsTitle = document.querySelector('.projects-title');
 let currentSelection = 'none';
 let defaultContainerSize; //This variable is filled on DOMContentLoaded with the current size of a card.
+const dynamicButton = document.createElement("button");
+dynamicButton.innerHTML = "Click Me (Dynamically Created)";
+dynamicButton.type = "button";
+dynamicButton.setAttribute('class', 'projCloseButton');
 
 containers.forEach(container => {
 
@@ -18,8 +22,14 @@ container.addEventListener('mousemove', (e) => {
     const centerY = rect.height / 2;
 
     // Calculate rotation angles (value can be adjusted for more/less tilt ||| NOTE: higher values mean less tilt)
-    const rotateX = (centerY - y) / 20;
-    const rotateY = (x - centerX) / 20;
+    let rotateX = (centerY - y) / 20;
+    let rotateY = (x - centerX) / 20;
+
+    //Reduce angles if the card is selected.
+    if (container.id === currentSelection) {
+        rotateX = rotateX / 10;
+        rotateY = rotateY / 10;
+    }
 
     // Apply rotation and scale to the card
     card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
@@ -39,18 +49,36 @@ container.addEventListener('mouseleave', () => {
 
     container.addEventListener('click', () => {
 
+        let sameCard = false;
+
+        if (container.id === currentSelection) {
+            //sameCard = true;
+        }
+
         //Update Selection
         deselectCard(getCardFromID(currentSelection));
 
-        currentSelection = container.id;
+        if (!sameCard) { currentSelection = container.id; }
 
         //Update Position
         positionCards();
+
+        //Create Close Button
+        addCloseButton();
+
     });
 
 });
 
-document.getElementById('projCloseButton').addEventListener('click', () => {
+dynamicButton.addEventListener("click", function () {
+
+    alert("detected");
+
+    //getCardFromID(currentSelection).removeChild(closeButton);
+
+    //deselectCard(getCardFromID(currentSelection));
+
+    //positionCards();
 
 });
 
@@ -60,6 +88,20 @@ document.addEventListener('DOMContentLoaded', function () {
     defaultContainerSize = containers[0].getBoundingClientRect();
 
     positionCards();
+
+});
+
+window.addEventListener("load", (event) => {
+
+    //To avoid everything animating itself moving from the corner, all animations are 0s until the full page has laoded
+    projectsTitle.style.transitionDuration = '0.4s';
+
+    containers.forEach(container => {
+
+        //Height and width changes are delayed and shorter than the movement to improve smoothness.
+        container.style.transition = 'transform 0.6s, height 0.3s ease-in-out 0.1s, width 0.3s ease-in-out 0.1s';
+
+    });
 
 });
 
@@ -121,6 +163,12 @@ function positionTitle() {
     /*projectsTitle.style.transform = `translate(${newPosX}, 0px)`;*/
 
     absTranslate(projectsTitle, { x: newPosX, y: projectsTitle.style.top })
+
+}
+
+function addCloseButton() {
+
+    getCardFromID(currentSelection).appendChild(dynamicButton);
 
 }
 
