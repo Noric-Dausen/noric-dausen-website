@@ -1050,6 +1050,7 @@ body.dark-mode .projects-details-sidebar {
     border: dashed 2px orange;
     width: fit-content;
     margin-inline: auto;
+    text-align: center;
 }
 
 .about-page p {
@@ -1094,5 +1095,46 @@ body.dark-mode .projects-details-sidebar {
         padding: 1.5rem;
         margin-block: 5rem;
     }
+
+.roadmap-container {
+    border: solid 2px #ccc;
+    border-radius: 10px;
+    max-width: 80%;
+    margin-inline: auto;
+}
+
+    .roadmap-container .roadmap-circle {
+        width: fit-content;
+        aspect-ratio: 1 / 1; /* width / height */
+        border: solid 2px #ccc;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+    }
+
+        .roadmap-container .roadmap-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+        }
+
+        .roadmap-container .roadmap-circle p {
+            width: 300px;
+            margin-block: 0.5rem;
+            margin-inline: 2rem;
+            border: dashed 2px orange;
+            flex-shrink: 1;
+        }
+
+        .roadmap-container .roadmap-circle h3 {
+            width: 300px;
+            margin-block: 0.5rem;
+            margin-inline: 2rem;
+            border: dashed 2px red;
+            flex-shrink: 1;
+        }
 
 /*#endregion*/
