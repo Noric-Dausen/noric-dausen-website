@@ -1007,33 +1007,85 @@ body.dark-mode .projects-details-sidebar {
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
-        margin-left: 25%;
-        width: 25%;
+        margin-left: 21%;
+        width: 30%;
         border: dashed 2px blue;
     }
 
     .about-page header div h1 {
-        font-size: 4rem;
+        font-size: 5rem;
         text-align: left;
+        margin-bottom: 1rem;
+        border: dashed 2px red;
     }
 
-.about-page h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
+    .about-page header div p {
+        font-size: 1.25rem;
+        text-align: center;
+        border: dashed 2px orange;
+    }
+
+    .about .navbar {
+        background-color: transparent;
+    }
 
 .about-page h2 {
-    font-size: 2rem;
+    font-size: 2.25rem;
     margin-top: 2rem;
+    border: dashed 2px green;
+    width: fit-content;
+    margin-inline: auto;
 }
 
 .about-page h3 {
     font-size: 1.5rem;
     margin-top: 1.5rem;
+    border: dashed 2px orange;
+    width: fit-content;
+    margin-inline: auto;
 }
 
 .about-page p {
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    width: 80%;
+    margin-inline: auto;
+    text-align: center;
 }
+
+.pillars {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2%;
+    margin-top: 2rem;
+}
+
+.pillar {
+    flex: 1;
+    padding: 1rem;
+    border: solid 2px #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: background-color 0.4s, color 0.4s;
+    max-width: 20%;
+    height: 30%;
+    margin-bottom: 5rem;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+    .pillar:hover {
+        transform: translateY(-1rem);
+        box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+    }
+
+    .pillar p {
+        text-align: center;
+        font-size: 1rem;
+        padding: 1.5rem;
+        margin-block: 5rem;
+    }
 
 /*#endregion*/
