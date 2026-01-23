@@ -866,18 +866,61 @@ body.dark-mode .projects-details-sidebar {
 }
 
 .projCloseButton {
-    width: 100px;
-    height: 100px;
+    width: 3rem;
+    height: 3rem;
     display: block;
     position: relative;
-    top: -95%;
-    left: 5%;
+    top: -98%;
+    left: 2%;
+    background-color: transparent;
+    border: none;
+    animation: button-float 3s ease-in-out infinite;
 }
 
+.proj-close-span1 {
+    position: absolute;
+    width: 0rem;
+    height: 0.25rem;
+    top: 50%;
+    left: 0%;
+    background-color: #636363;
+    border-radius: 0.5rem;
+    transform: rotate(45deg);
+    transition: background-color 0.4s, width 0.2s ease-in-out 0.2s;
+}
+
+.proj-close-span2 {
+    position: absolute;
+    width: 0rem;
+    height: 0.25rem;
+    top: 50%;
+    left: 0%;
+    background-color: #636363;
+    border-radius: 0.5rem;
+    transform: rotate(-45deg);
+    transition: background-color 0.4s, width 0.2s ease-in-out 0.2s;
+}
+
+body.dark-mode .proj-close-span1, body.dark-mode .proj-close-span2 {
+    background-color: #bbb;
+}
+
+.projCloseButton:hover .proj-close-span1, .projCloseButton:hover .proj-close-span2 {
+    background-color: #3dafe9;
+}
+
+body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projCloseButton:hover .proj-close-span2 {
+    background-color: #301991;
+}
 /*Floating Wobble Animation*/
 @keyframes card-float {
     0%, 100% {transform: translateY(0px); }
     50% {transform: translateY(-10px); }
+}
+
+@keyframes button-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
 }
 
 .project-card-float-wrapper {
