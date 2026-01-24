@@ -107,6 +107,15 @@ window.addEventListener("load", (event) => {
 
 });
 
+//On scroll, make sure the selected card stays in position
+window.addEventListener('scroll', function () {
+    containers.forEach(container => {
+        if (container.id === currentSelection) {
+            positionSelectedCard(container);
+        }
+    });
+});
+
 function positionCards() {
 
     positionTitle();
@@ -137,15 +146,7 @@ function positionCards() {
 
         if (container.id === currentSelection) {
 
-            const newSize = { width: 70, height: 85 };
-
-            container.style.width = newSize.width + 'vw';
-            container.style.height = newSize.height + 'vh';
-
-            //container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
-            //container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
-
-            absTranslate(container, cornerizeUnits({ x: 62, y: 55 }, newSize));
+            positionSelectedCard(container);
 
         }
 
@@ -159,6 +160,30 @@ function positionCards() {
         pageMain.style.height = '240vh';
     }
 
+}
+
+function positionSelectedCard(container) {
+
+    const newSize = { width: 70, height: 85 };
+
+    container.style.width = newSize.width + 'vw';
+    container.style.height = newSize.height + 'vh';
+
+    //container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
+    //container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
+
+    let yDown = pixelsToViewPort(window.scrollY, true);
+
+    //Depending on how the user has scrolled, adjust the Y position slightly to ensure the card always apppears centered/in proper position
+    if (pixelsToViewPort(window.scrollY, true) > 5 && !(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1)) {
+        yDown += 50;
+    } else if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1) {
+        yDown += 45;
+    } else {
+        yDown += 55;
+    }
+
+    absTranslate(container, cornerizeUnits({ x: 62, y: yDown }, newSize));
 }
 
 function positionTitle() {
