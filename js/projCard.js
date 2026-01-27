@@ -144,9 +144,16 @@ function positionCards() {
             return;
         }
 
+        //Remove Information fill on all cards
+        container.classList.remove('information-fill');
+
         if (container.id === currentSelection) {
 
             positionSelectedCard(container);
+
+            //Information fill on selected card
+
+            container.classList.add('information-fill');
 
         }
 
@@ -157,7 +164,7 @@ function positionCards() {
     pageMain.style.height = '110vh';
 
     if (currentSelection !== 'none') {
-        pageMain.style.height = '240vh';
+        pageMain.style.height = '2220px';
     }
 
 }
@@ -301,6 +308,8 @@ function deselectCard(container) {
 
     container.style.width = '300px';
     container.style.height = '400px';
+
+    container.classList.remove('information-fill');
 
     currentSelection = 'none';
 }

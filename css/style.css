@@ -827,19 +827,63 @@ body.dark-mode .projects-details-sidebar {
 }
 
 .project-card-content {
-    
+    text-align: center;
 }
 
     .project-card-content h3 {
         margin: 0;
         padding: 0.5rem;
         text-align: center;
+        transition: font-size 0.4s;
     }
 
-    .project-card-content p {
-        padding: 0.5rem;
-        text-align: center;
+    .project-card-container.information-fill .project-card-content h3 {
+        font-size: 2.5rem;
     }
+
+.project-card-content h4 {
+    margin: 0;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: normal;
+    transition: font-size 0.4s, font-weight 0.4s;
+}
+
+.project-card-container.information-fill .project-card-content h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.project-card-content p {
+    visibility: hidden;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    padding: 0.5rem;
+    text-align: center;
+    transition: opacity 0.4s ease-in-out 0.2s, height 0s ease-in-out 0.2s; /*Delay so the text only begins to appear when the card is bigger*/
+}
+
+.project-card-container.information-fill .project-card-content p {
+    visibility: visible;
+    overflow: visible;
+    height: auto;
+    font-size: 1rem;
+    opacity: 1;
+}
+
+.selected-card-img {
+    opacity: 0;
+    height: 0;
+    transition: opacity 0.3s ease-in-out 0.2s, height 0s ease-in-out 0.2s;
+}
+
+.project-card-container.information-fill .selected-card-img {
+    height: 240px; /*Image Dimensions*/
+    width: 240px;
+    opacity: 1;
+}
 
 .projects-title {
     text-align: center;
