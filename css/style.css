@@ -1022,6 +1022,34 @@ body.dark-mode .projects-details-sidebar {
     transform-origin: 0;
 }
 
+    .about-page .background-color-change {
+        position: absolute;
+        top: 175%;
+        left: 0;
+        width: 100%;
+        height: 80vh;
+        background: #e0f2fe;
+        z-index: -1;
+        overflow: hidden;
+        transform: skewY(-6deg);
+        transform-origin: 0;
+        transition: background-color 0.4s;
+    }
+
+    .about-page .background-color-change2 {
+        position: absolute;
+        bottom: -250vh;
+        left: 0;
+        width: 100%;
+        height: 80vh;
+        background: #c3d1ed;
+        z-index: -2;
+        overflow: hidden;
+        transform: skewY(6deg);
+        transform-origin: 0;
+        transition: background-color 0.4s;
+    }
+
 .about-page .moving-gradient {
     position: absolute;
     width: 100%;
