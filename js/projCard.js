@@ -3,9 +3,17 @@ const projectsTitle = document.querySelector('.projects-title');
 let currentSelection = 'none';
 let defaultContainerSize; //This variable is filled on DOMContentLoaded with the current size of a card.
 const dynamicButton = document.createElement("button");
-dynamicButton.innerHTML = "Click Me (Dynamically Created)";
+dynamicButton.innerHTML = "";
 dynamicButton.type = "button";
 dynamicButton.setAttribute('class', 'projCloseButton');
+const dynamicButtonSpan1 = document.createElement("span");
+dynamicButton.appendChild(dynamicButtonSpan1);
+dynamicButtonSpan1.setAttribute('class', 'proj-close-span1');
+const dynamicButtonSpan2 = document.createElement("span");
+dynamicButton.appendChild(dynamicButtonSpan2);
+dynamicButtonSpan2.setAttribute('class', 'proj-close-span2');
+dynamicButtonSpan1.style.width = '0rem';
+dynamicButtonSpan2.style.width = '0rem';
 
 containers.forEach(container => {
 
@@ -72,13 +80,7 @@ container.addEventListener('mouseleave', () => {
 
 dynamicButton.addEventListener("click", function () {
 
-    alert("detected");
-
-    //getCardFromID(currentSelection).removeChild(closeButton);
-
-    //deselectCard(getCardFromID(currentSelection));
-
-    //positionCards();
+    closeCard();
 
 });
 
@@ -103,6 +105,15 @@ window.addEventListener("load", (event) => {
 
     });
 
+});
+
+//On scroll, make sure the selected card stays in position
+window.addEventListener('scroll', function () {
+    containers.forEach(container => {
+        if (container.id === currentSelection) {
+            positionSelectedCard(container);
+        }
+    });
 });
 
 function positionCards() {
@@ -135,19 +146,44 @@ function positionCards() {
 
         if (container.id === currentSelection) {
 
-            const newSize = { width: 70, height: 85 };
-
-            container.style.width = newSize.width + 'vw';
-            container.style.height = newSize.height + 'vh';
-
-            //container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
-            //container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
-
-            absTranslate(container, cornerizeUnits({ x: 62, y: 55 }, newSize));
+            positionSelectedCard(container);
 
         }
 
     });
+
+    const pageMain = document.querySelector('main');
+
+    pageMain.style.height = '110vh';
+
+    if (currentSelection !== 'none') {
+        pageMain.style.height = '240vh';
+    }
+
+}
+
+function positionSelectedCard(container) {
+
+    const newSize = { width: 70, height: 85 };
+
+    container.style.width = newSize.width + 'vw';
+    container.style.height = newSize.height + 'vh';
+
+    //container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
+    //container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
+
+    let yDown = pixelsToViewPort(window.scrollY, true);
+
+    //Depending on how the user has scrolled, adjust the Y position slightly to ensure the card always apppears centered/in proper position
+    if (pixelsToViewPort(window.scrollY, true) > 5 && !(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1)) {
+        yDown += 50;
+    } else if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1) {
+        yDown += 45;
+    } else {
+        yDown += 55;
+    }
+
+    absTranslate(container, cornerizeUnits({ x: 62, y: yDown }, newSize));
 }
 
 function positionTitle() {
@@ -169,6 +205,8 @@ function positionTitle() {
 function addCloseButton() {
 
     getCardFromID(currentSelection).appendChild(dynamicButton);
+
+    setCloseWidths();
 
 }
 
@@ -299,6 +337,41 @@ function absTranslate(object, newPosition) {
     difference.y = newPosition.y - oldPosition.y;
 
     object.style.transform = `translate(${difference.x}vw, ${difference.y}vh)`;
+}
+
+async function setCloseWidths() {
+    await delay(1);
+
+    dynamicButtonSpan1.style.transition = 'background-color 0.4s, width 0.2s ease-in-out 0.2s';
+    dynamicButtonSpan2.style.transition = 'background-color 0.4s, width 0.2s ease-in-out 0.2s';
+    dynamicButtonSpan1.style.width = '3rem';
+    dynamicButtonSpan2.style.width = '3rem';
+}
+
+async function closeCard() {
+
+    await delay(2); //Delay for any amount to ensure that the deselection is not immediately undone by the card underneath.
+
+    dynamicButtonSpan1.style.transition = 'background-color 0.4s, width 0.2s ease-in-out';
+    dynamicButtonSpan2.style.transition = 'background-color 0.4s, width 0.2s ease-in-out';
+    dynamicButtonSpan1.style.width = '0rem';
+    dynamicButtonSpan2.style.width = '0rem';
+
+    const oldSelection = currentSelection;
+
+    deselectCard(getCardFromID(currentSelection));
+
+    positionCards();
+
+    await delay(400);
+
+    getCardFromID(oldSelection).removeChild(dynamicButton);
+
+}
+
+// Function to create a delay
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function log(message) {
