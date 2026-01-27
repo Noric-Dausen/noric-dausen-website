@@ -1142,8 +1142,7 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
-        margin-left: 21%;
-        margin-top: 10vh;
+        margin: 10vh 0 12vh 21%;
         width: 30%;
     }
 
@@ -1186,7 +1185,7 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
     margin-bottom: 5rem;
     line-height: 1.6;
     font-size: 1.1rem;
-    width: 60%;
+    width: 70%;
     margin-inline: auto;
     text-align: center;
 }
