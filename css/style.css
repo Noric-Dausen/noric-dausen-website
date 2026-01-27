@@ -1050,6 +1050,8 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
 
 .about-page {
     padding: 2rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .about-page .stripe-bg-container {
@@ -1067,7 +1069,7 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
 
     .about-page .background-color-change {
         position: absolute;
-        top: 175%;
+        top: %;
         left: 0;
         width: 100%;
         height: 80vh;
@@ -1081,16 +1083,29 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
 
     .about-page .background-color-change2 {
         position: absolute;
-        bottom: -250vh;
+        /* Change from -250vh to 0 so it stays at the bottom of its container */
+        bottom: 0;
         left: 0;
         width: 100%;
-        height: 80vh;
+        height: 40vh;
         background: #c3d1ed;
         z-index: -2;
-        overflow: hidden;
+        /* This skew creates the top slant */
         transform: skewY(6deg);
-        transform-origin: 0;
+        /* This ensures the slant starts from the bottom left corner */
+        transform-origin: bottom left;
         transition: background-color 0.4s;
+    }
+
+    .about-page .bottom-bg-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Make sure this is tall enough to hold the box */
+        overflow: hidden; /* THIS CUTS OFF THE SLANT */
+        z-index: -2;
+        pointer-events: none; /* Allows you to still click things 'through' it */
     }
 
 .about-page .moving-gradient {
@@ -1143,6 +1158,8 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
     .about-page header div p {
         font-size: 1.25rem;
         text-align: left;
+        color: #0f1d37;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
 
     .about .navbar {
