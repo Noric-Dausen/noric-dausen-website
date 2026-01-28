@@ -776,6 +776,7 @@ body.dark-mode .projects-details-sidebar {
     height: 100%;
     background: linear-gradient(135px, #6e8efb, #a777e3);
     border-radius: 15px;
+    border: solid 3px #ccc;
     transition: transform 0.1s ease-out;
     transform-style: preserve-3d;
     display: flex;
@@ -791,7 +792,7 @@ body.dark-mode .projects-details-sidebar {
     will-change: transform;
     backface-visibility: hidden;
     pointer-events: none;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, border 0.3s;
 }
 
     /*Glare for the card*/
@@ -813,10 +814,11 @@ body.dark-mode .projects-details-sidebar {
         pointer-events: none; /*So it doesn't block mouse events*/
     }
 
-    body.dark-mode .project-card {
-        background-color: #2a2a2a;
-        color: #eee;
-    }
+body.dark-mode .project-card {
+    background-color: #2a2a2a;
+    color: #eee;
+    border: solid 3px #666;
+}
 
 .project-card-container:hover .project-card {
     box-shadow: 0 30px 60px rgba(0,0,0,0.4);
@@ -827,11 +829,16 @@ body.dark-mode .projects-details-sidebar {
 }
 
 .project-card-content {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    width: 100%;
+    height: 100%;
 }
 
+/*h3 is for card/project titles - they enlarge on select*/
     .project-card-content h3 {
-        margin: 0;
+        margin-top: 3rem;
         padding: 0.5rem;
         text-align: center;
         transition: font-size 0.4s;
@@ -841,8 +848,9 @@ body.dark-mode .projects-details-sidebar {
         font-size: 2.5rem;
     }
 
+/*h4 is for project/card subtitles, they enlarge and bold on select*/
 .project-card-content h4 {
-    margin: 0;
+    margin-top: 1rem;
     padding: 0.5rem;
     text-align: center;
     font-size: 1rem;
@@ -855,6 +863,7 @@ body.dark-mode .projects-details-sidebar {
     font-weight: bold;
 }
 
+/*p is for text that can only be seen when the card is selected*/
 .project-card-content p {
     visibility: hidden;
     overflow: hidden;
@@ -883,6 +892,61 @@ body.dark-mode .projects-details-sidebar {
     height: 240px; /*Image Dimensions*/
     width: 240px;
     opacity: 1;
+}
+
+.project-card-tags {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-content: center;
+    justify-items: center;
+    margin-top: auto;
+}
+
+.project-card-tag {
+    margin: auto auto 2rem auto;
+    justify-self: center;
+    width: 80%;
+    height: 2rem;
+    background-color: #315dbd;
+    border: 2px solid #1a3775;
+    border-radius: 1rem;
+    transition: width 0s ease-in-out 0.2s, margin 0.4s;
+}
+
+/*h5 (when in tag) is for text that does not bold on select*/
+    .project-card-tag h5 {
+        font-size: 1rem;
+        font-weight: normal;
+        text-align: center;
+        margin: auto;
+        padding: 0.25rem 0 0 0;
+        color: #000;
+    }
+
+
+.project-card-container.information-fill .project-card-tag {
+    margin: auto 0.5rem 2rem 0.5rem;
+    width: 12rem;
+}
+
+.project-card-container.information-fill .project-card-tags {
+    margin-left: 1rem;
+}
+
+/*Some tags only show up when selected*/
+.tag-invisible {
+    display: none;
+}
+
+.project-card-container.information-fill .tag-invisible {
+    display: block;
+}
+
+/*Additional tag attributes (colors)*/
+.project-card-tag-1 {
+    background-color: #d13838;
+    border: 2px solid #a11313;
 }
 
 .projects-title {
