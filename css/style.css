@@ -1074,6 +1074,12 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
     box-sizing: border-box;
     border: solid 2px #444;
     margin-top: 1rem;
+    -ms-overflow-style: none; /* IE and Edge scrollbar */
+    scrollbar-width: none; /* Firefox scrollbar */
+}
+
+.console-text-window::-webkit-scrollbar {
+    display: none;
 }
 
 .console-input-field {
