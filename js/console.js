@@ -7,6 +7,7 @@ let inputField = null;
 const darkModeSwitch = document.getElementById('toggleInput');
 
 const previousCommands = [];
+let currentCommandIndex = -1;
 
 const helpMessage = `Available commands:
  > help - show this help message
@@ -94,11 +95,30 @@ window.addEventListener('keydown', (event) => {
     // return if the input field is not focused
     if (document.activeElement !== inputField) { return; }
 
-    if (event.code === 'ArrowUp') {
-        // retrieve and set the last entered command
-        event.preventDefault();
+    // helper function to ensure currentCommandIndex stays within bounds
+    function normalizeCommandIndex() {
+        if (currentCommandIndex < 0) { currentCommandIndex = 0; }
+        if (currentCommandIndex > previousCommands.length - 1) { currentCommandIndex = previousCommands.length - 1; }
+    }
+
+    // direction should be 1 for previous command and -1 for next command
+    function viewPreviousCommand(direction) {
         if (previousCommands.length === 0) { return; }
-        inputField.value = previousCommands[previousCommands.length - 1];
+        currentCommandIndex += direction;
+        normalizeCommandIndex();
+        inputField.value = previousCommands[previousCommands.length - 1 - currentCommandIndex];
+    }
+
+    if (event.code === 'ArrowUp') {
+        // retrieve and set the last entered command (further in the past)
+        event.preventDefault();
+        viewPreviousCommand(1);
+    }
+
+    if (event.code === 'ArrowDown') {
+        // retrieve and set the last entered command (closer to the present)
+        event.preventDefault();
+        viewPreviousCommand(-1);
     }
 
     // Enter key to submit commands
