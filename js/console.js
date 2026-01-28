@@ -9,6 +9,27 @@ const darkModeSwitch = document.getElementById('toggleInput');
 const previousCommands = [];
 let currentCommandIndex = -1;
 
+// helper function to ensure currentCommandIndex stays within bounds
+function normalizeCommandIndex() {
+    if (currentCommandIndex < 0) { currentCommandIndex = 0; }
+    if (currentCommandIndex > previousCommands.length - 1) { currentCommandIndex = previousCommands.length - 1; }
+}
+
+// direction should be 1 for previous command and -1 for next command
+function viewPreviousCommand(direction) {
+    if (previousCommands.length === 0) { return; }
+    currentCommandIndex += direction;
+    normalizeCommandIndex();
+    inputField.value = previousCommands[previousCommands.length - 1 - currentCommandIndex];
+}
+
+// send a message to the console
+function logToConsole(message) {
+    window.dispatchEvent(new CustomEvent('consoleLog', {
+        detail: { data: message }
+    }));
+}
+
 const helpMessage = `Available commands:
  > help - show this help message
  > clear - clear the console output
@@ -54,6 +75,8 @@ window.addEventListener('keydown', (event) => {
     //Opening and closing the console with Shift + `
     if (event.code === 'Backquote' && event.shiftKey) {
 
+        event.preventDefault();
+
         if (consoleElement === null) {
             // Create the console element if it doesn't exist
             consoleElement = document.createElement('div');
@@ -62,7 +85,7 @@ window.addEventListener('keydown', (event) => {
             textWindow = document.createElement('div');
             textWindow.setAttribute('class', 'console-text-window');
             textwindowContent = document.createElement('pre');
-            textwindowContent.textContent = 'This is a placeholder for the developer console output.';
+            textwindowContent.textContent = 'This is a placeholder for the developer console output.\n';
             inputField = document.createElement('input');
             inputField.setAttribute('class', 'console-input-field');
 
@@ -80,6 +103,10 @@ window.addEventListener('keydown', (event) => {
 
         consoleVisible = !consoleVisible;
 
+        // Focus the input field
+        if (consoleVisible) {
+            inputField.focus();
+        }
     }
 
     
@@ -88,26 +115,12 @@ window.addEventListener('keydown', (event) => {
 
     // return if the input field does not exist
     if (inputField === null) {
-        textwindowContent.textContent += `> ERROR: Input Field Not Found\n`;
+        logToConsole(`> ERROR: Input Field Not Found\n`);
         return;
     } 
 
     // return if the input field is not focused
     if (document.activeElement !== inputField) { return; }
-
-    // helper function to ensure currentCommandIndex stays within bounds
-    function normalizeCommandIndex() {
-        if (currentCommandIndex < 0) { currentCommandIndex = 0; }
-        if (currentCommandIndex > previousCommands.length - 1) { currentCommandIndex = previousCommands.length - 1; }
-    }
-
-    // direction should be 1 for previous command and -1 for next command
-    function viewPreviousCommand(direction) {
-        if (previousCommands.length === 0) { return; }
-        currentCommandIndex += direction;
-        normalizeCommandIndex();
-        inputField.value = previousCommands[previousCommands.length - 1 - currentCommandIndex];
-    }
 
     if (event.code === 'ArrowUp') {
         // retrieve and set the last entered command (further in the past)
@@ -124,6 +137,9 @@ window.addEventListener('keydown', (event) => {
     // Enter key to submit commands
     if (event.code === 'Enter') {
 
+        // reset command index for retrieving previous commands
+        currentCommandIndex = -1;
+
         if (inputField.value === '') { return; }
 
         const command = inputField.value.trim();
@@ -138,15 +154,15 @@ window.addEventListener('keydown', (event) => {
 
         if (args.length === 0) { return; }
 
-        if (textwindowContent.textContent !== '') { textwindowContent.textContent += `\n`; }
+        if (textwindowContent.textContent !== '') { logToConsole(`\n`); }
 
-        textwindowContent.textContent += `> ${command}\n`;
+        logToConsole(`> ${command}\n`);
 
         if (args.length === 1) {
             switch (args[0].toLowerCase()) {
 
                 case 'help':
-                    textwindowContent.textContent += helpMessage;
+                    logToConsole(helpMessage);
                     return;
 
                 case 'clear':
@@ -155,25 +171,25 @@ window.addEventListener('keydown', (event) => {
 
                 case 'darkmode':
                     if (darkModeSwitch === null) {
-                        textwindowContent.textContent += 'Dark mode switch not found.';
+                        logToConsole('Dark mode switch not found.');
                         return;
                     }
                     darkModeSwitch.checked = !darkModeSwitch.checked;
                     darkModeSwitch.dispatchEvent(new Event('change'));
-                    textwindowContent.textContent += `Dark mode toggled to ${darkModeSwitch.checked ? 'ON' : 'OFF'}`;
+                    logToConsole(`Dark mode toggled to ${darkModeSwitch.checked ? 'ON' : 'OFF'}`);
                     return;
 
                 case 'theme':
-                    textwindowContent.textContent += 'Usage: theme [light|dark|matrix|abyss]';
+                    logToConsole('Usage: theme [light|dark|matrix|abyss]');
                     return;
 
                 case 'game':
-                    textwindowContent.textContent += 'Redirecting to game page.';
+                    logToConsole('Redirecting to game page.');
                     setTimeout(function () {
-                        textwindowContent.textContent += '.';
+                        logToConsole('.');
                     }, 1000);
                     setTimeout(function () {
-                        textwindowContent.textContent += '.';
+                        logToConsole('.');
                     }, 2000);
                     setTimeout(function () {
                         window.location.href = 'testing.html';
@@ -181,31 +197,31 @@ window.addEventListener('keydown', (event) => {
                     return;
 
                 case 'hi':
-                    textwindowContent.textContent += 'hey cutie :)';
+                    logToConsole('hey cutie :)');
                     return;
 
                 case 'reset':
-                    textwindowContent.textContent += 'Usage: reset [DOMContent|page]';
+                    logToConsole('Usage: reset [DOMContent|page]');
                     return;
 
                 case 'emulate':
-                    textwindowContent.textContent += 'Usage: emulate <Event>';
+                    logToConsole('Usage: emulate <Event>');
                     return;
 
                 case '#emulate':
-                    textwindowContent.textContent += emulateMessage;
+                    logToConsole(emulateMessage);
                     return;
 
                 case 'execute':
-                    textwindowContent.textContent += 'Usage: execute <Event> <data>+>';
+                    logToConsole('Usage: execute <Event> <data>+>');
                     return;
 
                 case '#execute':
-                    textwindowContent.textContent += executeMessage;
+                    logToConsole(executeMessage);
                     return;
 
                 case 'commandguide':
-                    textwindowContent.textContent += guideMessage;
+                    logToConsole(guideMessage);
                     return;
             }
 
@@ -236,7 +252,7 @@ window.addEventListener('keydown', (event) => {
             //Default Commands (no type applied)
             if (args[0].toLowerCase() === 'theme') {
                 if (args.length < 2) {
-                    textwindowContent.textContent += '\nUsage: theme [light|dark|matrix|abyss]';
+                    logToConsole('\nUsage: theme [light|dark|matrix|abyss]');
                 }
 
                 const theme = command.split(' ')[1].toLowerCase();
@@ -255,16 +271,16 @@ window.addEventListener('keydown', (event) => {
                         consoleElement.setAttribute('class', 'console console-abyss');
                         break;
                     default:
-                        textWindowContent.textContent += 'Invalid theme. Available themes: light, dark, matrix, abyss.';
+                        logToConsole('Invalid theme. Available themes: light, dark, matrix, abyss.');
                 }
 
-                textwindowContent.textContent += `Theme set to ${theme}`;
+                logToConsole(`Theme set to ${theme}`);
                 return;
             }
 
             if (args[0].toLowerCase() === 'reset') {
                 if (args.length < 2) {
-                    textwindowContent.textContent += '\nUsage: reset [DOMContent|page]';
+                    logToConsole('\nUsage: reset [DOMContent|page]');
                 }
 
                 const target = command.split(' ')[1].toLowerCase();
@@ -277,21 +293,21 @@ window.addEventListener('keydown', (event) => {
                         window.location.reload();
                         break;
                     default: 
-                        textWindowContent.textContent += 'Invalid reset target. Available targets: page, DOMContent.';
+                        logToConsole('Invalid reset target. Available targets: page, DOMContent.');
                 }
 
-                textwindowContent.textContent += `Reseting ${target}`;
+                logToConsole(`Reseting ${target}`);
                 return;
             }
 
             if (typedCommand === 'emulate') {
                 if (args.length < 3 && type === '?') {
-                    textwindowContent.textContent += '\nUsage: emulate <Event>';
+                    logToConsole('\nUsage: emulate <Event>');
                     return;
                 }
 
                 if (args.length > 2 && type !== '?') {
-                    textwindowContent.textContent += '\nUsage: emulate <Event>';
+                    logToConsole('\nUsage: emulate <Event>');
                     return;
                 }
 
@@ -302,15 +318,15 @@ window.addEventListener('keydown', (event) => {
                         let target = document.getElementById(args[2]);
 
                         target.dispatchEvent(new Event(args[1]));
-                        textwindowContent.textContent += `Emulating ${args[1]} event for ${args[2]}`;
+                        logToConsole(`Emulating ${args[1]} event for ${args[2]}`);
                         break;
                     case '!':
                         document.dispatchEvent(new Event(args[1]));
-                        textwindowContent.textContent += `Emulating ${args[1]} event for DOCUMENT`;
+                        logToConsole(`Emulating ${args[1]} event for DOCUMENT`);
                         break;
                     default:
                         window.dispatchEvent(new Event(args[1]));
-                        textwindowContent.textContent += `Emulating ${args[1]} event for WINDOW`;
+                        logToConsole(`Emulating ${args[1]} event for WINDOW`);
 
                 }
 
@@ -320,7 +336,7 @@ window.addEventListener('keydown', (event) => {
             if (typedCommand === 'execute') {
 
                 if (type === '?' && args.length < 3) {
-                    textwindowContent.textContent += '\nUsage: execute <Event> <data>+>';
+                    logToConsole('\nUsage: execute <Event> <data>+>');
                     return;
                 }
 
@@ -351,15 +367,15 @@ window.addEventListener('keydown', (event) => {
                         let target = document.getElementById(args[2]);
 
                         target.dispatchEvent(operation);
-                        textwindowContent.textContent += `Executing ${args[1]} event for ${args[2]}`;
+                        logToConsole(`Executing ${args[1]} event for ${args[2]}`);
                         break;
                     case '!':
                         document.dispatchEvent(operation);
-                        textwindowContent.textContent += `Executing ${args[1]} event for DOCUMENT`;
+                        logToConsole(`Executing ${args[1]} event for DOCUMENT`);
                         break;
                     default:
                         window.dispatchEvent(operation);
-                        textwindowContent.textContent += `Executing ${args[1]} event for WINDOW`;
+                        logToConsole(`Executing ${args[1]} event for WINDOW`);
 
                 }
 
@@ -369,16 +385,22 @@ window.addEventListener('keydown', (event) => {
 
         }
 
-        textwindowContent.textContent += `Unknown command: ${command}. Type 'help' for a list of commands.`;
+        logToConsole(`Unknown command: ${command}. Type 'help' for a list of commands.`);
 
     }
 
     
 });
 
-
 window.addEventListener('consoleLog', (event) => {
     if (consoleElement === null) { return; }
 
-    textwindowContent.textContent += event.detail.data + "\n";
+    let message = event.detail.data;
+
+    if (!message.endsWith('\n')) {
+        message += '\n';
+    }
+
+    textwindowContent.textContent += message;
+    textWindow.scrollTop = textWindow.scrollHeight;
 });
