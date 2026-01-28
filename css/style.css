@@ -1173,6 +1173,7 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
     overflow: hidden;
     transform: skewY(-6deg);
     transform-origin: 0;
+    transition: background-color 0.4s;
 }
 
     .about-page .background-color-change {
@@ -1216,6 +1217,15 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
         pointer-events: none; /* Allows you to still click things 'through' it */
     }
 
+/*Darkmode for background-color-changes*/
+body.dark-mode .about-page .background-color-change {
+    background: #0f1929;
+}
+
+body.dark-mode .about-page .background-color-change2 {
+    background: #161229;
+}
+
 .about-page .moving-gradient {
     position: absolute;
     width: 100%;
@@ -1229,6 +1239,36 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
     );
     background-size: 200% 200%;
     animation: moveGradient 10s ease infinite;
+    transition: opacity 0.4s;
+}
+
+/*Darkmode for moving-gradient*/
+.about-page .gradient-dark {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        150deg, 
+        #0c2861 15%, 
+        #3b3569 70%, 
+        #0c5a61 94%
+    );
+    background-size: 200% 200%;
+    animation: moveGradient 10s ease infinite;
+    transition: opacity 0.4s;
+    opacity: 0;
+}
+
+body.dark-mode .about-page .moving-gradient {
+    opacity: 0;
+}
+
+body.dark-mode .about-page .gradient-dark {
+    opacity: 1;
+}
+
+body.dark-mode .about-page .stripe-bg-container {
+        background: #0a1223;
 }
 
 @keyframes moveGradient {
@@ -1268,6 +1308,16 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
         color: #0f1d37;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
+
+/*Darkmode for header p and h1*/
+body.dark-mode .about-page header div h1 {
+    color: #a2bae8;
+}
+
+body.dark-mode .about-page header div p {
+    color: #899fc7;
+}
+
 
     .about .navbar {
         background-color: transparent;
@@ -1332,6 +1382,13 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
         margin-block: 5rem;
     }
 
+/*Darkmode for pillars*/
+body.dark-mode .pillar {
+    background-color: #222;
+    color: #eee;
+    border: solid 2px #444;
+}
+
 .roadmap-container {
     max-width: 80%;
     margin-inline: auto;
@@ -1390,11 +1447,17 @@ body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projClo
             flex-shrink: 1;
         }
 
-/*#endregion*/
+ /*Darkmode for roadmap circles*/
+body.dark-mode .roadmap-container .roadmap-circle {
+    background-color: #222;
+    color: #eee;
+    border: solid 2px #444;
+}
 
-/*#region Privacy Page*/
+    /*#endregion*/
+    /*#region Privacy Page*/
 
-.privacy-policy-title {
+    .privacy-policy-title {
     font-size: 4rem;
     margin: 5rem 10% 0 10%;
 }
