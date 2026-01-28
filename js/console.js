@@ -6,6 +6,8 @@ let inputField = null;
 
 const darkModeSwitch = document.getElementById('toggleInput');
 
+const previousCommands = [];
+
 const helpMessage = `Available commands:
  > help - show this help message
  > clear - clear the console output
@@ -80,11 +82,28 @@ window.addEventListener('keydown', (event) => {
     }
 
     
+    // return if the console is not visible
+    if (!consoleVisible) { return; }
+
+    // return if the input field does not exist
+    if (inputField === null) {
+        textwindowContent.textContent += `> ERROR: Input Field Not Found\n`;
+        return;
+    } 
+
+    // return if the input field is not focused
+    if (document.activeElement !== inputField) { return; }
+
+    if (event.code === 'ArrowUp') {
+        // retrieve and set the last entered command
+        event.preventDefault();
+        if (previousCommands.length === 0) { return; }
+        inputField.value = previousCommands[previousCommands.length - 1];
+    }
 
     // Enter key to submit commands
-    if (event.code === 'Enter' && consoleVisible) {
+    if (event.code === 'Enter') {
 
-        if (inputField === null) { return; } 
         if (inputField.value === '') { return; }
 
         const command = inputField.value.trim();
@@ -94,6 +113,8 @@ window.addEventListener('keydown', (event) => {
 
         // clear input field after getting the command
         inputField.value = '';
+
+        previousCommands.push(command);
 
         if (args.length === 0) { return; }
 
