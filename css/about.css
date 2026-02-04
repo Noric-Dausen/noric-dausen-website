@@ -267,25 +267,27 @@ body.dark-mode .pillar {
     }
 
 @media screen and (min-width: 769px) {
+    #roadmap-circle-1, #roadmap-circle-2, #roadmap-circle-3 {
+        /* Remove the 'transform' line and use 'translate' instead */
+        translate: -50% 0;
+    }
+    
     #roadmap-circle-1 {
         position: absolute;
         top: 0;
         left: calc(50% + (23rem/2.25));
-        transform: translateX(-50%);
     }
 
     #roadmap-circle-2 {
         position: absolute;
         top: 21vh;
         left: calc(50% - (23rem/2.25));
-        transform: translateX(-50%);
     }
 
     #roadmap-circle-3 {
         position: absolute;
         top: 42vh;
         left: calc(50% + (23rem/2.25));
-        transform: translateX(-50%);
     }
 }
 
