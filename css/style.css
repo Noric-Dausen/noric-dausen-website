@@ -270,21 +270,21 @@ body.dark-mode .logo-light {
     margin-top: -0.75rem;
 }
 
-#banner-logo-left-dark, #banner-logo-right-dark {
+.banner-logo {
     flex-shrink: 1;
     height: 23px;
     margin-top: 5px;
 }
 
-body.dark-mode #ND-logo-animated-dark {
+body.dark-mode #ND-logo-animated-dark, body.dark-mode #banner-logo-left-dark, body.dark-mode #banner-logo-right-dark {
     display: none;
 }
 
-body.dark-mode #ND-logo-animated-light {
+body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, body.dark-mode #banner-logo-right-light {
     display: block;
 }
 
-#ND-logo-animated-light {
+#ND-logo-animated-light, #banner-logo-left-light, #banner-logo-right-light {
     display: none;
 }
 
