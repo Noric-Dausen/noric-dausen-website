@@ -125,7 +125,6 @@ body.dark-mode .about-page .stripe-bg-container {
     margin: 10vh 0 12vh 21%;
     max-width: 500px;
     min-width: 300px;
-    border: 2px dashed red;
     flex-shrink: 1;
 }
 
