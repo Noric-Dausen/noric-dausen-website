@@ -123,8 +123,9 @@ body.dark-mode .about-page .stripe-bg-container {
     align-items: center;
     gap: 0.5rem;
     margin: 10vh 0 12vh 21%;
-    width: 30%;
-    min-width: 500px;
+    max-width: 500px;
+    min-width: 300px;
+    flex-shrink: 1;
 }
 
 /* change header div based on screen size (small screens) */

@@ -19,6 +19,127 @@
     <header>
     </header>
 
+    <!--the navigation bar code-->
+    <nav class="navbar">
+
+        <!--In the navbar, there are 4 segments: the links segments (left and right), the logo, and the other segment-->
+
+        <div class="nav-main-container">
+
+            <!--list of links in the FULL navbar on the left-->
+            <div>
+                <ul class="nav-links slide-in-from-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="projects.html">Projects</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--logo-->
+            <div class="logo-navbar-container">
+
+                <a href="index.html" class="logo-link">
+                    <!--Use <picture> tags to create image with small and banner variants for screen sizes-->
+                    <div class="navbar-logo">
+                        <span class="hide-overflow">
+                            <img src="Assets\Images\NoricSeparateBannerLogo1.png"
+                                 id="banner-logo-left-dark"
+                                 class="slide-in-from-right banner-logo">
+                            <img src="Assets\Images\NoricLightCropped.png"
+                                 id="banner-logo-right-light"
+                                 class="slide-in-from-right banner-logo">
+                        </span>
+
+
+                        <!--ND animation logo (uses multiple logos in one for multiple clip-paths)-->
+                        <div id="ND-logo-animated-dark">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="clipped-poly-N1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="clipped-poly-N2"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="clipped-poly-N3"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
+                                 class="clipped-circle-D1"
+                                 alt="Noric Dausen Logo (Dark)"
+                                 width="500">
+                        </div>
+
+                        <div id="ND-logo-animated-light">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucentLight.png"
+                                 class="clipped-poly-N1"
+                                 alt="Noric Dausen Logo (Light)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucentLight.png"
+                                 class="clipped-poly-N2"
+                                 alt="Noric Dausen Logo (Light)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucentLight.png"
+                                 class="clipped-poly-N3"
+                                 alt="Noric Dausen Logo (Light)"
+                                 width="500">
+                            <img src="Assets\Images\NoricDausenLogosBlankTranslucentLight.png"
+                                 class="clipped-circle-D1"
+                                 alt="Noric Dausen Logo (Light)"
+                                 width="500">
+                        </div>
+
+                        <span class="hide-overflow">
+                            <img src="Assets\Images\DausenSeparateBannerLogo1.png"
+                                 id="banner-logo-right-dark"
+                                 class="slide-in-from-left banner-logo">
+                            <img src="Assets\Images\DausenLightCropped.png"
+                                 id="banner-logo-right-light"
+                                 class="slide-in-from-left banner-logo">
+                        </span>
+
+                    </div>
+
+                    <!--for small screens-->
+                    <!--<picture>
+                        <source media="(max-width: 768px)" srcset="Assets\Images\NoricDausenLogosTranslucentLight.png" />
+                        <img src="Assets\Images\NoricDausenBannerLogosCentralizedLight.png" class="logo logo-light" alt="Noric Dausen Logo (Light)" />
+                    </picture>-->
+                </a>
+            </div>
+
+            <!--list of links in the FULL navbar on the right-->
+            <div>
+                <ul class="nav-links links-right slide-in-from-left" id="nav-links">
+                    <!--li = list item-->
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--the light-dark mode switch (the other segment)-->
+            <label class="switch">
+                <input type="checkbox" id="toggleInput">
+                <span class="slider"></span>
+            </label>
+
+            <button class="hamburger" id="hamburger">
+                <span class="hamburger-line hline-long" id="hline-long"></span>
+                <span class="hamburger-line hline-short" id="hline-short"></span>
+            </button>
+
+        </div>
+
+    </nav>
+
     <main>
 
         <span class="projects-container">
