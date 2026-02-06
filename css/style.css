@@ -882,16 +882,88 @@ body.dark-mode .project-card {
     opacity: 1;
 }
 
+.selected-card-img-container {
+    width: 100%;
+    height: 20%;
+    overflow: hidden;
+}
+
 .selected-card-img {
     opacity: 0;
     height: 0;
-    transition: opacity 0.3s ease-in-out 0.2s, height 0s ease-in-out 0.2s;
+    transition: opacity 0.3s ease-in-out 0.2s, height 0s ease-in-out 0.2s, width 0s ease-in-out 0.2s;
 }
 
 .project-card-container.information-fill .selected-card-img {
     height: 240px; /*Image Dimensions*/
     width: 240px;
     opacity: 1;
+}
+
+.backgrounds-container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.background-color-change {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 80vh;
+    background: #e0f2fe;
+    z-index: -4;
+    overflow: hidden;
+    transform: skewY(6deg);
+    transform-origin: 0;
+    transition: background-color 0.4s;
+}
+
+.background-color-change2 {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    width: 100%;
+    height: 80vh;
+    background: #c3d1ed;
+    z-index: -3;
+    overflow: hidden;
+    transform: skewY(-8deg);
+    transform-origin: 0;
+    transition: background-color 0.4s;
+}
+
+.background-color-change3 {
+    position: absolute;
+    top: 130%;
+    left: 0;
+    width: 100%;
+    height: 80vh;
+    background: #8bb2d9;
+    z-index: -2;
+    overflow: hidden;
+    transform: skewY(7deg);
+    transform-origin: 0;
+    transition: background-color 0.4s;
+}
+
+.background-color-change4 {
+    position: absolute;
+    top: 200%;
+    left: 0;
+    width: 100%;
+    height: 80vh;
+    background: #a57fc7;
+    z-index: -1;
+    overflow: hidden;
+    transform: skewY(-6deg);
+    transform-origin: 0;
+    transition: background-color 0.4s;
+}
+
+body.dark-mode .background-color-change {
+    background: #0f1929;
 }
 
 .project-card-tags {

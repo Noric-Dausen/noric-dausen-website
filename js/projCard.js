@@ -161,7 +161,7 @@ function positionCards() {
 
     const pageMain = document.querySelector('main');
 
-    pageMain.style.height = '110vh';
+    pageMain.style.height = '120vh';
 
     if (currentSelection !== 'none') {
         pageMain.style.height = '2220px';
