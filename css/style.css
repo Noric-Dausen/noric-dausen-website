@@ -476,6 +476,7 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         }
     }
     /* #endregion*/
+
     /* #region Navbar Logo Animation */
 
     .logo-svg {
@@ -607,6 +608,7 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         }
     }
     /* #endregion */
+
     /*#region Footer*/
 
     .footer {
@@ -676,6 +678,7 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         }
     }
     /*#endregion*/
+
     /*#region Projects Page*/
 
     .projects-main {
@@ -845,11 +848,17 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         opacity: 1;
     }
 
-    .selected-card-img {
-        opacity: 0;
-        height: 0;
-        transition: opacity 0.3s ease-in-out 0.2s, height 0s ease-in-out 0.2s;
-    }
+.selected-card-img-container {
+    width: 100%;
+    height: 20%;
+    overflow: hidden;
+}
+
+.selected-card-img {
+    opacity: 0;
+    height: 0;
+    transition: opacity 0.3s ease-in-out 0.2s, height 0s ease-in-out 0.2s, width 0s ease-in-out 0.2s;
+}
 
     .project-card-container.information-fill .selected-card-img {
         height: 240px; /*Image Dimensions*/
@@ -857,14 +866,20 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         opacity: 1;
     }
 
-    .project-card-tags {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        align-content: center;
-        justify-items: center;
-        margin-top: auto;
-    }
+.backgrounds-container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.project-card-tags {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-content: center;
+    justify-items: center;
+    margin-top: auto;
+}
 
     .project-card-tag {
         margin: auto auto 2rem auto;
@@ -980,9 +995,117 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
     body.dark-mode .projCloseButton:hover .proj-close-span1, body.dark-mode .projCloseButton:hover .proj-close-span2 {
         background-color: #301991;
     }
-    /*Floating Wobble Animation*/
-    @keyframes card-float {
-        0%, 100% {
+
+    /*Background Aesthetics*/
+.background-color-change {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    width: 100%;
+    height: 80vh;
+    background: #e0f2fe;
+    z-index: -4;
+    overflow: hidden;
+    clip-path: polygon(
+    0% 0%,
+    100% 20%,
+    100% 100%,
+    00% 100%
+  );
+    /*transform: skewY(6deg);*/
+    transform-origin: 0;
+    transition: background-color 0.4s;
+}
+
+.background-color-change2 {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    background: #c3d1ed;
+    z-index: -3;
+    overflow: hidden;
+        clip-path: polygon(
+    0% 20%,
+    100% 00%,
+    100% 100%,
+    00% 100%
+  );
+    /*transform: skewY(-8deg);*/
+    transform-origin: 0;
+    transition: background-color 0.4s, height 0.4s;
+}
+
+.background-color-change3 {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    height: 80vh;
+    background: #8bb2d9;
+    z-index: -2;
+    overflow: hidden;
+        clip-path: polygon(
+    0% 0%,
+    100% 20%,
+    100% 100%,
+    00% 100%
+  );
+    /*transform: skewY(7deg);*/
+    transform-origin: 0;
+    transition: background-color 0.4s;
+    display: hidden;
+}
+
+.background-color-change4 {
+    display: none;
+    position: absolute;
+    top: 150%;
+    left: 0;
+    width: 100%;
+    height: 95vh;
+    background: #a57fc7;
+    z-index: -1;
+    overflow: hidden;
+    clip-path: polygon( 0% 20%, 100% 00%, 100% 100%, 00% 100% );
+    /*transform: skewY(-6deg);*/
+    transform-origin: 0;
+    transition: background-color 0.4s;
+}
+
+body.card-selected .background-color-change3{
+    display: block;
+}
+
+body.card-selected .background-color-change4 {
+    display: block;
+}
+
+body.card-selected .background-color-change2 {
+    height: 80vh;
+}
+
+body.dark-mode .background-color-change {
+    background: #0f1929;
+}
+
+body.dark-mode .background-color-change2 {
+    background: #161229;
+}
+
+body.dark-mode .background-color-change3 {
+    background: #071e36;
+}
+
+body.dark-mode .background-color-change4 {
+    background: #240a38;
+}
+
+/*Floating Wobble Animation*/
+@keyframes card-float {
+    0%, 100% {
             transform: translateY(0px);
         }
 
@@ -1013,6 +1136,7 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         /*animation-play-state: paused; */ /*Optionally the float animation can stop when you are hovering*/
     }
     /*#endregion*/
+
     /*#region Console*/
 
     .console {
@@ -1124,6 +1248,7 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         }
     /*#endregion*/
     /*#endregion*/
+
     /*#region Privacy Page*/
 
     .privacy-policy-title {

@@ -155,13 +155,15 @@ function positionCards() {
 
             container.classList.add('information-fill');
 
+            document.body.classList.add('card-selected');
+
         }
 
     });
 
     const pageMain = document.querySelector('main');
 
-    pageMain.style.height = '110vh';
+    pageMain.style.height = '120vh';
 
     if (currentSelection !== 'none') {
         pageMain.style.height = '2220px';
@@ -310,6 +312,8 @@ function deselectCard(container) {
     container.style.height = '400px';
 
     container.classList.remove('information-fill');
+
+    document.body.classList.remove('card-selected');
 
     currentSelection = 'none';
 }
