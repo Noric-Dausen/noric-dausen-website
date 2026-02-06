@@ -9,6 +9,9 @@
     <meta name="description" content="Official Website of Noric Dausen LLC">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <!--p5.js library for the triangle grid-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
 </head>
 
 <body>
@@ -171,8 +174,12 @@
                 <path class="letter d-path" d="M110,20 C160,20 160,80 110,80" />
             </svg>
 
+            <!--triangles background-->
+            <canvas id="trianglesbg"></canvas>
+            <script src="js/trianglesbg.js"></script>
+
             <!--each logo-container holds the light and dark version of the logo
-                for light mode and dark mode toggling-->
+        for light mode and dark mode toggling-->
             <div class="logo-container">
                 <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
                      class="logo logo-dark clipped-poly-N1"
