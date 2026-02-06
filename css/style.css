@@ -872,10 +872,6 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
     height: 100%;
 }
 
-body.dark-mode .background-color-change {
-    background: #0f1929;
-}
-
 .project-card-tags {
     display: flex;
     flex-direction: row;
@@ -1091,6 +1087,21 @@ body.card-selected .background-color-change2 {
     height: 80vh;
 }
 
+body.dark-mode .background-color-change {
+    background: #0f1929;
+}
+
+body.dark-mode .background-color-change2 {
+    background: #161229;
+}
+
+body.dark-mode .background-color-change3 {
+    background: #071e36;
+}
+
+body.dark-mode .background-color-change4 {
+    background: #240a38;
+}
 
 /*Floating Wobble Animation*/
 @keyframes card-float {
