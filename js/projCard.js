@@ -155,6 +155,8 @@ function positionCards() {
 
             container.classList.add('information-fill');
 
+            document.body.classList.add('card-selected');
+
         }
 
     });
@@ -310,6 +312,8 @@ function deselectCard(container) {
     container.style.height = '400px';
 
     container.classList.remove('information-fill');
+
+    document.body.classList.remove('card-selected');
 
     currentSelection = 'none';
 }
