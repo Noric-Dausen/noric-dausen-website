@@ -181,8 +181,22 @@ function positionCards() {
 
     pageMain.style.height = '1140px';
 
+    if (window.innerWidth < 950) {
+        pageMain.style.height = '2350px';
+        document.body.classList.add('card-selected');
+    }
+
+    if (window.innerWidth < 700) {
+        pageMain.style.height = '3050px';
+        document.body.classList.add('card-selected-mobile');
+    }
+
     if (currentSelection !== 'none') {
         pageMain.style.height = '2350px';
+
+        if (window.innerWidth < 700) {
+            pageMain.style.height = '3050px';
+        }
     }
 
 }
@@ -205,8 +219,13 @@ function positionSelectedCard(container) {
         xValue = 50;
     }
 
+    if (window.innerWidth < 700) {
+        newSize = { width: 80, height: 70 };
+    }
+
     container.style.width = newSize.width + 'vw';
     container.style.height = newSize.height + 'vh';
+
 
     //container.style.left = cornerizeUnits({ x: 62, y: 55 }, newSize).x + 'vw';
     //container.style.top = cornerizeUnits({ x: 62, y: 55 }, newSize).y + 'vh';
@@ -226,6 +245,9 @@ function positionSelectedCard(container) {
         yDown = 70;
     }
 
+    if (window.innerWidth < 700) {
+        yDown = 63;
+    }
 
     absTranslate(container, cornerizeUnits({ x: xValue, y: yDown }, newSize));
 }
@@ -319,6 +341,10 @@ function getCardPositionById(rawID, cardSize) {
             YStartingPos = 120;
             columns = 2;
 
+        }
+
+        if (window.innerWidth < 700) {
+            columns = 1;
         }
 
     }
@@ -472,7 +498,28 @@ window.addEventListener('resize', () => {
 
         positionCards();
 
+        //On resize, add card-selected so the background changes
+
+        if (window.innerWidth < 700) {
+            document.body.classList.add('card-selected-mobile');
+        } else {
+            document.body.classList.remove('card-selected-mobile');
+        }
+
+        if (currentSelection !== 'none') {
+            document.body.classList.add('card-selected');
+        } else {
+            document.body.classList.remove('card-selected');
+        }
+
+        if (window.innerWidth < 950) {
+            document.body.classList.add('card-selected');
+        } else {
+            document.body.classList.remove('card-selected');
+        }
+
     }, 100); //Amount of time inbetween resize and when the function is executed; this is to avoid the function being called multiple times during a resize, which can cause performance issues
+
 });
 
 //Console Listeners (allows easier debugging)
