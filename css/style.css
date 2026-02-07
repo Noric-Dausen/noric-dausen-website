@@ -861,9 +861,12 @@ body.dark-mode .selected-card-img-container {
 }
 
 .selected-card-img {
+    transform: translate(-5rem, -10rem);
+}
+
+.selected-card-img img {
     opacity: 1;
     object-fit: cover;
-    object-position: 50% 60%;
     transition: opacity 0.3s ease-in-out 0.2s, height 0s ease-in-out 0.2s, width 0s ease-in-out 0.2s, object-position 0.2s;
 }
 
@@ -964,6 +967,7 @@ body.dark-mode .selected-card-img-container {
     left: 2%;
     background-color: transparent;
     border: none;
+    opacity: 0;
     animation: button-float 3s ease-in-out infinite;
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 10px rgba(255, 255, 255, 1));
     transition: filter 0.4s;
