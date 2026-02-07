@@ -57,7 +57,7 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, {
-    threshold: 0.2 // Trigger when 20% of the element is visible
+    threshold: 0.4 // Trigger when 40% of the element is visible
 });
 
 // Select all sections and start observing them
