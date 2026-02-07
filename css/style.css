@@ -1021,7 +1021,7 @@ body.dark-mode .projCloseButton {
     width: 100%;
     height: 765px;
     background: #e0f2fe;
-    z-index: -4;
+    z-index: -5;
     overflow: hidden;
     clip-path: polygon(
     0% 0%,
@@ -1041,7 +1041,7 @@ body.dark-mode .projCloseButton {
     width: 100%;
     height: 570px;
     background: #c3d1ed;
-    z-index: -3;
+    z-index: -4;
     overflow: hidden;
         clip-path: polygon(
     0% 20%,
@@ -1062,7 +1062,7 @@ body.dark-mode .projCloseButton {
     width: 100%;
     height: 765px;
     background: #8bb2d9;
-    z-index: -2;
+    z-index: -3;
     overflow: hidden;
         clip-path: polygon(
     0% 0%,
@@ -1084,9 +1084,35 @@ body.dark-mode .projCloseButton {
     width: 100%;
     height: 1010px;
     background: #a57fc7;
+    z-index: -2;
+    overflow: hidden;
+        clip-path: polygon(
+    0% 20%,
+    100% 00%,
+    100% 100%,
+    00% 100%
+  );
+    /*transform: skewY(-6deg);*/
+    transform-origin: 0;
+    transition: background-color 0.4s;
+}
+
+.background-color-change5 {
+    display: none;
+    position: absolute;
+    top: 2200px;
+    left: 0;
+    width: 100%;
+    height: 1010px;
+    background: #8a59ab;
     z-index: -1;
     overflow: hidden;
-    clip-path: polygon( 0% 20%, 100% 00%, 100% 100%, 00% 100% );
+            clip-path: polygon(
+    0% 0%,
+    100% 20%,
+    100% 100%,
+    00% 100%
+  );
     /*transform: skewY(-6deg);*/
     transform-origin: 0;
     transition: background-color 0.4s;
@@ -1102,6 +1128,10 @@ body.card-selected .background-color-change4 {
 
 body.card-selected .background-color-change2 {
     height: 80vh;
+}
+
+body.card-selected-mobile .background-color-change5 {
+        display: block;
 }
 
 body.dark-mode .background-color-change {
