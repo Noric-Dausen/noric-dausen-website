@@ -37,8 +37,22 @@ container.addEventListener('mousemove', (e) => {
 
     //Reduce angles if the card is selected.
     if (container.id === currentSelection) {
+
         rotateX = rotateX / 10;
         rotateY = rotateY / 10;
+
+        if (window.innerWidth > 2000) { //On larger screens, the angles are reduced more to avoid excessive tilt)
+
+            rotateX = rotateX / 2;
+            rotateY = rotateY / 2;
+
+        }
+
+        if (window.innerWidth < 1000) { //On smaller screens, the angles are increased more to make tilt noticable)
+            rotateX = rotateX * 1.5;
+            rotateY = rotateY * 1.5;
+        }
+
     }
 
     // Apply rotation and scale to the card
@@ -165,17 +179,31 @@ function positionCards() {
 
     const pageMain = document.querySelector('main');
 
-    pageMain.style.height = '120vh';
+    pageMain.style.height = '1140px';
 
     if (currentSelection !== 'none') {
-        pageMain.style.height = '2220px';
+        pageMain.style.height = '2350px';
     }
 
 }
 
 function positionSelectedCard(container) {
 
-    const newSize = { width: 70, height: 85 };
+    let newSize = { width: 70, height: 85 };
+
+    let xValue = 62;
+
+    //Change size for smaller screens
+
+    if (window.innerWidth < 1300) {
+        newSize = { width: 60, height: 85 };
+        xValue = 65;
+    }
+
+    if (window.innerWidth < 950) {
+        newSize = { width: 80, height: 85 };
+        xValue = 50;
+    }
 
     container.style.width = newSize.width + 'vw';
     container.style.height = newSize.height + 'vh';
@@ -194,7 +222,12 @@ function positionSelectedCard(container) {
         yDown += 55;
     }
 
-    absTranslate(container, cornerizeUnits({ x: 62, y: yDown }, newSize));
+    if (window.innerWidth < 950) { //Below 950px, we switch this page to a single column layout, so the selected card stays at the top
+        yDown = 70;
+    }
+
+
+    absTranslate(container, cornerizeUnits({ x: xValue, y: yDown }, newSize));
 }
 
 function positionTitle() {
@@ -203,6 +236,16 @@ function positionTitle() {
 
     if (currentSelection !== 'none') {
         centerColumnX = 13.5;
+
+        if (window.innerWidth < 1300) {
+
+            centerColumnX = 17.5;
+        }
+
+        if (window.innerWidth < 950) {
+            centerColumnX = 50;
+        }
+
     }
 
     const newPosX = centerColumnX - pixelsToViewPort(projectsTitle.clientWidth / 2);
@@ -228,11 +271,22 @@ function getCardPositionById(rawID, cardSize) {
     let columns = 3;
 
     //Size of gaps
-    const gapX = 1;
+    let gapX = 1;
     const gapY = 2;
 
     //How far down the grid of cards starts
-    const YStartingPos = 25;
+    let YStartingPos = 25;
+
+    //Variable changes for smaller screens/mobile
+    if (window.innerWidth < 950) {
+        columns = 2;
+        gapX = 2;
+    }
+
+    if (window.innerWidth < 700) {
+        columns = 1;
+        gapX = 2;
+    }
 
     //The variable that will be modified and eventually returned; starts empty
     const currentPos = { x: 0, y: 0 };
@@ -254,6 +308,18 @@ function getCardPositionById(rawID, cardSize) {
 
         columns = 1;
         centerColumnX = 13.5;
+
+        if (window.innerWidth < 1300) {
+            centerColumnX = 17.5;
+        }
+
+        if (window.innerWidth < 950) {
+
+            centerColumnX = 50;
+            YStartingPos = 120;
+            columns = 2;
+
+        }
 
     }
 
@@ -372,7 +438,7 @@ async function closeCard() {
     dynamicButton.style.opacity = '0';
     dynamicButton.style.width = '0rem';
 
-    const oldSelection = currentSelection;
+    const oldSelection = currentSelection; //Remember old selection so that even after selection is changed the close button can be removed from the correct card
 
     deselectCard(getCardFromID(currentSelection));
 
