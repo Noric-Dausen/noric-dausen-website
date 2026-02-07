@@ -242,7 +242,7 @@ function positionSelectedCard(container) {
     }
 
     if (window.innerWidth < 950) { //Below 950px, we switch this page to a single column layout, so the selected card stays at the top
-        yDown = 70;
+        yDown = 72;
     }
 
     if (window.innerWidth < 700) {
@@ -303,6 +303,7 @@ function getCardPositionById(rawID, cardSize) {
     if (window.innerWidth < 950) {
         columns = 2;
         gapX = 2;
+        YStartingPos = 30;
     }
 
     if (window.innerWidth < 700) {
