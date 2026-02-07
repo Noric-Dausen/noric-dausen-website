@@ -8,8 +8,8 @@ let currentTriangle = null; // To track which triangle is currently hovered
 // triangles styling
 const SPACING = 2;
 const SIZE = 60;
-const HEIGHT = SIZE * Math.sqrt(3) / 2;
-const ROWS = 20;
+const height = SIZE * Math.sqrt(3) / 2;
+const ROWS = 25;
 const ROTATION_COOLDOWN = 300; // Minimum time (ms) between rotations for the same triangle
 const FADE_SPEED = 0.02; // Smaller = slower fade to black
 
@@ -82,13 +82,13 @@ class Triangle {
 
         ctx.beginPath();
         if (this.isPointUp) {
-            ctx.moveTo(0, -2 * HEIGHT / 3);
-            ctx.lineTo(-SIZE / 2, HEIGHT / 3);
-            ctx.lineTo(SIZE / 2, HEIGHT / 3);
+            ctx.moveTo(0, -2 * height / 3);
+            ctx.lineTo(-SIZE / 2, height / 3);
+            ctx.lineTo(SIZE / 2, height / 3);
         } else {
-            ctx.moveTo(0, 2 * HEIGHT / 3);
-            ctx.lineTo(-SIZE / 2, -HEIGHT / 3);
-            ctx.lineTo(SIZE / 2, -HEIGHT / 3);
+            ctx.moveTo(0, 2 * height / 3);
+            ctx.lineTo(-SIZE / 2, -height / 3);
+            ctx.lineTo(SIZE / 2, -height / 3);
         }
         ctx.closePath();
 
@@ -109,7 +109,7 @@ function lerpColor(color1, color2, t) {
 function resize() {
     let marginLeft = (100 - WIDTH_PERCENTAGE) / 2;
     canvas.width = window.innerWidth * (WIDTH_PERCENTAGE / 100);
-    canvas.height = ((HEIGHT + SPACING) * ROWS) + (HEIGHT * 2);
+    canvas.height = ((height + SPACING) * ROWS) + (height * 2);
 
     // canvas styling for rotation and centering
     canvas.style.marginLeft = marginLeft.toString() + "${marginLeft}%";
@@ -152,13 +152,13 @@ window.addEventListener("mousemove", (e) => {
 
         ctx.beginPath();
         if (tri.isPointUp) {
-            ctx.moveTo(0, -2 * HEIGHT / 3);
-            ctx.lineTo(-SIZE / 2, HEIGHT / 3);
-            ctx.lineTo(SIZE / 2, HEIGHT / 3);
+            ctx.moveTo(0, -2 * height / 3);
+            ctx.lineTo(-SIZE / 2, height / 3);
+            ctx.lineTo(SIZE / 2, height / 3);
         } else {
-            ctx.moveTo(0, 2 * HEIGHT / 3);
-            ctx.lineTo(-SIZE / 2, -HEIGHT / 3);
-            ctx.lineTo(SIZE / 2, -HEIGHT / 3);
+            ctx.moveTo(0, 2 * height / 3);
+            ctx.lineTo(-SIZE / 2, -height / 3);
+            ctx.lineTo(SIZE / 2, -height / 3);
         }
 
         // Check collision against the corrected coordinates
@@ -192,13 +192,13 @@ function generateTriangles() {
 
         for (let col = 0; col < COLS; col++) {
             const isPointUp = (row + col) % 2 === 0;
-            const baseY = row * (HEIGHT + SPACING);
-            const y = isPointUp ? baseY + HEIGHT * 2 / 3 : baseY + HEIGHT / 3;
+            const baseY = row * (height + SPACING);
+            const y = isPointUp ? baseY + height * 2 / 3 : baseY + height / 3;
 
             // add new triangle to array
             triangles.push(new Triangle(
                 col * (SIZE / 2 + SPACING),
-                y + HEIGHT,
+                y + height,
                 isPointUp,
                 opacity
             ));

@@ -1,6 +1,6 @@
 #trianglesbg {
     position: absolute;
-    top: 50%;
+    top: 100%;
     left: 0;
     z-index: -1;
     transform: rotate(-6deg);
@@ -16,6 +16,7 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+    border: 2px dashed red;
 }
 
 .orb {
