@@ -42,3 +42,24 @@ async function resetHamburgerTimer() {
 toggle.addEventListener('test', (e) => {
     alert('Test Succeeded: ' + e.detail.data);
 });
+
+// Create the observer
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        // If the element is visible
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            // Optional: stop observing once shown if you only want it to happen once
+            // observer.unobserve(entry.target); 
+        } else {
+            // Optional: remove 'show' if you want it to hide again when scrolling up
+            // entry.target.classList.remove('show');
+        }
+    });
+}, {
+    threshold: 0.2 // Trigger when 20% of the element is visible
+});
+
+// Select all sections and start observing them
+const hiddenElements = document.querySelectorAll('.section');
+hiddenElements.forEach((el) => observer.observe(el));

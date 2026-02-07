@@ -1,3 +1,7 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 #trianglesbg {
     position: absolute;
     top: 100%;
@@ -16,7 +20,6 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    border: 2px dashed red;
 }
 
 .orb {
@@ -49,4 +52,57 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+/* Base state for all sections */
+.section {
+    width: 40%;
+    height: 500px;
+    margin-top: 19vh;
+    margin-inline: auto;
+    
+    /* Animation Properties */
+    opacity: 0; 
+    transition: all 1s ease-out; /* Controls how smooth the slide is */
+    
+    /* Rest of your glass-card styling... */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    color: black;
+    text-align: center;
+}
+
+/* Starting positions */
+.section1, .section3 {
+    transform: translateX(calc(-40% - 150px)); /* Slide from left */
+}
+
+.section2 {
+    transform: translateX(calc(40% + 150px)); /* Slide from right */
+}
+
+/* The state when the section becomes visible */
+.section1.show, .section3.show {
+    opacity: 1;
+    transform: translateX(-40%);
+}
+
+.section2.show {
+    opacity: 1;
+    transform: translateX(40%);
+}
+
+.section h2 {
+    font-size: 2rem;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.section p {
+    font-size: 1.2rem;
+    padding: 2rem;
 }

@@ -9,7 +9,7 @@ let currentTriangle = null; // To track which triangle is currently hovered
 const SPACING = 2;
 const SIZE = 60;
 const height = SIZE * Math.sqrt(3) / 2;
-const ROWS = 25;
+const ROWS = 37;
 const ROTATION_COOLDOWN = 300; // Minimum time (ms) between rotations for the same triangle
 const FADE_SPEED = 0.02; // Smaller = slower fade to black
 
