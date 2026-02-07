@@ -2,10 +2,17 @@ const canvas = document.getElementById("trianglesbg");
 const ctx = canvas.getContext("2d");
 
 let triangles = [];
-const SPACING = 10;
-const SIZE = 120;
+let currentTriangle = null; // To track which triangle is currently hovered
+
+// triangles styling
+const SPACING = 2;
+const SIZE = 60;
 const HEIGHT = SIZE * Math.sqrt(3) / 2;
-const ROWS = 8;
+const ROWS = 14;
+
+// canvas styling
+const WIDTH_PERCENTAGE = 120;
+const CANVAS_ROTATION = -6;
 
 class Triangle {
     constructor(x, y, isPointUp) {
@@ -23,6 +30,11 @@ class Triangle {
         const lerpFactor = 0.1;
         // Smoothly interpolate current rotation to target
         this.rotation += (this.targetRotation - this.rotation) * lerpFactor;
+    }
+
+    rotate() {
+        this.targetRotation += Math.PI / 1.5; // Rotate by 120 degrees
+        this.color = lerpColor({ r: 81, g: 84, b: 252 }, { r: 187, g: 81, b: 252 }, Math.random());
     }
 
     draw(ctx) {
@@ -56,34 +68,18 @@ function lerpColor(color1, color2, t) {
 }
 
 function resize() {
-    canvas.width = window.innerWidth;
+    let marginLeft = (100 - WIDTH_PERCENTAGE) / 2;
+    canvas.width = window.innerWidth * (WIDTH_PERCENTAGE / 100);
     canvas.height = ((HEIGHT + SPACING) * ROWS) + (HEIGHT * 2);
+
+    // canvas styling for rotation and centering
+    canvas.style.marginLeft = marginLeft.toString() + "${marginLeft}%";
+    canvas.style.transform = `rotate(${CANVAS_ROTATION}deg)`;
+
     generateTriangles(); // Re-generate on resize to fill screen
 }
 
 window.addEventListener("resize", resize);
-
-/*const HOVER_RADIUS = 80; // Adjust this: larger = more sensitive
-// (Distance Based) HOVER DETECTION
-window.addEventListener("mousemove", (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    triangles.forEach(tri => {
-        // Calculate distance between mouse and triangle center
-        const dx = mouseX - tri.x;
-        const dy = mouseY - tri.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        // If mouse is within the radius, rotate it
-        if (distance < HOVER_RADIUS) {
-            tri.targetRotation = Math.PI / 1.5; // 120 degrees
-        } else {
-            tri.targetRotation = 0;
-        }
-    });
-});*/
 
 // (Hitbox Based) HOVER DETECTION
 window.addEventListener("mousemove", (e) => {
@@ -92,6 +88,8 @@ window.addEventListener("mousemove", (e) => {
     const mouseY = e.clientY - rect.top;
 
     triangles.forEach(tri => {
+        if (tri === currentTriangle) return; // Skip if already hovered
+
         // To check if mouse is inside a ROTATED shape:
         // 1. Save context, apply the same transformations used in draw()
         ctx.save();
@@ -112,9 +110,8 @@ window.addEventListener("mousemove", (e) => {
 
         // 3. Check if mouse point is inside this specific path
         if (ctx.isPointInPath(mouseX, mouseY)) {
-            tri.targetRotation = Math.PI / 1.5; // 120 degrees
-        } else {
-            tri.targetRotation = 0;
+            currentTriangle = tri;
+            tri.rotate();
         }
         ctx.restore();
     });
