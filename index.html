@@ -14,12 +14,6 @@
 
 <body>
 
-    <!--just tells website this is the header, no styling-->
-    <header>
-        <h1>Noric Dausen</h1>
-        <span>Official Website of Noric Dausen LLC</span>
-    </header>
-
     <!--the navigation bar code-->
     <nav class="navbar">
 
@@ -159,24 +153,34 @@
     </ul>
 
     <main>
-        <h2>We are Noric Dausen</h2>
-        <p>Noric Dausen works to revolutionize the software landscape of the future.</p>
+        <!--<h2>We are Noric Dausen</h2>
+        <p>Noric Dausen works to revolutionize the software landscape of the future.</p>-->
 
-        <div class="orb-container">
-            <div class="orb"></div>
-            <div id="orb-text" class="orb-text">Ni Howdy</div>
+        <div class="stage">
+            <div class="canvas-layers">
+                <canvas class="line-canvas" id="line1"></canvas>
+                <canvas class="line-canvas" id="line2"></canvas>
+                <canvas class="line-canvas" id="line3"></canvas>
+                <canvas class="line-canvas" id="line4"></canvas>
+                <canvas class="line-canvas" id="line5"></canvas>
+            </div>
+
+            <div class="orb-container">
+                <div class="orb"></div>
+                <div id="orb-text" class="orb-text">Ni Howdy</div>
+            </div>
         </div>
 
         <div class="section section1 glass-card">
             <h2>Section 1</h2>
             <p>
-                Braden likes to eat food. Braden also likes to eat more food. 
-                Braden is a big fan of food, and he will eat it whenever he can. 
-                He especially loves pizza, burgers, and ice cream. In fact, 
-                Braden's favorite thing to do is to go out to eat with his friends 
-                and try new restaurants. He is always on the lookout for the best 
-                food in town, and he is not afraid to try something new. Braden's 
-                love for food is one of his defining characteristics, and it brings 
+                Braden likes to eat food. Braden also likes to eat more food.
+                Braden is a big fan of food, and he will eat it whenever he can.
+                He especially loves pizza, burgers, and ice cream. In fact,
+                Braden's favorite thing to do is to go out to eat with his friends
+                and try new restaurants. He is always on the lookout for the best
+                food in town, and he is not afraid to try something new. Braden's
+                love for food is one of his defining characteristics, and it brings
                 him a lot of joy in life.
             </p>
         </div>
@@ -224,7 +228,7 @@
             <script src="js/trianglesbg.js"></script>
 
             <!--each logo-container holds the light and dark version of the logo
-        for light mode and dark mode toggling-->
+            for light mode and dark mode toggling-->
             <div class="logo-container">
                 <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
                      class="logo logo-dark clipped-poly-N1"
@@ -290,6 +294,7 @@
     <script src="js/script.js"></script>
     <script src="js/console.js"></script>
     <script src="js/orb.js"></script>
+    <script src="js/lines.js"></script>
 </body>
 
 </html>

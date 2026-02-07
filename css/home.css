@@ -1,5 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e6e6e6;
 }
 
 #trianglesbg {
@@ -10,10 +11,38 @@ body {
     transform: rotate(-6deg);
 }
 
+.stage {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Prevents lines from creating scrollbars */
+}
+
+.canvas-layers {
+    position: absolute;
+    top: 12%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Puts it behind the orb */
+    pointer-events: none; /* Allows you to click things through the lines */
+}
+
+.line-canvas {
+    position: relative;
+    width: 100%;
+    height: 15vh; /* Or whatever height you prefer */
+    display: block;
+    background: transparent !important;
+    border: none;
+}
+
 .orb-container {
     position: relative;
     /* Set the desired size here */
-    width: 35%;
+    width: 40%;
     /* Maintains a perfect circle based on width */
     aspect-ratio: 1 / 1;
     display: flex;
@@ -63,7 +92,7 @@ body {
     
     /* Animation Properties */
     opacity: 0; 
-    transition: all 1s ease-out; /* Controls how smooth the slide is */
+    transition: all 1s ease-out, color 0.1s ease; /* Controls how smooth the slide is */
     
     /* Rest of your glass-card styling... */
     background: rgba(255, 255, 255, 0.1);
@@ -110,5 +139,4 @@ body {
 
 body.dark-mode .section {
     color: white;
-    transition: color 0.1s ease;
 }
