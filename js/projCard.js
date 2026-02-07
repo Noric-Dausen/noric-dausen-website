@@ -12,8 +12,9 @@ dynamicButtonSpan1.setAttribute('class', 'proj-close-span1');
 const dynamicButtonSpan2 = document.createElement("span");
 dynamicButton.appendChild(dynamicButtonSpan2);
 dynamicButtonSpan2.setAttribute('class', 'proj-close-span2');
-dynamicButtonSpan1.style.width = '0rem';
-dynamicButtonSpan2.style.width = '0rem';
+dynamicButton.style.transition = 'width 0s ease-in-out 0.2s, opacity 0.1s ease-in-out 0.2s';
+dynamicButton.style.opacity = '0';
+dynamicButton.style.width = '0rem';
 
 containers.forEach(container => {
 
@@ -355,20 +356,20 @@ function absTranslate(object, newPosition) {
 async function setCloseWidths() {
     await delay(1);
 
-    dynamicButtonSpan1.style.transition = 'background-color 0.4s, width 0.2s ease-in-out 0.2s';
-    dynamicButtonSpan2.style.transition = 'background-color 0.4s, width 0.2s ease-in-out 0.2s';
-    dynamicButtonSpan1.style.width = '3rem';
-    dynamicButtonSpan2.style.width = '3rem';
+    dynamicButton.style.transition = 'width 0.1s ease-in-out 0.2s, opacity 0s ease-in-out 0.2s';
+    dynamicButton.style.opacity = '1';
+    dynamicButton.style.width = '3rem';
+
 }
 
 async function closeCard() {
 
-    await delay(2); //Delay for any amount to ensure that the deselection is not immediately undone by the card underneath.
+    await delay(3); //Delay for any amount to ensure that the deselection is not immediately undone by the card underneath.
+    //If only 2 seconds delayed, then the animation properties are sometimes set to wrong amount
 
-    dynamicButtonSpan1.style.transition = 'background-color 0.4s, width 0.2s ease-in-out';
-    dynamicButtonSpan2.style.transition = 'background-color 0.4s, width 0.2s ease-in-out';
-    dynamicButtonSpan1.style.width = '0rem';
-    dynamicButtonSpan2.style.width = '0rem';
+    dynamicButton.style.transition = 'width 0s ease-in-out 0.2s, opacity 0.1s ease-in-out 0.2s';
+    dynamicButton.style.opacity = '0';
+    dynamicButton.style.width = '0rem';
 
     const oldSelection = currentSelection;
 
