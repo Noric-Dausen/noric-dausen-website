@@ -12,9 +12,10 @@ dynamicButtonSpan1.setAttribute('class', 'proj-close-span1');
 const dynamicButtonSpan2 = document.createElement("span");
 dynamicButton.appendChild(dynamicButtonSpan2);
 dynamicButtonSpan2.setAttribute('class', 'proj-close-span2');
-dynamicButton.style.transition = 'width 0s ease-in-out 0.2s, opacity 0.1s ease-in-out 0.2s';
+dynamicButton.style.transition = 'width 0s ease-in-out 0.2s, opacity 0.2s';
 dynamicButton.style.opacity = '0';
 dynamicButton.style.width = '0rem';
+let resizeTimeout;
 
 containers.forEach(container => {
 
@@ -224,11 +225,11 @@ function addCloseButton() {
 function getCardPositionById(rawID, cardSize) {
 
     //Number of Columns
-    let columns = 5;
+    let columns = 3;
 
     //Size of gaps
     const gapX = 1;
-    const gapY = 1;
+    const gapY = 2;
 
     //How far down the grid of cards starts
     const YStartingPos = 25;
@@ -356,7 +357,7 @@ function absTranslate(object, newPosition) {
 async function setCloseWidths() {
     await delay(1);
 
-    dynamicButton.style.transition = 'width 0.1s ease-in-out 0.2s, opacity 0s ease-in-out 0.2s';
+    dynamicButton.style.transition = 'width 0.1s ease-in-out 0.2s, opacity 0.2s';
     dynamicButton.style.opacity = '1';
     dynamicButton.style.width = '3rem';
 
@@ -367,7 +368,7 @@ async function closeCard() {
     await delay(3); //Delay for any amount to ensure that the deselection is not immediately undone by the card underneath.
     //If only 2 seconds delayed, then the animation properties are sometimes set to wrong amount
 
-    dynamicButton.style.transition = 'width 0s ease-in-out 0.2s, opacity 0.1s ease-in-out 0.2s';
+    dynamicButton.style.transition = 'width 0s ease-in-out 0.2s, opacity 0.2s';
     dynamicButton.style.opacity = '0';
     dynamicButton.style.width = '0rem';
 
@@ -396,6 +397,17 @@ function log(message) {
 
     window.dispatchEvent(logOperation);
 }
+
+//Auto Resize Function
+
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+
+        positionCards();
+
+    }, 100); //Amount of time inbetween resize and when the function is executed; this is to avoid the function being called multiple times during a resize, which can cause performance issues
+});
 
 //Console Listeners (allows easier debugging)
 document.addEventListener('execution', (e) => {
