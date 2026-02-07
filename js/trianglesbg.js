@@ -1,5 +1,6 @@
 const canvas = document.getElementById("trianglesbg");
 const ctx = canvas.getContext("2d");
+const darkModeSwitch1 = document.getElementById('toggleInput');
 
 let triangles = [];
 let currentTriangle = null; // To track which triangle is currently hovered
@@ -10,6 +11,7 @@ const SIZE = 60;
 const HEIGHT = SIZE * Math.sqrt(3) / 2;
 const ROWS = 14;
 const ROTATION_COOLDOWN = 300; // Minimum time (ms) between rotations for the same triangle
+const FADE_SPEED = 0.02; // Smaller = slower fade to black
 
 // canvas styling
 const WIDTH_PERCENTAGE = 120;
@@ -25,25 +27,49 @@ class Triangle {
         this.opacity = opacity;
         this.lastRotateTime = 0;
 
-        const t = Math.random();
-        this.color = lerpColor({ r: 81, g: 84, b: 252 }, { r: 187, g: 81, b: 252 }, t);
+        // Start as black
+        this.currentColor = darkModeSwitch1.checked ? { r: 0, g: 0, b: 0 } : { r: 255, g: 255, b: 255 };
+        // This is the color it will flash to on rotate
+        this.targetColor = { r: 0, g: 0, b: 0 };
     }
 
     update() {
-        const lerpFactor = 0.1;
-        // Smoothly interpolate current rotation to target
-        this.rotation += (this.targetRotation - this.rotation) * lerpFactor;
+        // 1. Determine which background color to fade toward
+        if (darkModeSwitch1.checked) {
+            // Dark Mode: Fade toward Black
+            this.targetColor = { r: 0, g: 0, b: 0 };
+        } else {
+            // Light Mode: Fade toward White
+            this.targetColor = { r: 255, g: 255, b: 255 };
+        }
+
+        // 2. Handle Rotation Smoothness
+        const rotationLerp = 0.1;
+        this.rotation += (this.targetRotation - this.rotation) * rotationLerp;
+
+        // 3. Handle Color Fading
+        // Instead of (0 - current), we use (target - current)
+        this.currentColor.r += (this.targetColor.r - this.currentColor.r) * FADE_SPEED;
+        this.currentColor.g += (this.targetColor.g - this.currentColor.g) * FADE_SPEED;
+        this.currentColor.b += (this.targetColor.b - this.currentColor.b) * FADE_SPEED;
     }
 
     rotate() {
         const now = Date.now();
-
-        // Only proceed if the time elapsed is greater than the cooldown
         if (now - this.lastRotateTime > ROTATION_COOLDOWN) {
-            this.targetRotation += Math.PI / 1.5; // 120 degrees
-            this.color = lerpColor({ r: 81, g: 84, b: 252 }, { r: 187, g: 81, b: 252 }, Math.random());
+            this.targetRotation += Math.PI / 1.5;
 
-            // Update the timestamp to "start" the cooldown
+            // Set a new random bright color
+            const t = Math.random();
+            // Define your purple/blue range
+            const c1 = { r: 81, g: 84, b: 252 };
+            const c2 = { r: 187, g: 81, b: 252 };
+
+            // Snap the current color to a bright random one
+            this.currentColor.r = Math.round(c1.r + (c2.r - c1.r) * t);
+            this.currentColor.g = Math.round(c1.g + (c2.g - c1.g) * t);
+            this.currentColor.b = Math.round(c1.b + (c2.b - c1.b) * t);
+
             this.lastRotateTime = now;
         }
     }
@@ -52,8 +78,6 @@ class Triangle {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
-
-        // apply opacity
         ctx.globalAlpha = this.opacity;
 
         ctx.beginPath();
@@ -68,7 +92,8 @@ class Triangle {
         }
         ctx.closePath();
 
-        ctx.fillStyle = this.color;
+        // Convert the current color object to a string
+        ctx.fillStyle = `rgb(${Math.round(this.currentColor.r)}, ${Math.round(this.currentColor.g)}, ${Math.round(this.currentColor.b)})`;
         ctx.fill();
         ctx.restore();
     }
@@ -164,8 +189,6 @@ function generateTriangles() {
         } else if (row === 2 || row === ROWS - 3) {
             opacity = 0.75;
         }
-
-        console.log(`Row ${row}/${ROWS}: Opacity ${opacity}`);
 
         for (let col = 0; col < COLS; col++) {
             const isPointUp = (row + col) % 2 === 0;
