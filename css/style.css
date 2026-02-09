@@ -945,11 +945,12 @@ body.dark-mode .selected-card-img-container {
 
     .projects-title {
         text-align: center;
-        font-size: 2rem;
+        font-size: 4rem;
         padding: 2rem;
         display: block;
         position: absolute;
         transition: transform 0s ease-out;
+        top: 6.5%;
     }
 
         .projects-title.hidden {
