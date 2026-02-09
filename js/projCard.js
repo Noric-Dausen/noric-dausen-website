@@ -242,11 +242,11 @@ function positionSelectedCard(container) {
     }
 
     if (window.innerWidth < 950) { //Below 950px, we switch this page to a single column layout, so the selected card stays at the top
-        yDown = 72;
+        yDown = 82;
     }
 
     if (window.innerWidth < 700) {
-        yDown = 63;
+        yDown = 75;
     }
 
     absTranslate(container, cornerizeUnits({ x: xValue, y: yDown }, newSize));
@@ -269,6 +269,8 @@ function positionTitle() {
         }
 
     }
+
+    //Convert position from center based version to corner based version by subtracting half of the title width from the center position; this ensures that the title is always centered regardless of its size
 
     const newPosX = centerColumnX - pixelsToViewPort(projectsTitle.clientWidth / 2);
 
@@ -297,13 +299,13 @@ function getCardPositionById(rawID, cardSize) {
     const gapY = 2;
 
     //How far down the grid of cards starts
-    let YStartingPos = 25;
+    let YStartingPos = 30;
 
     //Variable changes for smaller screens/mobile
     if (window.innerWidth < 950) {
         columns = 2;
         gapX = 2;
-        YStartingPos = 30;
+        YStartingPos = 40;
     }
 
     if (window.innerWidth < 700) {
@@ -339,13 +341,14 @@ function getCardPositionById(rawID, cardSize) {
         if (window.innerWidth < 950) {
 
             centerColumnX = 50;
-            YStartingPos = 120;
+            YStartingPos = 130;
             columns = 2;
 
         }
 
         if (window.innerWidth < 700) {
             columns = 1;
+            YStartingPos = 115;
         }
 
     }
