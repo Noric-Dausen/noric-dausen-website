@@ -208,17 +208,26 @@ body.dark-mode .logo-light {
         animation: slideRight 1s forwards;
 }
 
-.hide-overflow {
+.hide-overflow-right {
     display: block;
     overflow: hidden;
-    /* The blur will happen INSIDE this padding. */
-    padding: 0 50px;
-    /* Offset the padding with a negative margin so the links 
-          still line up visually where they belong in the navbar. */
-    margin: 0 -50px;
-    /* Mask */
-    -webkit-mask-image: linear-gradient( to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100% );
-    mask-image: linear-gradient( to right, transparent 0px, black 50px, black calc(100% - 50px), transparent 100% );
+    padding-right: 50px;
+    margin-right: -50px; /* Offset only the right side */
+    
+    /* Fade only on the RIGHT: Solid black from the start until the final 50px */
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 50px), transparent 100%);
+    mask-image: linear-gradient(to right, black calc(100% - 50px), transparent 100%);
+}
+
+.hide-overflow-left {
+    display: block;
+    overflow: hidden;
+    padding-left: 50px;
+    margin-left: -50px; /* Offset only the left side */
+    
+    /* Fade only on the LEFT: Transparent at 0, becoming solid black at 50px */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 50px);
+    mask-image: linear-gradient(to right, transparent 0%, black 50px);
 }
 
 @keyframes slideLeft {
