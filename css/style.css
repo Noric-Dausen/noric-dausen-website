@@ -1148,7 +1148,7 @@ body.dark-mode .background-color-change {
 }
 
 body.dark-mode .background-color-change2 {
-    background: #161229;
+    background: #162436;
 }
 
 body.dark-mode .background-color-change3 {
@@ -1157,6 +1157,10 @@ body.dark-mode .background-color-change3 {
 
 body.dark-mode .background-color-change4 {
     background: #240a38;
+}
+
+body.dark-mode .background-color-change5 {
+    background: #301145;
 }
 
 /*Floating Wobble Animation*/
