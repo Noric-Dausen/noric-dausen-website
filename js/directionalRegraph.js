@@ -26,6 +26,20 @@ let lineSpeedH = 4;
 
 let lineSpeeds = [lineSpeed, lineSpeedH];
 
+//Variables for the actual graph
+
+const lowerBound = 900; //Lowest point that the graph can start ||| Because positions go down, this a higher number than the upper bound, but it is still the lower bound because it is lower on the graph
+const upperBound = 300; // Highest point that the graph can start
+
+const changeBound = 30; // This is how much the graph can change between each data point, this creates a more natural movement
+
+const graphSpeed = 6; // Speed at which the graph moves to the right (higher means more frames between each new data point, which means slower movement)
+let graphPosition = 0; // Internal variable that tracks position (Counts up every frame)
+
+let pointsGenerated = 1; // Counter to track how many points have been generated, this is used to know when to start replacing points for the regraph effect
+
+let graphData = []; // This will hold the data points for the graph, it will be an array of objects with x and y properties
+
 function draw() {
 
     const canvas = document.getElementById('dr');
@@ -148,6 +162,105 @@ function draw() {
         lineSpeedH -= 0.02; // Decrease the speed of the horizontal lines
     }
 
+    //#region Graph Segment
+
+    //Draw the red (downward movement) of the graph
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 2;
+    ctx.moveTo(graphData[0].x, graphData[0].y);
+
+    for (let i = 1; i < graphData.length; i++) {
+
+        if (graphData[i].trend !== 'down') {
+
+            if (i === pointsGenerated) {
+                ctx.moveTo(graphData[i].x, graphData[i].y);
+            } else if (i + 1 !== pointsGenerated) {
+                ctx.lineTo(graphData[i].x, graphData[i].y);
+            } else {
+                ctx.moveTo(graphData[i].x, graphData[i].y);
+            }
+
+        } else {
+
+            ctx.moveTo(graphData[i].x, graphData[i].y);
+
+        } 
+
+    }
+
+    ctx.stroke();
+
+    //Draw the green (upward movement) of the graph
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'green';
+    ctx.lineWidth = 2;
+    ctx.moveTo(graphData[0].x, graphData[0].y);
+
+    for (let i = 1; i < graphData.length; i++) {
+
+        if (graphData[i].trend === 'down') {
+
+            if (i === pointsGenerated) {
+                ctx.moveTo(graphData[i].x, graphData[i].y);
+            } else if (i + 1 !== pointsGenerated) {
+                ctx.lineTo(graphData[i].x, graphData[i].y);
+            } else {
+                ctx.moveTo(graphData[i].x, graphData[i].y);
+            }
+
+        } else {
+
+            ctx.moveTo(graphData[i].x, graphData[i].y);
+
+        }
+
+    }
+
+    ctx.stroke();
+
+    //Create new data point
+
+    if (graphPosition % graphSpeed === 0) { // Only create a new data point every graphSpeed frames, this controls the speed of the graph movement
+
+        
+         graphData[pointsGenerated] = createNewDataPoint();
+
+        pointsGenerated++;
+
+        if (pointsGenerated === 101) {
+            pointsGenerated = 1;
+        }
+
+    }
+
+    graphPosition++;
+
+    // Line
+
+    
+
+    const trail3 = ctx.createLinearGradient(0, canvas.height, 0, 0);
+    trail3.addColorStop(0, 'rgba(180, 180, 180, 0)'); // Transparent at the top of the line
+    trail3.addColorStop(0.28, 'rgba(180, 180, 180, 1)');
+    trail3.addColorStop(0.72, 'rgba(180, 180, 180, 1)'); // Opaque at 50% of the line
+    trail3.addColorStop(1, 'rgba(180, 180, 180, 0)'); // Opaque at the bottom of the line
+
+    //draw line segment
+
+    ctx.beginPath();
+    ctx.strokeStyle = trail3;
+    ctx.lineWidth = 2;
+    ctx.moveTo(graphData[pointsGenerated - 1].x - percentageToPixel(1), 0);
+    ctx.lineTo(graphData[pointsGenerated - 1].x - percentageToPixel(1), canvas.height);
+    ctx.stroke();
+
+    //#endregion
+
+
     requestAnimationFrame(draw); // Loop the animation
 
 }
@@ -165,6 +278,10 @@ function setup() {
     lineSpeed *= 3;
     lineSpeedH *= 3;
 
+    //Graph setup
+
+    graphData[0] = { x:0, y:(Math.random() * (lowerBound - upperBound)) + upperBound }; // This is the formula for getting a random number between the two bound
+
     draw();
 
 }
@@ -173,4 +290,27 @@ function percentageToPixel(percentage) {
     const canvas = document.getElementById('dr');
 
     return (percentage / 100) * canvas.width;
+}
+
+function createNewDataPoint() {
+
+    let lastY = graphData[(pointsGenerated) - 1].y; // Get the y value of the last data point
+
+    let temp = { x: 0, y: 0, trend:'up'};
+
+    temp.x = (pointsGenerated) * percentageToPixel(1); // 100 total data points
+
+    let tempFactor = (Math.random() - 0.5) * 2 // Seperated so we can measure it
+
+    if (tempFactor < 0) { 
+        temp.trend = 'down'; // Trend allows us to know if the graph is moving down or up from the last point
+    }
+
+    temp.y = (tempFactor * changeBound) + lastY; // Base new Y to be a modification of last Y
+
+    if (temp.y > lowerBound) { temp.y = lowerBound; }
+
+    if (temp.y < upperBound) { temp.y = upperBound; }
+
+    return temp;
 }
