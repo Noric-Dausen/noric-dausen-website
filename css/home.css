@@ -140,3 +140,9 @@ body {
 body.dark-mode .section {
     color: white;
 }
+
+#dr {
+    display: block; 
+    width: 100%; 
+    background-color: #f0f0f0; /*fallback color */
+}

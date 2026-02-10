@@ -399,19 +399,19 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
     Note that this is to prevent the logo from being shrunk by the screen for being too big on medium screens.
 */
 
-    @media screen and (max-width: 1000px) {
+    /*@media screen and (max-width: 1000px) {
         .logo-navbar-container {
             display: flex;
-            width: 300px; /* Adjust to your logo size */
-            height: 40px;
+            width: 300px;*/ /* Adjust to your logo size */
+            /*height: 40px;
         }
 
         .switch {
             margin-right: 1%;
         }
-    }
+    }*/
     /* 2. Mobile Styles (Screens smaller than 768px) */
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
 
         .navbar {
             width: 100%;
