@@ -232,7 +232,7 @@ function draw() {
         pointsGenerated++;
 
         if (pointsGenerated === 101) {
-            pointsGenerated = 1;
+            pointsGenerated = 0;
         }
 
     }
@@ -254,8 +254,10 @@ function draw() {
     ctx.beginPath();
     ctx.strokeStyle = trail3;
     ctx.lineWidth = 2;
-    ctx.moveTo(graphData[pointsGenerated - 1].x - percentageToPixel(1), 0);
-    ctx.lineTo(graphData[pointsGenerated - 1].x - percentageToPixel(1), canvas.height);
+    if (pointsGenerated !== 0) { //No need to move line to just off screen (when reseting where the graph is coming from)
+        ctx.moveTo(graphData[pointsGenerated - 1].x - percentageToPixel(1), 0);
+        ctx.lineTo(graphData[pointsGenerated - 1].x - percentageToPixel(1), canvas.height);
+    }
     ctx.stroke();
 
     //#endregion
@@ -294,7 +296,17 @@ function percentageToPixel(percentage) {
 
 function createNewDataPoint() {
 
-    let lastY = graphData[(pointsGenerated) - 1].y; // Get the y value of the last data point
+    let lastY = 0;
+
+    if (pointsGenerated !== 0) { //If we are not currently generating the first point
+
+        lastY = graphData[(pointsGenerated) - 1].y; // Get the y value of the last data point
+
+    } else { // If we are regenerating first point (will not happen first time because pointsGenerated is initialized as 1 to account for setup()) use the last point as reference
+
+        lastY = graphData[graphData.length - 1].y;
+
+    }
 
     let temp = { x: 0, y: 0, trend:'up'};
 
