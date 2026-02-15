@@ -37,8 +37,13 @@ const graphSpeed = 6; // Speed at which the graph moves to the right (higher mea
 let graphPosition = 0; // Internal variable that tracks position (Counts up every frame)
 
 let pointsGenerated = 1; // Counter to track how many points have been generated, this is used to know when to start replacing points for the regraph effect
+let deadPoint = [{ x: 0, y: 0, trend: 'up', initialized: false }, { x: 0, y: 0, trend: 'up', initialized: false }]; // Variable that measures the most recently deleted point
 
 let graphData = []; // This will hold the data points for the graph, it will be an array of objects with x and y properties
+
+let mousePosition = { x: 0, y: 0 }; // Variable to track mouse position
+
+let graphicalGravity = 0.3; // This is how much the graph is pulled towards the mouse, higher means more pull
 
 function draw() {
 
@@ -222,26 +227,72 @@ function draw() {
 
     ctx.stroke();
 
+    //Create Dead Line (line that's starting point was already erased with new data)
+
+    if (deadPoint[0].initialized && deadPoint[1].initialized) {
+
+        ctx.beginPath();
+        ctx.strokeStyle = 'green';
+        if (deadPoint[0].trend !== 'down') { ctx.strokeStyle = 'red'; }
+        ctx.lineWidth = 2;
+        ctx.moveTo(deadPoint[1].x, deadPoint[1].y);
+        ctx.lineTo(deadPoint[0].x, deadPoint[0].y);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.strokeStyle = 'red';
+        if (graphData[pointsGenerated].trend === 'down') { ctx.strokeStyle = 'green'; }
+        ctx.lineWidth = 2;
+        ctx.moveTo(deadPoint[0].x, deadPoint[0].y);
+        ctx.lineTo(graphData[pointsGenerated].x, graphData[pointsGenerated].y);
+        ctx.stroke();
+
+    }
+
+
     //Create new data point
 
     if (graphPosition % graphSpeed === 0) { // Only create a new data point every graphSpeed frames, this controls the speed of the graph movement
 
+        if (deadPoint[0].initialized) { // Only once the graph has looped at least once
+
+            if (deadPoint[1].initialized) { //Set second deadpoint to first deadpoint before first deadpoint is replaced
+                deadPoint[1].x = deadPoint[0].x;
+                deadPoint[1].y = deadPoint[0].y;
+                deadPoint[1].trend = deadPoint[0].trend;
+            }
+
+            deadPoint[0].x = graphData[pointsGenerated].x; //Since deadpoint has 4 datapoints while graphdata has 3, we set each of the 3 manually
+            deadPoint[0].y = graphData[pointsGenerated].y;
+            deadPoint[0].trend = graphData[pointsGenerated].trend;
+
+            deadPoint[1].initialized = true; //Only start tracking second deadpoint when first deadpoint has made one datapoint
+            
+        }
         
-         graphData[pointsGenerated] = createNewDataPoint();
+        graphData[pointsGenerated] = createNewDataPoint();
 
         pointsGenerated++;
 
-        if (pointsGenerated === 101) {
+        if (pointsGenerated === 101) { //Runs every time graph reaches loop
+
             pointsGenerated = 0;
+
+            deadPoint[0].initialized = true;
+
+            deadPoint[0].x = 0; //Reset dead points so a line isn't drawn from the last point to the first point when the graph loops, this also allows the graph to start from the correct position when it loops back around
+            deadPoint[0].y = 0;
+            deadPoint[1].x = 0;
+            deadPoint[1].y = 0;
+
         }
 
     }
 
     graphPosition++;
 
-    // Line
 
-    
+    // Line
 
     const trail3 = ctx.createLinearGradient(0, canvas.height, 0, 0);
     trail3.addColorStop(0, 'rgba(180, 180, 180, 0)'); // Transparent at the top of the line
@@ -284,6 +335,17 @@ function setup() {
 
     graphData[0] = { x:0, y:(Math.random() * (lowerBound - upperBound)) + upperBound }; // This is the formula for getting a random number between the two bound
 
+    //Mouse Movement Detection Setup
+
+    canvas.addEventListener('mousemove', function (event) {
+
+        const rect = canvas.getBoundingClientRect();
+
+        mousePosition.x = event.clientX - rect.left;
+        mousePosition.y = event.clientY - rect.top;
+
+    });
+
     draw();
 
 }
@@ -304,7 +366,7 @@ function createNewDataPoint() {
 
     } else { // If we are regenerating first point (will not happen first time because pointsGenerated is initialized as 1 to account for setup()) use the last point as reference
 
-        lastY = graphData[graphData.length - 1].y;
+        lastY = graphData[graphData.length - 1].y; // Get previous point y value
 
     }
 
@@ -314,6 +376,12 @@ function createNewDataPoint() {
 
     let tempFactor = (Math.random() - 0.5) * 2 // Seperated so we can measure it
 
+    if (lastY > mousePosition.y) { // If the last point is above the mouse, there is a higher chance the next point will be above the last point (and vice versa) this creates a more interactive experience)
+        tempFactor -= graphicalGravity; // Decrease the tempFactor to increase the chance of the next point being above the last point
+    } else {
+        tempFactor += graphicalGravity; // Increase the tempFactor to increase the chance of the next point being below the last point
+    }
+    
     if (tempFactor < 0) { 
         temp.trend = 'down'; // Trend allows us to know if the graph is moving down or up from the last point
     }
