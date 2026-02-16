@@ -161,17 +161,31 @@ body.dark-mode .section {
     }
 
 .slider-container {
-    width: 500px;
+    width: 700px;
     height: 100px;
     padding: 20px;
     opacity: 1;
     position: relative;
     top: 800px;
     right: 25%;
+    display: flex;
+    flex-direction: row;
 }
+
+.slider-container p {
+    position: relative;
+    padding: 0 1rem 0 1rem;
+}
+
+    .slider-container h1 {
+        position: relative;
+        bottom: 14px;
+    }
 
 #ndSliders {
     background-color: transparent;
+    position: relative;
+    right: 0px;
 }
 
 /*input[type="range"] {

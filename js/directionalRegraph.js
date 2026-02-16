@@ -315,7 +315,14 @@ function draw() {
 
     checkIfInView(); // Check if the canvas is in view to trigger the section animations
 
-    requestAnimationFrame(draw); // Loop the animation
+    //Set the graphical gravity number
+
+    const numberDisplay = document.getElementById('graphicalGravityDisplay');
+
+    numberDisplay.innerHTML = graphicalGravity;
+
+    // Loop the animation
+    requestAnimationFrame(draw); 
 
 }
 
@@ -410,3 +417,9 @@ function checkIfInView() {
     }
 
 }
+
+document.addEventListener('drUpdateGraphicalGravity', (e) => {
+
+    graphicalGravity = e.detail.data;
+
+});
