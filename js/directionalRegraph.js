@@ -43,7 +43,7 @@ let graphData = []; // This will hold the data points for the graph, it will be 
 
 let mousePosition = { x: 0, y: 0 }; // Variable to track mouse position
 
-let graphicalGravity = 0.3; // This is how much the graph is pulled towards the mouse, higher means more pull
+let graphicalGravity = 0.2; // This is how much the graph is pulled towards the mouse, higher means more pull
 
 function draw() {
 
@@ -313,6 +313,7 @@ function draw() {
 
     //#endregion
 
+    checkIfInView(); // Check if the canvas is in view to trigger the section animations
 
     requestAnimationFrame(draw); // Loop the animation
 
@@ -393,4 +394,19 @@ function createNewDataPoint() {
     if (temp.y < upperBound) { temp.y = upperBound; }
 
     return temp;
+}
+
+// Select all sections and start observing them
+const hiddenGraphElements = document.querySelectorAll('.section4');
+
+function checkIfInView() {
+
+    const canvas = document.getElementById('dr');
+
+    if (canvas.offsetTop + (canvas.height * -0.15) < window.scrollY) { // If the top of the canvas is above 75% of the viewport height, we consider it in view (this allows the graph to be mostly in view before the elements start showing up, which creates a better effect)
+        hiddenGraphElements.forEach((entry) => {
+            entry.classList.add('shown');
+        });
+    }
+
 }
