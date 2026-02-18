@@ -45,6 +45,12 @@ let mousePosition = { x: 0, y: 0 }; // Variable to track mouse position
 
 let graphicalGravity = 0.2; // This is how much the graph is pulled towards the mouse, higher means more pull
 
+let colors = ['#e6e6e6', '#fafafa', 'rgba(230, 230, 230, 0.4)', 'rgba(230, 230, 230, 0.6)', 'rgba(230, 230, 230, 1)', 'green', 'red']; // Gradient Outside Color, Gradient Inside Color, Line Up Color, Line Down Color
+
+let colorsDB = ['#e6e6e6', '#fafafa', 'rgba(230, 230, 230, 0.4)', 'rgba(230, 230, 230, 0.6)', 'rgba(230, 230, 230, 1)',
+                '#121212', '#000000', 'rgba(18, 18, 18, 0.4)', 'rgba(18, 18, 18, 0.6)', 'rgba(18, 18, 18, 1)'];
+
+
 function draw() {
 
     const canvas = document.getElementById('dr');
@@ -58,10 +64,10 @@ function draw() {
 
     //#region Gradient
 
-    gradient.addColorStop(0, '#e6e6e6');   // Transparent at top
-    gradient.addColorStop(0.2, '#fafafa'); // Full color at 20%
-    gradient.addColorStop(0.8, '#fafafa'); // Stay full until 80%
-    gradient.addColorStop(1, '#e6e6e6');   // Transparent at bottom
+    gradient.addColorStop(0, colors[0]);   // Transparent at top
+    gradient.addColorStop(0.2, colors[1]); // Full color at 20%
+    gradient.addColorStop(0.8, colors[1]); // Stay full until 80%
+    gradient.addColorStop(1, colors[0]);   // Transparent at bottom
 
     ctx.fillStyle = gradient; // Pick a color
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -76,10 +82,10 @@ function draw() {
 
         //Set up trail gradient
         const trail = ctx.createLinearGradient(0, y - lineHeight, 0, y);
-        trail.addColorStop(0, 'rgba(230, 230, 230, 0.4)'); // Transparent at the top of the line
-        trail.addColorStop(0.2, 'rgba(230, 230, 230, 0.6)');
-        trail.addColorStop(0.5, 'rgba(230, 230, 230, 1)'); // Opaque at 50% of the line
-        trail.addColorStop(1, 'rgba(230, 230, 230, 1)'); // Opaque at the bottom of the line
+        trail.addColorStop(0, colors[2]); // Transparent at the top of the line
+        trail.addColorStop(0.2, colors[3]);
+        trail.addColorStop(0.5, colors[4]); // Opaque at 50% of the line
+        trail.addColorStop(1, colors[4]); // Opaque at the bottom of the line
 
         //draw line segment
         ctx.beginPath();
@@ -120,10 +126,10 @@ function draw() {
 
         //Set up trail gradient
         const trailH = ctx.createLinearGradient(x - canvas.width, 0, x, 0);
-        trailH.addColorStop(0, 'rgba(230, 230, 230, 0.2)'); // Transparent at the top of the line
-        trailH.addColorStop(0.3, 'rgba(230, 230, 230, 0.6)');
-        trailH.addColorStop(0.65, 'rgba(230, 230, 230, 1)'); // Opaque at 50% of the line
-        trailH.addColorStop(1, 'rgba(230, 230, 230, 1)'); // Opaque at the bottom of the line
+        trailH.addColorStop(0, colors[2]); // Transparent at the top of the line
+        trailH.addColorStop(0.3, colors[3]);
+        trailH.addColorStop(0.65, colors[4]); // Opaque at 50% of the line
+        trailH.addColorStop(1, colors[4]); // Opaque at the bottom of the line
 
         //draw line segment
         ctx.beginPath();
@@ -172,7 +178,7 @@ function draw() {
     //Draw the red (downward movement) of the graph
 
     ctx.beginPath();
-    ctx.strokeStyle = 'red';
+    ctx.strokeStyle = colors[6];
     ctx.lineWidth = 2;
     ctx.moveTo(graphData[0].x, graphData[0].y);
 
@@ -201,7 +207,7 @@ function draw() {
     //Draw the green (upward movement) of the graph
 
     ctx.beginPath();
-    ctx.strokeStyle = 'green';
+    ctx.strokeStyle = colors[5];
     ctx.lineWidth = 2;
     ctx.moveTo(graphData[0].x, graphData[0].y);
 
@@ -232,16 +238,16 @@ function draw() {
     if (deadPoint[0].initialized && deadPoint[1].initialized) {
 
         ctx.beginPath();
-        ctx.strokeStyle = 'green';
-        if (deadPoint[0].trend !== 'down') { ctx.strokeStyle = 'red'; }
+        ctx.strokeStyle = colors[5];
+        if (deadPoint[0].trend !== 'down') { ctx.strokeStyle = colors[6]; }
         ctx.lineWidth = 2;
         ctx.moveTo(deadPoint[1].x, deadPoint[1].y);
         ctx.lineTo(deadPoint[0].x, deadPoint[0].y);
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.strokeStyle = 'red';
-        if (graphData[pointsGenerated].trend === 'down') { ctx.strokeStyle = 'green'; }
+        ctx.strokeStyle = colors[6];
+        if (graphData[pointsGenerated].trend === 'down') { ctx.strokeStyle = colors[5]; }
         ctx.lineWidth = 2;
         ctx.moveTo(deadPoint[0].x, deadPoint[0].y);
         ctx.lineTo(graphData[pointsGenerated].x, graphData[pointsGenerated].y);
@@ -423,3 +429,27 @@ document.addEventListener('drUpdateGraphicalGravity', (e) => {
     graphicalGravity = e.detail.data;
 
 });
+
+//toggle is recgonized even though it is defined in another script
+toggle.addEventListener('change', () => {
+
+    if (document.body.classList.contains('dark-mode')) {
+
+        colors[0] = colorsDB[5];
+        colors[1] = colorsDB[6];
+        colors[2] = colorsDB[7];
+        colors[3] = colorsDB[8];
+        colors[4] = colorsDB[9];
+
+    } else {
+
+        colors[0] = colorsDB[0];
+        colors[1] = colorsDB[1];
+        colors[2] = colorsDB[2];
+        colors[3] = colorsDB[3];
+        colors[4] = colorsDB[4];
+
+    }
+
+});
+
