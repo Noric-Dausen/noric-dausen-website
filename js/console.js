@@ -41,7 +41,7 @@ const helpMessage = `Available commands:
  > emulate - dispatch an event
  > execute - run a custom event
  > commandguide - explains usage syntax
-`;
+ > returndefaulttext - returns the Noric Dausen default/placeholder message`;
 
 const guideMessage = `COMMAND GUIDE:
 PREFIX SYMBOLS:
@@ -67,8 +67,16 @@ const executeMessage = `Usage:
 execute: execute <Event> <Data>+>
 #execute: #execute
 !execute: !execute <Event> <data>+>
-?emulate: ?emulate <Event> <target> <data>+>`;
+?emulate: ?execute <Event> <target> <data>+>`;
 
+const bradenText = `Braden likes to eat food. Braden also likes to eat more food.
+Braden is a big fan of food, and he will eat it whenever he can.
+He especially loves pizza, burgers, and ice cream. In fact,
+Braden's favorite thing to do is to go out to eat with his friends
+and try new restaurants. He is always on the lookout for the best
+food in town, and he is not afraid to try something new. Braden's
+love for food is one of his defining characteristics, and it brings
+him a lot of joy in life.`;
 
 window.addEventListener('keydown', (event) => {
 
@@ -222,6 +230,9 @@ window.addEventListener('keydown', (event) => {
 
                 case 'commandguide':
                     logToConsole(guideMessage);
+                    return;
+                case 'returndefaulttext':
+                    logToConsole(bradenText);
                     return;
             }
 
