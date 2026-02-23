@@ -4,7 +4,7 @@
     overflow: hidden;
 }
 
-    .about-page .stripe-bg-container {
+    .stripe-bg-container {
         position: absolute;
         top: 0;
         left: 0;
@@ -18,7 +18,7 @@
         transition: background-color 0.4s;
     }
 
-    .about-page .background-color-change {
+    .background-color-change {
         position: absolute;
         top: 50%;
         left: 0;
@@ -32,7 +32,7 @@
         transition: background-color 0.4s;
     }
 
-    .about-page .background-color-change2 {
+    .background-color-change2 {
         position: absolute;
         /* Change from -250vh to 0 so it stays at the bottom of its container */
         bottom: 0;
@@ -48,7 +48,7 @@
         transition: background-color 0.4s;
     }
 
-    .about-page .bottom-bg-container {
+    .bottom-bg-container {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -60,15 +60,15 @@
     }
 
 /*Darkmode for background-color-changes*/
-body.dark-mode .about-page .background-color-change {
+body.dark-mode .background-color-change {
     background: #0f1929;
 }
 
-body.dark-mode .about-page .background-color-change2 {
+body.dark-mode .background-color-change2 {
     background: #161229;
 }
 
-.about-page .moving-gradient {
+.moving-gradient {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -80,7 +80,7 @@ body.dark-mode .about-page .background-color-change2 {
 }
 
 /*Darkmode for moving-gradient*/
-.about-page .gradient-dark {
+.gradient-dark {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -91,15 +91,15 @@ body.dark-mode .about-page .background-color-change2 {
     opacity: 0;
 }
 
-body.dark-mode .about-page .moving-gradient {
+body.dark-mode .moving-gradient {
     opacity: 0;
 }
 
-body.dark-mode .about-page .gradient-dark {
+body.dark-mode .gradient-dark {
     opacity: 1;
 }
 
-body.dark-mode .about-page .stripe-bg-container {
+body.dark-mode .stripe-bg-container {
     background: #0a1223;
 }
 
@@ -117,7 +117,7 @@ body.dark-mode .about-page .stripe-bg-container {
     }
 }
 
-.about-page header div {
+header div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,12 +130,12 @@ body.dark-mode .about-page .stripe-bg-container {
 
 /* change header div based on screen size (small screens) */
 @media screen and (max-width: 768px) {
-    .about-page header div {
+    header div {
         margin-left: 5%;
     }
 }
 
-    .about-page header div h1 {
+    header div h1 {
         font-size: 5rem;
         text-align: left;
         margin-bottom: 1rem;
@@ -143,7 +143,7 @@ body.dark-mode .about-page .stripe-bg-container {
         color: #082050;
     }
 
-    .about-page header div p {
+    header div p {
         font-size: 1.25rem;
         text-align: left;
         color: #0f1d37;
@@ -151,20 +151,20 @@ body.dark-mode .about-page .stripe-bg-container {
     }
 
 /*Darkmode for header p and h1*/
-body.dark-mode .about-page header div h1 {
+body.dark-mode header div h1 {
     color: #a2bae8;
 }
 
-body.dark-mode .about-page header div p {
+body.dark-mode header div p {
     color: #899fc7;
 }
 
 
-.about .navbar {
+.navbar {
     background-color: transparent;
 }
 
-.about-page h2 {
+h2 {
     font-size: 2.25rem;
     margin-top: 20rem;
     width: fit-content;
@@ -173,7 +173,7 @@ body.dark-mode .about-page header div p {
     text-align: center;
 }
 
-.about-page h3 {
+h3 {
     font-size: 1.5rem;
     margin-top: 1.5rem;
     width: fit-content;
@@ -181,11 +181,11 @@ body.dark-mode .about-page header div p {
     text-align: center;
 }
 
-.about-page p {
-    margin-bottom: 5rem;
+p {
+    margin-block: 5rem;
     line-height: 1.6;
     font-size: 1.1rem;
-    width: 70%;
+    width: 50%;
     margin-inline: auto;
     text-align: center;
 }
@@ -233,7 +233,7 @@ body.dark-mode .about-page header div p {
     .pillar p {
         text-align: center;
         font-size: 1rem;
-        padding: 1.5rem;
+        padding: 0rem;
         margin-block: 5rem;
     }
 
