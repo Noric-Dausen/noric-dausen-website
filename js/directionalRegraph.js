@@ -51,6 +51,8 @@ let colorsDB = ['#e6e6e6', '#fafafa', 'rgba(230, 230, 230, 0.4)', 'rgba(230, 230
                 '#121212', '#000000', 'rgba(18, 18, 18, 0.4)', 'rgba(18, 18, 18, 0.6)', 'rgba(18, 18, 18, 1)'];
 
 
+let drAnimationId; // Storing the animation so we can stop it from repeating on resize
+
 function draw() {
 
     const canvas = document.getElementById('dr');
@@ -328,11 +330,20 @@ function draw() {
     numberDisplay.innerHTML = graphicalGravity;
 
     // Loop the animation
-    requestAnimationFrame(draw); 
+    drAnimationId = requestAnimationFrame(draw); 
 
 }
 
 function setup() {
+
+    //Destroy old animation if it is running
+    if (drAnimationId) {
+        cancelAnimationFrame(drAnimationId);
+    }
+
+    //Reset linespeed to global declarations
+    lineSpeed = lineSpeeds[0];
+    lineSpeedH = lineSpeeds[1];
 
     const canvas = document.getElementById('dr');
 
@@ -349,20 +360,23 @@ function setup() {
 
     graphData[0] = { x:0, y:(Math.random() * (lowerBound - upperBound)) + upperBound }; // This is the formula for getting a random number between the two bound
 
-    //Mouse Movement Detection Setup
-
-    canvas.addEventListener('mousemove', function (event) {
-
-        const rect = canvas.getBoundingClientRect();
-
-        mousePosition.x = event.clientX - rect.left;
-        mousePosition.y = event.clientY - rect.top;
-
-    });
 
     draw();
 
 }
+
+
+//Mouse Movement Detection Setup
+
+document.getElementById('dr').addEventListener('mousemove', function (event) {
+
+    const rect = document.getElementById('dr').getBoundingClientRect();
+
+    mousePosition.x = event.clientX - rect.left;
+    mousePosition.y = event.clientY - rect.top;
+
+});
+
 
 function percentageToPixel(percentage) {
     const canvas = document.getElementById('dr');
@@ -453,3 +467,16 @@ toggle.addEventListener('change', () => {
 
 });
 
+
+let resizeTimeout2;
+
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout2);
+    resizeTimeout2 = setTimeout(() => {
+        //On resize, add card-selected so the background changes
+
+        setup();
+
+    }, 100); //Amount of time inbetween resize and when the function is executed; this is to avoid the function being called multiple times during a resize, which can cause performance issues
+
+});
