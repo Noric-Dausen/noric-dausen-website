@@ -671,6 +671,9 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         color: #eee;
     }
 
+    #contact:hover {
+        border-bottom: 0px solid #333;
+    }
 
     .footer a:hover {
         border-bottom: 3px solid #333;
