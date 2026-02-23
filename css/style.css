@@ -293,6 +293,26 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
     display: block;
 }
 
+@media screen and (max-width: 900px) {
+    .banner-logo {
+        display: none;
+    }
+
+    body.dark-mode #banner-logo-left-light, body.dark-mode #banner-logo-right-light {
+        display: none;
+    }
+
+    .ND-animated-logo {
+        margin-left: 10%;
+    }
+
+    .navbar-logo {
+        position: absolute;
+        top: 15%;
+        left: 5%;
+    }
+}
+
 #ND-logo-animated-light, #banner-logo-left-light, #banner-logo-right-light {
     display: none;
 }
@@ -675,7 +695,7 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         -webkit-user-drag: none;
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
 
         .logo-footer-container {
             display: none; /*There's not room for the logo on mobile screens, so just turn it off*/
