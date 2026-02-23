@@ -158,6 +158,7 @@ body.dark-mode .section {
 .section4 {
     transform: translateX(800px);
     margin-bottom: 500px;
+    height: 550px;
 }
 
     .section4.shown { /*Section 4 is handled in a different way than other sections so it uses 'shown' not 'show'*/
