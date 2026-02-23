@@ -200,6 +200,12 @@ body.dark-mode .logo-light {
             padding-bottom: 0.1rem;
         }
 
+        body.dark-mode .nav-links a:hover {
+            color: #3dafe9;
+            border-bottom: 3px solid #3dafe9;
+            padding-bottom: 0.1rem;
+        }
+
 .slide-in-from-right {
         animation: slideLeft 1s forwards;
 }
@@ -361,6 +367,10 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
     }
 
     .nav-links-mobile a:hover {
+        color: #3dafe9;
+    }
+
+    body.dark-mode .nav-links-mobile a:hover {
         color: #3dafe9;
     }
 

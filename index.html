@@ -48,9 +48,8 @@
                                  class="slide-in-from-right banner-logo">
                         </span>
 
-
                         <!--ND animation logo (uses multiple logos in one for multiple clip-paths)-->
-                        <div id="ND-logo-animated-dark">
+                        <div id="ND-logo-animated-dark" class="ND-animated-logo">
                             <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
                                  class="clipped-poly-N1"
                                  alt="Noric Dausen Logo (Dark)"
@@ -69,7 +68,7 @@
                                  width="500">
                         </div>
 
-                        <div id="ND-logo-animated-light">
+                        <div id="ND-logo-animated-light" class="ND-animated-logo">
                             <img src="Assets\Images\NoricDausenLogosBlankTranslucentLight.png"
                                  class="clipped-poly-N1"
                                  alt="Noric Dausen Logo (Light)"
@@ -154,15 +153,11 @@
 
     <main>
         <!--<h2>We are Noric Dausen</h2>
-    <p>Noric Dausen works to revolutionize the software landscape of the future.</p>-->
+        <p>Noric Dausen works to revolutionize the software landscape of the future.</p>-->
 
         <div class="stage">
-            <div class="canvas-layers">
-                <canvas class="line-canvas" id="line1"></canvas>
-                <canvas class="line-canvas" id="line2"></canvas>
-                <canvas class="line-canvas" id="line3"></canvas>
-                <canvas class="line-canvas" id="line4"></canvas>
-                <canvas class="line-canvas" id="line5"></canvas>
+            <div class="canvas-container">
+                <canvas class="line-canvas" id="orb-lines"></canvas>
             </div>
 
             <div class="orb-container">
@@ -178,7 +173,7 @@
                 Polished? Yes. As good as they can be? No. Except for the occasional
                 chart that is made to be beautiful by professional graphic designers
                 and experienced hobbyists, there aren't many out there. At Noric Dausen,
-                we believe in a new future. One where stunning charts don't require 
+                we believe in a new future. One where stunning charts don't require
                 professionals to make them. One where anyone can make statistics beautiful.
                 To do this, we are developing statstical technology that can open
                 the door to making graphs that are <b>clear and beautiful</b>.
@@ -193,8 +188,10 @@
                 feel like ancient relics from a bygone era of computer technology.
                 This makes creating statstics with them feel clunkly, hard to
                 understand, and generally a poor experience. Noric Dausen is working
-                to make statistical visualization feel <b>modern, intuitive, and easy to
-                use</b>. Clear and well explained tutorials will make learning statistical
+                to make statistical visualization feel <b>
+                    modern, intuitive, and easy to
+                    use
+                </b>. Clear and well explained tutorials will make learning statistical
                 visualization programs easy while modular design will make the entire
                 process feel like it builds off of what's already known.
             </p>
@@ -209,7 +206,7 @@
                 but in a less than satisfactory way. Noric Dausen understands that
                 and we are going to change that. Breaking the chains of what kinds
                 charts are available and expanding what is possible. Our statistical
-                visualization technology will have extensive features that work in 
+                visualization technology will have extensive features that work in
                 tandem to make <b>your imagination the only limit on possibilities</b>.
             </p>
         </div>
@@ -229,7 +226,7 @@
             <script src="js/trianglesbg.js"></script>
 
             <!--each logo-container holds the light and dark version of the logo
-        for light mode and dark mode toggling-->
+            for light mode and dark mode toggling-->
             <div class="logo-container">
                 <img src="Assets\Images\NoricDausenLogosBlankTranslucent.png"
                      class="logo logo-dark clipped-poly-N1"
@@ -292,15 +289,15 @@
                 understand data. A spreadsheet easily bores many who see it. To
                 help better communicate data, spreedsheets are converted to graphs,
                 charts, and maps. Still, these can be overwhelming, or not specific
-                enough on precise details. The most engaging way to solve this is 
+                enough on precise details. The most engaging way to solve this is
                 with interactable statistics. Maps with levels of detail, graphs with
                 selectable series, and charts with expandable sections. Noric Dausen
                 understands this and develops technology that makes creating statistics
                 with high levels of interactablilty <b>more than just a dream.</b><br /> <br />
-                
+
                 The graph behind this will trend towards the mouse, depending on
                 the mouse gravity.
-                
+
             </p>
         </div>
 
@@ -318,7 +315,7 @@
         <span>&copy; 2026 Noric Dausen LLC. All rights reserved.</span>
 
         <a href="privacy.html">Privacy Policy</a> |
-        <a href="about.html">About Noric Dausen</a> | 
+        <a href="about.html">About Noric Dausen</a> |
         <a id="contact">Contact us at: contact@noricdausen.com</a>
 
     </footer>

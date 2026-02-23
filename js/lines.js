@@ -1,7 +1,8 @@
-// Keep your constants and lerp function at the top
+// colors to lerp between
 const colorA = { r: 79, g: 172, b: 254 };
 const colorB = { r: 0, g: 242, b: 254 };
 
+// helper function for lerping between two colors
 function lerpColor(a, b, t) {
     const r = Math.floor(a.r + (b.r - a.r) * t);
     const g = Math.floor(a.g + (b.g - a.g) * t);
@@ -9,13 +10,13 @@ function lerpColor(a, b, t) {
     return { r, g, b: bl };
 }
 
-// Wrap the rest in this listener
 document.addEventListener('DOMContentLoaded', () => {
-    const canvases = document.querySelectorAll('.line-canvas');
-    if (canvases.length === 0) return; // Exit if canvases aren't found
+    const canvas = document.getElementById('orb-lines'); // get canvas by id
+    if (!canvas) return; // return if canvas isn't found
 
-    const ctxs = Array.from(canvases).map(canvas => canvas.getContext('2d'));
+    const ctx = canvas.getContext('2d'); // get drawing context
 
+    // settings for lines
     const lineConfigs = [
         { speed: 4, amp: 25, freq: 0.01, offset: 0, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 },
         { speed: 5, amp: 35, freq: 0.015, offset: 10, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 },
@@ -24,37 +25,42 @@ document.addEventListener('DOMContentLoaded', () => {
         { speed: 2.5, amp: 40, freq: 0.005, offset: -5, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 }
     ];
 
+    // function to resize canvas to fill width and maintain height
     function resize() {
-        canvases.forEach(canvas => {
-            canvas.width = window.innerWidth;
-            canvas.height = canvas.offsetHeight;
-        });
+        canvas.width = window.innerWidth;
+        canvas.height = canvas.offsetHeight || 200;
     }
 
+    // resize canvas on window resize
     window.addEventListener('resize', resize);
+    // resize canvas initially
     resize();
 
     let time = 0;
 
+    // animation loop for lines
     function animate() {
+        // time step for animation, controls speed of movement and color changes
         time += 0.01;
-        ctxs.forEach((ctx, i) => {
-            const config = lineConfigs[i];
-            const canvas = canvases[i];
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // clear canvas every frame
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        lineConfigs.forEach((config, i) => {
 
             config.progress += config.speed;
             config.noise += 0.005;
 
             if (config.progress > canvas.width + 50) {
                 config.progress = -50;
+                // config.trail = []; // optionally clear trail when resetting position
             }
 
             const t = (Math.sin(time + config.colorFactor * 10) + 1) / 2;
             const rgb = lerpColor(colorA, colorB, t);
             const x = config.progress;
 
-            const centerY = (canvas.height / 2) + config.offset;
+            const centerY = ((canvas.height / lineConfigs.length) * (i + 0.5)) + config.offset;
             const maxAllowedDist = (canvas.height / 2) - 10;
 
             const rawWobble = (Math.sin(x * config.freq + time) * config.amp) +
@@ -72,9 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 config.trail.shift();
             }
 
+            // 3. Draw logic
             for (let j = 0; j < config.trail.length - 1; j++) {
                 const p1 = config.trail[j];
                 const p2 = config.trail[j + 1];
+
+                // Skip drawing if the line wraps around
                 if (p2.x < p1.x) continue;
 
                 const opacity = j / config.trail.length;
