@@ -892,18 +892,100 @@ body.dark-mode .selected-card-img-container {
     border: solid 3px #666;
 }
 
+
 .selected-card-img {
-    transform: translate(-5rem, -10rem);
+    transform: translate(0%, -50%);
 }
+
+@media screen and (max-width: 2000px) {
+
+    .selected-card-img {
+        transform: translate(0%, -60%);
+    }
+
+}
+
+@media screen and (max-width: 1500px) {
+
+    .selected-card-img {
+        transform: translate(-80%, -70%);
+    }
+
+}
+
+@media screen and (max-width: 750px) {
+
+    .selected-card-img {
+        transform: translate(-80%, -60%) scale(0.6);
+    }
+
+    .project-card-container.information-fill .project-card-content h3 {
+       margin-top: 1rem;
+       margin-bottom: 1rem;
+    }
+
+    .project-card-container.information-fill .project-card-content h4 {
+        margin-bottom: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+
+    .selected-card-img {
+        transform: translate(-80%, -70%) scale(0.6);
+    }
+
+    .project-card-container.information-fill .project-card-content h3 {
+        margin-top: 0.5rem;
+        margin-bottom: 0rem;
+        font-size: 2rem;
+    }
+
+    .project-card-container.information-fill .project-card-content h4 {
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+    }
+
+    .project-card-container.information-fill .project-card-content p {
+        font-size: 0.8rem;
+    }
+
+    .project-card-container.information-fill .project-card-tag {
+        margin: auto 0rem 2rem 0rem;
+        width: 10rem;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+
+    .project-card-container.information-fill .project-card-content h3 {
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+        font-size: 1.5rem;
+    }
+
+    .project-card-container.information-fill .project-card-content h4 {
+        margin-bottom: 0rem;
+        font-size: 1rem;
+    }
+
+    .project-card-container.information-fill .project-card-content p {
+        font-size: 0.8rem;
+    }
+}
+
 
 .selected-card-img img {
     opacity: 1;
     object-fit: cover;
     transition: opacity 0.3s ease-in-out 0.2s, height 0s ease-in-out 0.2s, width 0s ease-in-out 0.2s, object-position 0.2s;
+    transform: scale(1);
 }
 
     .project-card-container.information-fill .selected-card-img {
-        height: 100%; /*This is being left here in case at some point a change needs to be made to an image o*/
+        height: 100%; /*This is being left here in case at some point a change needs to be made to an image when the card is selected*/
         width: 100%;
         opacity: 1;
     }
@@ -991,48 +1073,48 @@ body.dark-mode .selected-card-img-container {
         display: block;
     }
 
-.projCloseButton {
-    width: 3rem;
-    height: 3rem;
-    display: block;
-    position: relative;
-    top: -98%;
-    left: 2%;
-    background-color: transparent;
-    border: none;
-    opacity: 0;
-    animation: button-float 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 10px rgba(255, 255, 255, 1));
-    transition: filter 0.4s;
-}
+    .projCloseButton {
+        width: 3rem;
+        height: 3rem;
+        display: block;
+        position: relative;
+        top: -98%;
+        left: 2%;
+        background-color: transparent;
+        border: none;
+        opacity: 0;
+        animation: button-float 3s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+        transition: filter 0.4s;
+    }
 
-body.dark-mode .projCloseButton {
-    filter: drop-shadow(0 0 20px black) drop-shadow(0 0 16px black) drop-shadow(0 0 10px black);
-}
+    body.dark-mode .projCloseButton {
+        filter: drop-shadow(0 0 20px black) drop-shadow(0 0 16px black) drop-shadow(0 0 10px black);
+    }
 
-.proj-close-span1 {
-    position: absolute;
-    width: 100%;
-    height: 0.25rem;
-    top: 50%;
-    left: 0%;
-    background-color: #636363;
-    border-radius: 0.5rem;
-    transform: rotate(45deg);
-    transition: background-color 0.4s, width 0.2s ease-in-out 0.2s;  
-}
+    .proj-close-span1 {
+        position: absolute;
+        width: 100%;
+        height: 0.25rem;
+        top: 50%;
+        left: 0%;
+        background-color: #636363;
+        border-radius: 0.5rem;
+        transform: rotate(45deg);
+        transition: background-color 0.4s, width 0.2s ease-in-out 0.2s;
+    }
 
-.proj-close-span2 {
-    position: absolute;
-    width: 100%;
-    height: 0.25rem;
-    top: 50%;
-    left: 0%;
-    background-color: #636363;
-    border-radius: 0.5rem;
-    transform: rotate(-45deg);
-    transition: background-color 0.4s, width 0.2s ease-in-out 0.2s;
-}
+    .proj-close-span2 {
+        position: absolute;
+        width: 100%;
+        height: 0.25rem;
+        top: 50%;
+        left: 0%;
+        background-color: #636363;
+        border-radius: 0.5rem;
+        transform: rotate(-45deg);
+        transition: background-color 0.4s, width 0.2s ease-in-out 0.2s;
+    }
 
     body.dark-mode .proj-close-span1, body.dark-mode .proj-close-span2 {
         background-color: #bbb;
@@ -1047,149 +1129,124 @@ body.dark-mode .projCloseButton {
     }
 
     /*Background Aesthetics*/
-.background-color-change {
-    position: absolute;
-    top: 240px;
-    left: 0;
-    width: 100%;
-    height: 765px;
-    background: #e0f2fe;
-    z-index: -5;
-    overflow: hidden;
-    clip-path: polygon(
-    0% 0%,
-    100% 20%,
-    100% 100%,
-    00% 100%
-  );
-    /*transform: skewY(6deg);*/
-    transform-origin: 0;
-    transition: background-color 0.4s;
-}
+    .background-color-change {
+        position: absolute;
+        top: 240px;
+        left: 0;
+        width: 100%;
+        height: 765px;
+        background: #e0f2fe;
+        z-index: -5;
+        overflow: hidden;
+        clip-path: polygon( 0% 0%, 100% 20%, 100% 100%, 00% 100% );
+        /*transform: skewY(6deg);*/
+        transform-origin: 0;
+        transition: background-color 0.4s;
+    }
 
-.background-color-change2 {
-    position: absolute;
-    top: 670px;
-    left: 0;
-    width: 100%;
-    height: 570px;
-    background: #c3d1ed;
-    z-index: -4;
-    overflow: hidden;
-        clip-path: polygon(
-    0% 20%,
-    100% 00%,
-    100% 100%,
-    00% 100%
-  );
-    /*transform: skewY(-8deg);*/
-    transform-origin: 0;
-    transition: background-color 0.4s, height 0.4s;
-}
+    .background-color-change2 {
+        position: absolute;
+        top: 670px;
+        left: 0;
+        width: 100%;
+        height: 570px;
+        background: #c3d1ed;
+        z-index: -4;
+        overflow: hidden;
+        clip-path: polygon( 0% 20%, 100% 00%, 100% 100%, 00% 100% );
+        /*transform: skewY(-8deg);*/
+        transform-origin: 0;
+        transition: background-color 0.4s, height 0.4s;
+    }
 
-.background-color-change3 {
-    display: none;
-    position: absolute;
-    top: 1050px;
-    left: 0;
-    width: 100%;
-    height: 765px;
-    background: #8bb2d9;
-    z-index: -3;
-    overflow: hidden;
-        clip-path: polygon(
-    0% 0%,
-    100% 20%,
-    100% 100%,
-    00% 100%
-  );
-    /*transform: skewY(7deg);*/
-    transform-origin: 0;
-    transition: background-color 0.4s;
-    display: hidden;
-}
+    .background-color-change3 {
+        display: none;
+        position: absolute;
+        top: 1050px;
+        left: 0;
+        width: 100%;
+        height: 765px;
+        background: #8bb2d9;
+        z-index: -3;
+        overflow: hidden;
+        clip-path: polygon( 0% 0%, 100% 20%, 100% 100%, 00% 100% );
+        /*transform: skewY(7deg);*/
+        transform-origin: 0;
+        transition: background-color 0.4s;
+        display: hidden;
+    }
 
-.background-color-change4 {
-    display: none;
-    position: absolute;
-    top: 1430px;
-    left: 0;
-    width: 100%;
-    height: 1010px;
-    background: #a57fc7;
-    z-index: -2;
-    overflow: hidden;
-        clip-path: polygon(
-    0% 20%,
-    100% 00%,
-    100% 100%,
-    00% 100%
-  );
-    /*transform: skewY(-6deg);*/
-    transform-origin: 0;
-    transition: background-color 0.4s;
-}
+    .background-color-change4 {
+        display: none;
+        position: absolute;
+        top: 1430px;
+        left: 0;
+        width: 100%;
+        height: 1010px;
+        background: #a57fc7;
+        z-index: -2;
+        overflow: hidden;
+        clip-path: polygon( 0% 20%, 100% 00%, 100% 100%, 00% 100% );
+        /*transform: skewY(-6deg);*/
+        transform-origin: 0;
+        transition: background-color 0.4s;
+    }
 
-.background-color-change5 {
-    display: none;
-    position: absolute;
-    top: 2200px;
-    left: 0;
-    width: 100%;
-    height: 1010px;
-    background: #8a59ab;
-    z-index: -1;
-    overflow: hidden;
-            clip-path: polygon(
-    0% 0%,
-    100% 20%,
-    100% 100%,
-    00% 100%
-  );
-    /*transform: skewY(-6deg);*/
-    transform-origin: 0;
-    transition: background-color 0.4s;
-}
+    .background-color-change5 {
+        display: none;
+        position: absolute;
+        top: 2200px;
+        left: 0;
+        width: 100%;
+        height: 1010px;
+        background: #8a59ab;
+        z-index: -1;
+        overflow: hidden;
+        clip-path: polygon( 0% 0%, 100% 20%, 100% 100%, 00% 100% );
+        /*transform: skewY(-6deg);*/
+        transform-origin: 0;
+        transition: background-color 0.4s;
+    }
 
-body.card-selected .background-color-change3{
-    display: block;
-}
-
-body.card-selected .background-color-change4 {
-    display: block;
-}
-
-body.card-selected .background-color-change2 {
-    height: 80vh;
-}
-
-body.card-selected-mobile .background-color-change5 {
+    body.card-selected .background-color-change3 {
         display: block;
-}
+    }
 
-body.dark-mode .background-color-change {
-    background: #0f1929;
-}
+    body.card-selected .background-color-change4 {
+        display: block;
+    }
 
-body.dark-mode .background-color-change2 {
-    background: #162436;
-}
+    body.card-selected .background-color-change2 {
+        height: 80vh;
+    }
 
-body.dark-mode .background-color-change3 {
-    background: #071e36;
-}
+    body.card-selected-mobile .background-color-change5 {
+        display: block;
+    }
 
-body.dark-mode .background-color-change4 {
-    background: #240a38;
-}
+    body.dark-mode .background-color-change {
+        background: #0f1929;
+    }
 
-body.dark-mode .background-color-change5 {
-    background: #301145;
-}
+    body.dark-mode .background-color-change2 {
+        background: #162436;
+    }
 
-/*Floating Wobble Animation*/
-@keyframes card-float {
-    0%, 100% {
+    body.dark-mode .background-color-change3 {
+        background: #071e36;
+    }
+
+    body.dark-mode .background-color-change4 {
+        background: #240a38;
+    }
+
+    body.dark-mode .background-color-change5 {
+        background: #301145;
+    }
+
+    /*Floating Wobble Animation*/
+    @keyframes card-float {
+        0%, 100% {
             transform: translateY(0px);
         }
 
@@ -1435,3 +1492,21 @@ body.dark-mode .background-color-change5 {
         margin: 0% 10% 5% 10%
     }
     /*#endregion*/
+
+
+@media screen and (max-width: 550px) {
+
+    .project-card-container.information-fill .tag-invisible {
+        display: none;
+    }
+
+    .project-card-container.information-fill .project-card-tag {
+        margin: auto auto 2rem auto;
+        width: 80%;
+    }
+
+    .project-card-container.information-fill .project-card-tags {
+        margin-left: 0rem;
+    }
+
+}
