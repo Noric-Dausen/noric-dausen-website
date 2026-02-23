@@ -1,33 +1,65 @@
-const messages = ["Hello World", "Dylan Ugy", "Iristat is Cool", "Massive L", "We are technical and care about aesthetics :)", "Don't reload on triangles"];
-let currentIndex = 0;
+const messages = [
+    { text: "Ni Howdy", weight: 5 },
+    { text: "Hello World", weight: 1 },
+    { text: "Dylan Ugy", weight: 3 },
+    { text: "Iristat is Cool", weight: 5 },
+    { text: "Massive L", weight: 3 },
+    { text: "We are technical and care about aesthetics :)", weight: 1 },
+    { text: "Don't reload on triangles", weight: 3 },
+    { text: "We have the best statstics", weight: 5 }
+];
+
 const textElement = document.getElementById('orb-text');
-const maxTextSize = 35; // Maximum font size in pixels
-const minTextSize = 20; // Minimum font size in pixels
 const orbContainer = document.getElementById('orb-container');
+const maxTextSize = 35;
+const minTextSize = 20;
+
+// Helper function to pick a weighted random message
+function getWeightedMessage() {
+    const totalWeight = messages.reduce((sum, msg) => sum + msg.weight, 0);
+    let random = Math.random() * totalWeight;
+
+    for (const msg of messages) {
+        if (random < msg.weight) {
+            return msg.text;
+        }
+        random -= msg.weight;
+    }
+}
 
 function updateMessage() {
     // Fade out
     textElement.style.opacity = 0;
 
     setTimeout(() => {
-        // Change text after it's hidden
-        currentIndex = (currentIndex + 1) % messages.length;
-        textElement.textContent = messages[currentIndex];
+        // Pick a random weighted message
+        const nextText = getWeightedMessage();
+
+        // Aesthetic check: Don't show the same message twice in a row
+        if (nextText === textElement.textContent) {
+            updateMessage(); // Re-roll
+            return;
+        }
+
+        textElement.textContent = nextText;
+
         // Fade back in
         textElement.style.opacity = 1;
-    }, 1000); // Wait for fade-out to finish
+    }, 1000);
 }
 
-// Change message every x milliseconds
+// Change message every 6 seconds
 const changeTimer = 6000;
 setInterval(updateMessage, changeTimer);
 
 function resize() {
-    let textSize = orbContainer.clientWidth / 30; // Adjust divisor to control text size relative to container
-    textSize = Math.min(textSize, maxTextSize); // Ensure text size does not go above maximum
-    textSize = Math.max(textSize, minTextSize); // Ensure text size does not go below minimum
-    
-    textElement.style.fontSize = Math.min(textSize, maxTextSize) + 'px';
+    if (!orbContainer) return;
+
+    let textSize = orbContainer.clientWidth / 25;
+    textSize = Math.min(textSize, maxTextSize);
+    textSize = Math.max(textSize, minTextSize);
+
+    textElement.style.fontSize = textSize + 'px';
 }
 
 window.addEventListener('resize', resize);
