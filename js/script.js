@@ -4,6 +4,13 @@ toggle.addEventListener('change', () => {
     // when the toggle is changed, smoothly transition background color
     document.body.style.transition = "background-color 0.5s ease";
     document.body.classList.toggle('dark-mode');
+
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+
 });
 
 const hamburger = document.getElementById('hamburger');

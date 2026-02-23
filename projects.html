@@ -9,6 +9,30 @@
     <meta name="description" content="Official Website of Noric Dausen LLC">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+
+    <!--Load Preferences-->
+    <script src="js/load.js"></script>
+
+    <script>
+        // 1. Immediately apply the 'no-transitions' class to the root
+        document.documentElement.classList.add('no-transitions');
+
+        // 2. Check and apply the theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+
+        // 3. Use a tiny delay (or requestAnimationFrame) to remove the class
+        // This ensures the theme is applied BEFORE transitions are allowed
+        window.addEventListener('DOMContentLoaded', () => {
+            // A small timeout ensures the browser has painted the initial theme
+            setTimeout(() => {
+                document.documentElement.classList.remove('no-transitions');
+            }, 1);
+        });
+    </script>
+
 </head>
 
 <body>

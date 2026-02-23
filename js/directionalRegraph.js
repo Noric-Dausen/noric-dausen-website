@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     setup();
+
+    checkDarkMode();
 });
 
 // Variables for line positions and movement
@@ -445,9 +447,17 @@ document.addEventListener('drUpdateGraphicalGravity', (e) => {
 });
 
 //toggle is recgonized even though it is defined in another script
-toggle.addEventListener('change', () => {
 
-    if (document.body.classList.contains('dark-mode')) {
+const darkModeSwitch2 = document.getElementById('toggleInput');
+
+darkModeSwitch2.addEventListener('change', () => {
+
+    checkDarkMode();
+
+});
+
+function checkDarkMode() {
+    if (darkModeSwitch2.checked) {
 
         colors[0] = colorsDB[5];
         colors[1] = colorsDB[6];
@@ -462,10 +472,8 @@ toggle.addEventListener('change', () => {
         colors[2] = colorsDB[2];
         colors[3] = colorsDB[3];
         colors[4] = colorsDB[4];
-
     }
-
-});
+}
 
 
 let resizeTimeout2;
