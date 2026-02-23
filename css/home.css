@@ -36,7 +36,7 @@ body {
     height: 90vh; /* Or whatever height you prefer */
     display: block;
     background: transparent !important;
-    border: red 2px solid;
+    border: none;
     margin-top: -7vh;
 }
 
