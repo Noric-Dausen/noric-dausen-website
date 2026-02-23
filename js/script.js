@@ -56,6 +56,7 @@ const observer = new IntersectionObserver((entries) => {
         // If the element is visible
         if (entry.isIntersecting) {
             entry.target.classList.add('show');
+            entry.target.classList.add('shown');
             // Optional: stop observing once shown if you only want it to happen once
             // observer.unobserve(entry.target); 
         } else {
