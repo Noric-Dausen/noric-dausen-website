@@ -91,14 +91,12 @@ body {
 /* Base state for all sections */
 .section {
     width: 40%;
-    height: 500px;
+    height: fit-content;
     margin-top: 19vh;
     margin-inline: auto;
-    
     /* Animation Properties */
-    opacity: 0; 
+    opacity: 0;
     transition: all 1s ease-out, color 0.1s ease; /* Controls how smooth the slide is */
-    
     /* Rest of your glass-card styling... */
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(12px);
@@ -131,6 +129,33 @@ body {
     transform: translateX(40%);
 }
 
+@media screen and (max-width: 769px) {
+    .section {
+        width: 80%;
+        height: fit-content;
+    }
+
+    /* Starting positions */
+    .section1, .section3 {
+        transform: none; /* No sliding on mobile */
+    }
+
+    .section2 {
+        transform: none; /* No sliding on mobile */
+    }
+
+    /* The state when the section becomes visible */
+    .section1.show, .section3.show {
+        opacity: 1;
+        transform: none;
+    }
+
+    .section2.show {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 .section h2 {
     font-size: 2rem;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -139,6 +164,7 @@ body {
 .section p {
     font-size: 1.2rem;
     padding: 2rem;
+    padding-bottom: 4rem;
     margin-block: auto;
 }
 

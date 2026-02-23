@@ -1,4 +1,4 @@
-const messages = ["Hello World", "Dylan Ugy", "Iristat is Cool", "Massive L", "We are technical and care about aesthetics :)"];
+const messages = ["Hello World", "Dylan Ugy", "Iristat is Cool", "Massive L", "We are technical and care about aesthetics :)", "Don't reload on triangles"];
 let currentIndex = 0;
 const textElement = document.getElementById('orb-text');
 const maxTextSize = 35; // Maximum font size in pixels
