@@ -20,7 +20,7 @@ body {
     overflow: hidden; /* Prevents lines from creating scrollbars */
 }
 
-.canvas-layers {
+.canvas-container {
     position: absolute;
     top: 12%;
     left: 0;
@@ -33,10 +33,11 @@ body {
 .line-canvas {
     position: relative;
     width: 100%;
-    height: 15vh; /* Or whatever height you prefer */
+    height: 90vh; /* Or whatever height you prefer */
     display: block;
     background: transparent !important;
-    border: none;
+    border: red 2px solid;
+    margin-top: -7vh;
 }
 
 .orb-container {
