@@ -11,6 +11,11 @@ body {
     transform: rotate(-6deg);
 }
 
+#under-triangles-spacer {
+    height: 30vh;
+    width: 10vh;
+}
+
 .stage {
     position: relative;
     width: 100%;
