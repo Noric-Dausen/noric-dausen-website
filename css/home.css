@@ -48,7 +48,8 @@ body {
 .orb-container {
     position: relative;
     /* Set the desired size here */
-    width: 40%;
+    width: 90%;
+    max-width: 800px;
     /* Maintains a perfect circle based on width */
     aspect-ratio: 1 / 1;
     display: flex;
@@ -72,8 +73,6 @@ body {
     color: white;
     font-family: 'Arial', sans-serif;
     font-weight: bold;
-    /* Font size scales with the orb size */
-    font-size: 2vw;
     text-align: center;
     transition: opacity 1s ease-in-out;
     padding: 10%; /* Keeps text away from the edges */

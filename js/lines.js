@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d'); // get drawing context
 
     // settings for lines
-    const lineConfigs = [
+    const bigScreenLineConfigs = [
         { speed: 4, amp: 25, freq: 0.01, offset: 0, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 },
         { speed: 5, amp: 35, freq: 0.015, offset: 10, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 },
         { speed: 3, amp: 45, freq: 0.008, offset: -10, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 },
@@ -25,10 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
         { speed: 2.5, amp: 40, freq: 0.005, offset: -5, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 }
     ];
 
+    const smallScreenLineConfigs = [
+        { speed: 4, amp: 25, freq: 0.01, offset: 0, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 },
+        { speed: 5, amp: 35, freq: 0.015, offset: 10, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 },
+        { speed: 3, amp: 45, freq: 0.008, offset: -10, progress: 0, trail: [], colorFactor: Math.random(), noise: Math.random() * 100 }
+    ];
+
+    let lineConfigs = window.innerWidth > 600 ? bigScreenLineConfigs : smallScreenLineConfigs;
+
     // function to resize canvas to fill width and maintain height
     function resize() {
         canvas.width = window.innerWidth;
         canvas.height = canvas.offsetHeight || 200;
+
+        lineConfigs = window.innerWidth > 900 ? bigScreenLineConfigs : smallScreenLineConfigs;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
     // resize canvas on window resize
