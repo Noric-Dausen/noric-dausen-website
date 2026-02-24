@@ -2,6 +2,10 @@ const canvas = document.getElementById("trianglesbg");
 const ctx = canvas.getContext("2d");
 const darkModeSwitch1 = document.getElementById('toggleInput');
 
+// for small screens
+const SMALL_SCREEN_THRESHOLD = 900;
+let trianglesDrawn = false; // Flag to track if triangles have been drawn at least once
+
 let triangles = [];
 let currentTriangle = null; // To track which triangle is currently hovered
 
@@ -12,6 +16,8 @@ const height = SIZE * Math.sqrt(3) / 2;
 const ROWS = 42;
 const ROTATION_COOLDOWN = 300; // Minimum time (ms) between rotations for the same triangle
 const FADE_SPEED = 0.02; // Smaller = slower fade to black
+const DARK_COLOR = { r: 0, g: 0, b: 0 };
+const LIGHT_COLOR = { r: 255, g: 255, b: 255 };
 
 // canvas styling
 const WIDTH_PERCENTAGE = 120;
@@ -27,20 +33,48 @@ class Triangle {
         this.opacity = opacity;
         this.lastRotateTime = 0;
 
-        // Start as black
-        this.currentColor = darkModeSwitch1.checked ? { r: 0, g: 0, b: 0 } : { r: 255, g: 255, b: 255 };
-        // This is the color it will flash to on rotate
-        this.targetColor = { r: 0, g: 0, b: 0 };
+        // Use {...} to copy the values, not reference the original object
+        //    - the triangles were overriding the global DARK_COLOR and LIGHT_COLOR objects without this
+        this.darkModeColor = { ...DARK_COLOR };
+        this.lightModeColor = { ...LIGHT_COLOR };
+
+        // Start color should also be a copy
+        this.currentColor = darkModeSwitch1.checked ? { ...DARK_COLOR } : { ...LIGHT_COLOR };
+
+        // Target color initialization
+        this.targetColor = darkModeSwitch1.checked ? { ...DARK_COLOR } : { ...LIGHT_COLOR };
+    }
+
+    darkLightHardChange() {
+        // Immediately set the triangle's color without fading
+
+        // Used for changing between dark and light mode on small
+        //      screen devices where the fade effect is not applied for performance reasons
+
+        // returns true if a hard change was made
+
+        if (window.innerWidth <= SMALL_SCREEN_THRESHOLD) {
+            if (darkModeSwitch1.checked) {
+                this.currentColor = this.darkModeColor;
+            } else {
+                this.currentColor = this.lightModeColor;
+            }
+            // ensure rotation resets
+            this.rotation = 0;
+            return true; // Indicate that a hard change was made
+        }
+
+        return false; // No hard change needed
     }
 
     update() {
         // 1. Determine which background color to fade toward
         if (darkModeSwitch1.checked) {
             // Dark Mode: Fade toward Black
-            this.targetColor = { r: 0, g: 0, b: 0 };
+            this.targetColor = this.darkModeColor;
         } else {
             // Light Mode: Fade toward White
-            this.targetColor = { r: 255, g: 255, b: 255 };
+            this.targetColor = this.lightModeColor;
         }
 
         // 2. Handle Rotation Smoothness
@@ -48,10 +82,14 @@ class Triangle {
         this.rotation += (this.targetRotation - this.rotation) * rotationLerp;
 
         // 3. Handle Color Fading
-        // Instead of (0 - current), we use (target - current)
-        this.currentColor.r += (this.targetColor.r - this.currentColor.r) * FADE_SPEED;
-        this.currentColor.g += (this.targetColor.g - this.currentColor.g) * FADE_SPEED;
-        this.currentColor.b += (this.targetColor.b - this.currentColor.b) * FADE_SPEED;
+        // do not fade if on a small screen, just snap to correct color
+        //    - this is for performace, triangles do not animate on small screens
+        if (!this.darkLightHardChange()) {
+            // Instead of (0 - current), we use (target - current)
+            this.currentColor.r += (this.targetColor.r - this.currentColor.r) * FADE_SPEED;
+            this.currentColor.g += (this.targetColor.g - this.currentColor.g) * FADE_SPEED;
+            this.currentColor.b += (this.targetColor.b - this.currentColor.b) * FADE_SPEED;
+        }
     }
 
     rotate() {
@@ -116,6 +154,8 @@ function resize() {
     canvas.style.transform = `rotate(${CANVAS_ROTATION}deg)`;
 
     generateTriangles(); // Re-generate on resize to fill screen
+
+    trianglesDrawn = false; // Reset flag to allow re-drawing on next animation frame for small screens
 }
 
 window.addEventListener("resize", resize);
@@ -208,12 +248,22 @@ function generateTriangles() {
 
 resize();
 
+darkModeSwitch1.addEventListener('change', () => {
+    trianglesDrawn = false; // Reset flag to allow re-drawing on next animation frame for small screens
+});
+
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    triangles.forEach(tri => {
-        tri.update();
-        tri.draw(ctx);
-    });
+    // only draw triangles for smaller screens if they don't already exist
+    // this is for saving performace on mobile devices, there is noticible lag without this check
+    if (window.innerWidth > SMALL_SCREEN_THRESHOLD || !trianglesDrawn) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        triangles.forEach(tri => {
+            tri.update();
+            tri.draw(ctx);
+            trianglesDrawn = true;
+            
+        });
+    }
     requestAnimationFrame(animate);
 }
 
