@@ -713,7 +713,7 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
         -webkit-user-drag: none;
     }
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 1000px) {
 
         .logo-footer-container {
             display: none; /*There's not room for the logo on mobile screens, so just turn it off*/

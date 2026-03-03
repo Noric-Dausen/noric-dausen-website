@@ -362,6 +362,9 @@ function setup() {
 
     graphData[0] = { x:0, y:(Math.random() * (lowerBound - upperBound)) + upperBound }; // This is the formula for getting a random number between the two bound
 
+    if (window.innerWidth < 900) {
+        graphicalGravity = 0; // On mobile, we set graphical gravity to 0 because the mouse movement detection is not really a thing, this creates a better experience for mobile users
+    }
 
     draw();
 
