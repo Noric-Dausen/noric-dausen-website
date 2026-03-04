@@ -724,6 +724,26 @@ body.dark-mode #ND-logo-animated-light, body.dark-mode #banner-logo-left-light, 
             margin-bottom: 0.75rem;
         }
     }
+
+/* 1. Define the 'Flash' animation */
+@keyframes highlight-fade {
+    0% {
+        background-color: rgba(36, 130, 237, 0.5); /* Soft yellow glow */
+        outline: 3px solid #0b2fa3;
+    }
+
+    100% {
+        background-color: transparent;
+        outline: 3px solid transparent;
+    }
+}
+
+/* 2. Apply it only when the element is the current URL target */
+footer #contact:target {
+    animation: highlight-fade 3s ease-out;
+    scroll-margin-top: 20px; /* Keeps it from sticking to the very top of the screen */
+}
+
     /*#endregion*/
 
     /*#region Projects Page*/
