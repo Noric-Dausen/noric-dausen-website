@@ -1,3 +1,4 @@
+const canvasContainer = document.getElementById("triangles-container");
 const canvas = document.getElementById("trianglesbg");
 const ctx = canvas.getContext("2d");
 const darkModeSwitch1 = document.getElementById('toggleInput');
@@ -148,6 +149,9 @@ function resize() {
     let marginLeft = (100 - WIDTH_PERCENTAGE) / 2;
     canvas.width = window.innerWidth * (WIDTH_PERCENTAGE / 100);
     canvas.height = ((height + SPACING) * ROWS) + (height * 2);
+    canvasContainer.style.height = canvas.height + "px";
+
+    console.log(`canvas height ${canvas.height}, canvasContainer height ${canvasContainer.style.height}`);
 
     // canvas styling for rotation and centering
     canvas.style.marginLeft = `${marginLeft}%`;
