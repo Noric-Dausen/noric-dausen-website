@@ -8,6 +8,19 @@ body {
     overflow-x: hidden; /* Prevents horizontal scrollbars from the triangles */
 }
 
+/* This keeps your text and cards centered and prevents them from 
+   stretching too wide on 4K screens or when zooming out */
+#page-width-wrapper {
+    width: 100%;
+    max-width: 2000px; /* Adjust this to your preferred content width */
+    margin: 0 auto; /* Centers the content */
+    position: relative;
+    z-index: 1; /* Keeps content above triangles */
+    padding: 0 20px; /* Prevents text from touching edges on mobile */
+    box-sizing: border-box;
+    border: 2px solid red;
+}
+
 #trianglesbg {
     position: relative;
     z-index: -1;
