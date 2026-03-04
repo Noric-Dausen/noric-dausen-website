@@ -7,6 +7,7 @@
     margin: 0;
     font-family: 'Courier New', Courier, monospace;
     --glow: #32ba3c;
+    --glow-dark: #1a5e1a;
     --bg: #0a0a0a;
 }
 
@@ -40,6 +41,7 @@
     font-size: 1.2rem;
     animation: none;
     transform-origin: center;
+    height: 100%;
     opacity: 0;
 }
 
@@ -83,7 +85,7 @@
 
 .ndimg {
     position: absolute;
-    top: 400%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 600px;
@@ -158,4 +160,65 @@ h1 {
         transform: scale(1, 1) scaleX(1); /* Full screen */
         filter: brightness(1);
     }
+}
+
+/* region Stage Dependent CSS */
+
+/* Hide the ugly default input */
+#file-upload {
+    display: none;
+}
+
+/* Style the label to look like a real button */
+.custom-button {
+    padding: 10px 20px;
+    background-color: var(--glow);
+    color: var(--bg);
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 50%;
+}
+
+    .custom-button:hover {
+        background-color: var(--glow-dark);
+    }
+
+#preview-container img {
+    max-width: 85%;
+    max-height:90%;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    left: 10%;
+    position: absolute;
+}
+
+.stage2-sidebar {
+    width: 30%;
+    height: 100%;
+    border-right: 2px solid var(--glow);
+    position: absolute;
+}
+
+.stage2-mainbar {
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    left: 30%;
+}
+
+#stage2 {
+    height: 110%;
+}
+
+#file-name {
+    max-width: 85%;
+    overflow-wrap: break-word;
+}
+
+#s2o1 {
+    position: absolute;
+    bottom: 10%;
 }

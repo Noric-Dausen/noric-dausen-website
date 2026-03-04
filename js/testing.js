@@ -53,6 +53,8 @@ function togglePower() {
 
 //Key Detection
 
+let eventCanceled = false;
+
 window.addEventListener('keydown', (event) => {
 
     if (event.key === 'c' && event.ctrlKey) {
@@ -71,15 +73,39 @@ window.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowUp') {
             changeHomeSelection('up');
             event.preventDefault();
+            eventCanceled = false;
         }
 
         if (event.key === 'ArrowDown') {
             changeHomeSelection('down');
             event.preventDefault();
+            eventCanceled = false;
         }
 
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && !eventCanceled) {
             selectHomeOption();
+            event.preventDefault(); 
+            eventCanceled = true;
+            document.getElementById('s2o1').classList.remove('selected');
+        }
+
+    }
+
+    if (stage === 2) {
+
+        if (event.key === 'Enter' && !eventCanceled) {
+            stage = 1;
+            stage2.style.display = 'none';
+            stage1.style.display = 'block';
+            event.preventDefault();
+            eventCanceled = true;
+            homePosition = -1;
+            document.getElementById('s1o1').classList.remove('selected');
+        }
+
+        if (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+            eventCanceled = false;
+            document.getElementById('s2o1').classList.add('selected');
             event.preventDefault();
         }
 
@@ -87,10 +113,17 @@ window.addEventListener('keydown', (event) => {
 
 });
 
+async function grace() {
+    eventCanceled = true;
+    await (delay(1000));
+    eventCanceled = false;
+}
+
 const h1 = document.getElementById('crtHeader');
 const text = document.getElementById('crtText');
 const crtLogo = document.getElementById('crtImg');
 const stage1 = document.getElementById('stage1');
+const stage2 = document.getElementById('stage2');
 
 let step = 0;
 
@@ -106,6 +139,7 @@ function beginAnimation() {
             crtLogo.style.display = 'block';
             crtHeader.style.display = 'block';
             stage1.style.display = 'none';
+            stage2.style.display = 'none';
             crtText.textContent = '';
             h1.textContent = 'Initializing N.D.O.S.';
             break;
@@ -255,14 +289,49 @@ function selectHomeOption() {
 
     switch (homeOptions[homePosition]) {
         case 's1o1':
-            alert('You selected option A!');
+            stage = 2;
+            stage1.style.display = 'none';
+            stage2.style.display = 'block';
             break;
         case 's1o2':
-            alert('You selected option B!');
+            alert('Internal Exception Error: Iristat Not Found.');
             break;
         case 's1o3':
             togglePower();
             break;
     }
 
+}
+
+let stage2ExitSelected = false;
+
+//Stage 2 (Image Previewer)
+
+const fileInput = document.getElementById('file-upload');
+const fileName = document.getElementById('file-name');
+const previewContainer = document.getElementById('preview-container');
+
+fileInput.addEventListener('change', function () {
+    const file = this.files[0]; // Get the first selected file
+
+    if (file) {
+        fileName.textContent = `Selected: ${file.name}`;
+
+        // Check if the file is an image to show a preview
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                previewContainer.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+            };
+
+            reader.readAsDataURL(file); // Converts image to a string
+        } else {
+            previewContainer.innerHTML = `<p><em>(Preview not available for text files)</em></p>`;
+        }
+    }
+});
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
