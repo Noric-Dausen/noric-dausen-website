@@ -24,6 +24,18 @@ const LIGHT_COLOR = { r: 255, g: 255, b: 255 };
 const WIDTH_PERCENTAGE = 120;
 const CANVAS_ROTATION = 0;
 
+function getTrueDimensions() {
+    const zoomFactor = window.devicePixelRatio;
+
+    // This gives you the width/height as they appear at 100% zoom
+    const trueWidth = window.innerWidth * zoomFactor;
+    const trueHeight = window.innerHeight * zoomFactor;
+
+    return { width: trueWidth, height: trueHeight };
+}
+
+canvasContainer.style.top = `${getTrueDimensions().height}px`; // Start with the container above the viewport
+
 class Triangle {
     constructor(x, y, isPointUp, opacity = 1) {
         this.x = x;

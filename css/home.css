@@ -8,6 +8,11 @@ body {
     overflow-x: hidden; /* Prevents horizontal scrollbars from the triangles */
 }
 
+main {
+    overflow: hidden;
+    border: 2px solid blue;
+}
+
 /* This keeps your text and cards centered and prevents them from 
    stretching too wide on 4K screens or when zooming out */
 #page-width-wrapper {
@@ -30,7 +35,7 @@ body {
 
 #triangles-container {
     position: absolute;
-    top: 100%;
+    top: 100%; /* this is now set in trianglesbg.js */
     left: 0;
     width: 100%;
     height: 1000px; /* Adjust based on your triangle ROWS */
@@ -39,14 +44,14 @@ body {
 }
 
 #under-triangles-spacer {
-    height: 30vh;
-    width: 10vh;
+    height: 30%;
+    width: 10%;
 }
 
 .stage {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
     align-items: center;
     overflow: hidden; /* Prevents lines from creating scrollbars */
@@ -65,11 +70,11 @@ body {
 .line-canvas {
     position: relative;
     width: 100%;
-    height: 90vh; /* Or whatever height you prefer */
+    height: 90%; /* Or whatever height you prefer */
     display: block;
     background: transparent !important;
     border: none;
-    margin-top: -7vh;
+    margin-top: -7%;
 }
 
 .orb-container {
@@ -119,7 +124,7 @@ body {
 .section {
     width: 40%;
     height: fit-content;
-    margin-top: 19vh;
+    margin-top: 19%;
     margin-inline: auto;
     /* Animation Properties */
     opacity: 0;
