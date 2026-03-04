@@ -1,7 +1,13 @@
+html {
+    overflow-x: hidden; /* Prevents horizontal scrollbars from the triangles */
+    border: 2px solid red;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #e6e6e6;
     overflow-x: hidden; /* Prevents horizontal scrollbars from the triangles */
+    border: 2px solid green;
 }
 
 #trianglesbg {
