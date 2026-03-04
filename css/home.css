@@ -10,6 +10,7 @@ body {
     z-index: -1;
     transform: rotate(-6deg);
     overflow-x: hidden; /* Prevents horizontal scrollbars from the triangles */
+    border: 2px solid red;
 }
 
 #under-triangles-spacer {
