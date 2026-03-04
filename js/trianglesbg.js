@@ -150,7 +150,7 @@ function resize() {
     canvas.height = ((height + SPACING) * ROWS) + (height * 2);
 
     // canvas styling for rotation and centering
-    canvas.style.marginLeft = marginLeft.toString() + "${marginLeft}%";
+    canvas.style.marginLeft = `${marginLeft}%`;
     canvas.style.transform = `rotate(${CANVAS_ROTATION}deg)`;
 
     generateTriangles(); // Re-generate on resize to fill screen
