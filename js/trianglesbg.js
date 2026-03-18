@@ -2,7 +2,15 @@ const canvasContainer = document.getElementById("triangles-container");
 const canvas = document.getElementById("trianglesbg");
 const ctx = canvas.getContext("2d");
 const darkModeSwitch1 = document.getElementById('toggleInput');
-const orbContainer = document.getElementById("orb-container");
+const orbContainerDiv = document.getElementById("orb-container");
+
+// get sections inside bg
+const section1 = document.getElementById("section1");
+const section2 = document.getElementById("section2");
+const section3 = document.getElementById("section3");
+
+// directional regraph for chaning its position depending on triangles background height (so it is always below the triangles background and does not overlap with it)
+const directionalRegraph = document.getElementById("dr");
 
 // for small screens
 const SMALL_SCREEN_THRESHOLD = 900;
@@ -15,7 +23,7 @@ let currentTriangle = null; // To track which triangle is currently hovered
 const SPACING = 2;
 const SIZE = 60;
 const height = SIZE * Math.sqrt(3) / 2;
-const ROWS = 42;
+rows = 42;
 const ROTATION_COOLDOWN = 300; // Minimum time (ms) between rotations for the same triangle
 const FADE_SPEED = 0.02; // Smaller = slower fade to black
 const DARK_COLOR = { r: 0, g: 0, b: 0 };
@@ -36,9 +44,6 @@ function getTrueDimensions() {
 }
 
 //canvasContainer.style.top = `${getTrueDimensions().height}px`;
-
-// set canvasContainer.style.top to the height of orbContainer plus some extra padding (to ensure it is below the orbContainer)
-canvasContainer.style.top = `${orbContainer.offsetHeight + 50}px`;
 
 class Triangle {
     constructor(x, y, isPointUp, opacity = 1) {
@@ -163,12 +168,29 @@ function lerpColor(color1, color2, t) {
 
 function resize() {
     let marginLeft = (100 - WIDTH_PERCENTAGE) / 2;
-    canvas.width = window.innerWidth * (WIDTH_PERCENTAGE / 100);
-    canvas.height = ((height + SPACING) * ROWS) + (height * 2);
-    canvasContainer.style.height = canvas.height + "px";
-    canvasContainer.style.top = `${orbContainer.offsetHeight + 50}px`; // set distance from top of page
+    
+    
+    // set canvasContainer.style.top to the height of orbContainer plus some extra padding (to ensure it is below the orbContainer)
+    canvasContainer.style.top = `${orbContainerDiv.offsetHeight + 50}px`;
+    // set number of rows based on "height" of each triangle and the combined heights of sections 1, 2 and 3 including their margins (to ensure the triangles fill the entire background)
+    if (section1 == null || section2 == null || section3 == null) {
+        console.log('One or more sections not found, cannot calculate rows for triangle background.');
+    } else {
+        let totalHeight = section1.offsetHeight + section2.offsetHeight + section3.offsetHeight;
+        let totalMargins = parseFloat(getComputedStyle(section1).marginTop) + parseFloat(getComputedStyle(section1).marginBottom) +
+            parseFloat(getComputedStyle(section2).marginTop) + parseFloat(getComputedStyle(section2).marginBottom) +
+            parseFloat(getComputedStyle(section3).marginTop) + parseFloat(getComputedStyle(section3).marginBottom);
+        rows = Math.ceil((totalHeight + totalMargins) / (height + SPACING));
+    }
 
-    console.log(`canvas height ${canvas.height}, canvasContainer height ${canvasContainer.style.height}`);
+    canvas.width = window.innerWidth * (WIDTH_PERCENTAGE / 100);
+    canvas.height = ((height + SPACING) * rows) + (height * 2);
+    canvasContainer.style.height = canvas.height + "px";
+
+    console.log(`Calculated rows: ${rows}`);
+    console.log('Canvas height: ' + canvas.height + ' - Triangle height: ' + height);
+    // set directional regraph position to be below the triangles background
+    directionalRegraph.style.top = `${canvasContainer.offsetTop + canvas.height + 50}px`;
 
     // canvas styling for rotation and centering
     canvas.style.marginLeft = `${marginLeft}%`;
@@ -239,15 +261,15 @@ function generateTriangles() {
     triangles = [];
     const COLS = Math.ceil(canvas.width / (SIZE / 2)) + 1;
 
-    for (let row = 0; row < ROWS; row++) {
+    for (let row = 0; row < rows; row++) {
 
         let opacity = 1.0;
 
-        if (row === 0 || row === ROWS - 1) {
+        if (row === 0 || row === rows - 1) {
             opacity = 0.15;
-        } else if (row === 1 || row === ROWS - 2) {
+        } else if (row === 1 || row === rows - 2) {
             opacity = 0.40;
-        } else if (row === 2 || row === ROWS - 3) {
+        } else if (row === 2 || row === rows - 3) {
             opacity = 0.75;
         }
 
@@ -268,6 +290,11 @@ function generateTriangles() {
 }
 
 resize();
+
+// Wait for all assets (images, fonts, etc.) to load so offsetHeight is accurate
+window.addEventListener('load', () => {
+    resize();
+});
 
 darkModeSwitch1.addEventListener('change', () => {
     trianglesDrawn = false; // Reset flag to allow re-drawing on next animation frame for small screens
