@@ -22,7 +22,6 @@ main {
     z-index: 1; /* Keeps content above triangles */
     padding: 0 20px; /* Prevents text from touching edges on mobile */
     box-sizing: border-box;
-    border: 2px solid red;
 }
 
 #trianglesbg {
