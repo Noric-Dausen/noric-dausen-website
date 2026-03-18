@@ -9,6 +9,9 @@ const section1 = document.getElementById("section1");
 const section2 = document.getElementById("section2");
 const section3 = document.getElementById("section3");
 
+// directional regraph for chaning its position depending on triangles background height (so it is always below the triangles background and does not overlap with it)
+const directionalRegraph = document.getElementById("dr");
+
 // for small screens
 const SMALL_SCREEN_THRESHOLD = 900;
 let trianglesDrawn = false; // Flag to track if triangles have been drawn at least once
@@ -165,9 +168,8 @@ function lerpColor(color1, color2, t) {
 
 function resize() {
     let marginLeft = (100 - WIDTH_PERCENTAGE) / 2;
-    canvas.width = window.innerWidth * (WIDTH_PERCENTAGE / 100);
-    canvas.height = ((height + SPACING) * rows) + (height * 2);
-    canvasContainer.style.height = canvas.height + "px";
+    
+    
     // set canvasContainer.style.top to the height of orbContainer plus some extra padding (to ensure it is below the orbContainer)
     canvasContainer.style.top = `${orbContainerDiv.offsetHeight + 50}px`;
     // set number of rows based on "height" of each triangle and the combined heights of sections 1, 2 and 3 including their margins (to ensure the triangles fill the entire background)
@@ -180,7 +182,15 @@ function resize() {
             parseFloat(getComputedStyle(section3).marginTop) + parseFloat(getComputedStyle(section3).marginBottom);
         rows = Math.ceil((totalHeight + totalMargins) / (height + SPACING));
     }
-    console.log('rows: ' + rows);
+
+    canvas.width = window.innerWidth * (WIDTH_PERCENTAGE / 100);
+    canvas.height = ((height + SPACING) * rows) + (height * 2);
+    canvasContainer.style.height = canvas.height + "px";
+
+    console.log(`Calculated rows: ${rows}`);
+    console.log('Canvas height: ' + canvas.height + ' - Triangle height: ' + height);
+    // set directional regraph position to be below the triangles background
+    directionalRegraph.style.top = `${canvasContainer.offsetTop + canvas.height + 50}px`;
 
     // canvas styling for rotation and centering
     canvas.style.marginLeft = `${marginLeft}%`;
@@ -280,6 +290,11 @@ function generateTriangles() {
 }
 
 resize();
+
+// Wait for all assets (images, fonts, etc.) to load so offsetHeight is accurate
+window.addEventListener('load', () => {
+    resize();
+});
 
 darkModeSwitch1.addEventListener('change', () => {
     trianglesDrawn = false; // Reset flag to allow re-drawing on next animation frame for small screens
