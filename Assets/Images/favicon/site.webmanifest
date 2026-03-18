@@ -1,0 +1,21 @@
+{
+  "name": "Noric Dausen",
+  "short_name": "ND",
+  "icons": [
+    {
+        "src": "/Assets/Images/favicon/web-app-manifest-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/Assets/Images/favicon/web-app-manifest-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#3fa2e1",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Text" viewBox="0 0 300 300" width="300" height="300"><defs>
+    <style>
+      .cls-1 {
+        mask: url(#mask-1);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        mask: url(#mask);
+      }
+
+      .cls-4 {
+        filter: url(#luminosity-invert-noclip);
+      }
+
+      .cls-5 {
+        mask: url(#mask-2);
+      }
+
+      .cls-6 {
+        filter: url(#luminosity-invert-noclip-2);
+      }
+    </style>
+    <filter id="luminosity-invert-noclip" x="136.12" y="75.39" width="151.75" height="163.62" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"></feColorMatrix>
+      <feFlood flood-color="#fff" result="bg"></feFlood>
+      <feBlend in="cm" in2="bg"></feBlend>
+    </filter>
+    <mask id="mask" x="136.12" y="75.39" width="151.75" height="163.62" maskUnits="userSpaceOnUse">
+      <g class="cls-4">
+        <g>
+          <ellipse class="cls-2" cx="207.86" cy="152.54" rx="39.69" ry="39.82"></ellipse>
+          <rect class="cls-2" x="177.39" y="112.72" width="27.12" height="79.65"></rect>
+          <rect class="cls-2" x="158.39" y="75.39" width="20.06" height="163.62"></rect>
+        </g>
+      </g>
+    </mask>
+    <filter id="luminosity-invert-noclip-2" x="-2.29" y="75.85" width="162.98" height="163.62" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"></feColorMatrix>
+      <feFlood flood-color="#fff" result="bg"></feFlood>
+      <feBlend in="cm" in2="bg"></feBlend>
+    </filter>
+    <filter id="luminosity-invert-noclip-3" x="-2.29" y="-8342" width="17.77" height="32766" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"></feColorMatrix>
+      <feFlood flood-color="#fff" result="bg"></feFlood>
+      <feBlend in="cm" in2="bg"></feBlend>
+    </filter>
+    <mask id="mask-2" x="-2.29" y="-8342" width="17.77" height="32766" maskUnits="userSpaceOnUse"></mask>
+    <mask id="mask-1" x="-2.29" y="75.85" width="162.98" height="163.62" maskUnits="userSpaceOnUse">
+      <g class="cls-6">
+        <g class="cls-5">
+          <rect class="cls-2" x="-2.29" y="75.85" width="17.77" height="163.62"></rect>
+        </g>
+      </g>
+    </mask>
+  </defs><g class="cls-3">
+    <path d="M136.12,80.37h73.2c52.13,0,78.56,31.91,78.56,69.93,0,44.63-32.65,74.56-79.02,74.56h-72.74V80.37ZM183.13,192.38h20.28c23.28,0,34.9-14.03,34.9-40.98,0-22.17-9.22-38.42-34.84-38.68h-20.34v79.66Z"></path>
+  </g><g class="cls-1">
+    <path d="M12.02,224.87V80.38h54.72c32,51.75,42.81,70.52,52.13,89.13h.77c-1.29-13.59-1.23-39.72-1.23-63.62v-25.5h42.28v144.49h-51.7c-11.27-20.07-46.79-81.59-55.36-99.18h-.7c1.38,16.51,1.45,35.68,1.45,64.03v35.14H12.02Z"></path>
+  </g><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: invert(100%); } }
+</style></svg>
