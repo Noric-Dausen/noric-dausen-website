@@ -53,9 +53,9 @@ const changeTimer = 6000;
 setInterval(updateMessage, changeTimer);
 
 function resize() {
-    if (!orbContainer) return;
+    if (!orbContainerDiv) return;
 
-    let textSize = orbContainer.clientWidth / 25;
+    let textSize = orbContainerDiv.clientWidth / 25;
     textSize = Math.min(textSize, maxTextSize);
     textSize = Math.max(textSize, minTextSize);
 
