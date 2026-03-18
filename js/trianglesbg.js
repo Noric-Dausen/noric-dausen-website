@@ -2,6 +2,7 @@ const canvasContainer = document.getElementById("triangles-container");
 const canvas = document.getElementById("trianglesbg");
 const ctx = canvas.getContext("2d");
 const darkModeSwitch1 = document.getElementById('toggleInput');
+const orbContainer = document.getElementById("orb-container");
 
 // for small screens
 const SMALL_SCREEN_THRESHOLD = 900;
@@ -34,7 +35,10 @@ function getTrueDimensions() {
     return { width: trueWidth, height: trueHeight };
 }
 
-canvasContainer.style.top = `${getTrueDimensions().height}px`; // Start with the container above the viewport
+//canvasContainer.style.top = `${getTrueDimensions().height}px`;
+
+// set canvasContainer.style.top to the height of orbContainer plus some extra padding (to ensure it is below the orbContainer)
+canvasContainer.style.top = `${orbContainer.offsetHeight + 50}px`;
 
 class Triangle {
     constructor(x, y, isPointUp, opacity = 1) {
@@ -162,6 +166,7 @@ function resize() {
     canvas.width = window.innerWidth * (WIDTH_PERCENTAGE / 100);
     canvas.height = ((height + SPACING) * ROWS) + (height * 2);
     canvasContainer.style.height = canvas.height + "px";
+    canvasContainer.style.top = `${orbContainer.offsetHeight + 50}px`; // set distance from top of page
 
     console.log(`canvas height ${canvas.height}, canvasContainer height ${canvasContainer.style.height}`);
 
