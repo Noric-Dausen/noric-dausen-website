@@ -479,6 +479,16 @@ function checkDarkMode() {
 }
 
 
+const section4 = document.getElementById('section4');
+
+const section4OriginalText = section4.innerHTML;
+
+if (window.innerWidth > 900) {
+    section4.innerHTML = section4OriginalText + "The graph behind this will trend towards the mouse, depending on the mouse gravity.";
+} else {
+    section4.innerHTML = section4OriginalText;
+}
+
 let resizeTimeout2;
 
 window.addEventListener('resize', () => {
@@ -487,6 +497,13 @@ window.addEventListener('resize', () => {
         //On resize, add card-selected so the background changes
 
         setup();
+
+        //If screen size is below 900px
+        if (window.innerWidth > 900) {
+            section4.innerHTML = section4OriginalText + "The graph behind this will trend towards the mouse, depending on the mouse gravity.";
+        } else {
+            section4.innerHTML = section4OriginalText;
+        }
 
     }, 100); //Amount of time inbetween resize and when the function is executed; this is to avoid the function being called multiple times during a resize, which can cause performance issues
 
